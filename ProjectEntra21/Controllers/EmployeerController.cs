@@ -1,28 +1,30 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ProjectEntra21.Services;
 using ProjectEntra21.Domain.Entiteis;
+using ProjectEntra21.Infrastructure.Database.Common;
 
 namespace ProjectEntra21.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class EmployeerController : ControllerBase
     {
-        private IEmployeerService _employeerService;
+        private IEmployeerRepository _employeerRepository;
 
-        public EmployeerController(IEmployeerService employeerService)
+        public EmployeerController(IEmployeerRepository employeerRepository)
         {
-            _employeerService = employeerService;
+            _employeerRepository = employeerRepository;
         }
 
-        [HttpGet]
+        /*[HttpGet]
         public IActionResult get()
         {
-            return Ok(_employeerService.FindAll());
+            return Ok(_employeerRepository.FindAll());
         }
 
         [HttpGet("{id}")]
         public IActionResult Get(long id)
         {
-            var employeer = _employeerService.FindById(id);
+            var employeer = _employeerRepository.FindById(id));
             if (employeer == null)
             {
                 return NotFound();
@@ -30,6 +32,7 @@ namespace ProjectEntra21.Controllers
 
             return Ok(employeer);
         }
+        */
 
         [HttpPost]
         public IActionResult Post([FromBody] Employeer employeer)
@@ -39,7 +42,7 @@ namespace ProjectEntra21.Controllers
                 return BadRequest();
             }
 
-            return Ok(_employeerService.Create(employeer));
+            return Ok(_employeerRepository.InsertOrUpdate(employeer));
         }
 
         [HttpPut]
@@ -50,14 +53,15 @@ namespace ProjectEntra21.Controllers
                 return BadRequest();
             }
 
-            return Ok(_employeerService.Update(employeer));
+            return Ok(_employeerRepository.Update(employeer));
         }
-
+        /*
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
-            _employeerService.Delete(id);
+            _employeerRepository.Delete(id);
             return NoContent();
         }
+        */
     }
 }

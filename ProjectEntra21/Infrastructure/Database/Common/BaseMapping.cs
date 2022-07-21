@@ -26,7 +26,7 @@ namespace ProjectEntra21.Infrastructure.Database.Common
         private void MappingBase(EntityTypeBuilder<T> builder)
         {
             builder.ToTable(TableName);
-            builder.Property(x => x.Id).HasColumnName("id").IsRequired();
+            builder.Property(x => x.Id).HasColumnName("id").IsRequired().ValueGeneratedOnAdd();
             builder.Property(x => x.CreateAt).HasColumnName("criado_em").IsRequired();
             builder.Property(x => x.LastModifiedAt).HasColumnName("ultima_modificao_em").IsRequired();
         }

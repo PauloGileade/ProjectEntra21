@@ -9,7 +9,7 @@ using ProjectEntra21.Infrastructure;
 namespace ProjectEntra21.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20220721020012_Employeer")]
+    [Migration("20220721160112_Employeer")]
     partial class Employeer
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

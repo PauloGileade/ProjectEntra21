@@ -12,6 +12,7 @@ namespace ProjectEntra21.Infrastructure.Database.Mappings
         protected override void MappingEntity(EntityTypeBuilder<Employeer> builder)
         {
             builder.ToTable(TableName);
+            builder.HasAlternateKey(x => x.Register);
             builder.Property(x => x.Name).HasColumnName("nome");
             builder.Property(x => x.Register).HasColumnName("matricula");
             builder.Property(x => x.BirthDate).HasColumnName("data_nascimento");

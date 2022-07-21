@@ -14,6 +14,8 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
+using ProjectEntra21.Infrastructure.Database.Common;
+using ProjectEntra21.Infrastructure.Database.Repositories;
 
 namespace ProjectEntra21
 {
@@ -31,6 +33,7 @@ namespace ProjectEntra21
         {
             services.AddDbContextPool<DatabaseContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("TextileAutomationBD"), ServerVersion.AutoDetect(Configuration.GetConnectionString("TextileAutomationBD"))));
+            services.AddScoped<IEmployeerRepository, EmployeerRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
