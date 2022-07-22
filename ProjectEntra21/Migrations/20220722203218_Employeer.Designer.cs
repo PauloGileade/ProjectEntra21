@@ -9,7 +9,7 @@ using ProjectEntra21.Infrastructure;
 namespace ProjectEntra21.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20220721160112_Employeer")]
+    [Migration("20220722203218_Employeer")]
     partial class Employeer
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,35 +23,46 @@ namespace ProjectEntra21.Migrations
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     b.Property<DateTime>("BirthDate")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("data_nascimento");
 
                     b.Property<DateTime>("CreateAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("criado_em");
 
                     b.Property<string>("Document")
-                        .HasColumnType("longtext");
+                        .HasColumnType("longtext")
+                        .HasColumnName("documento");
 
                     b.Property<DateTime>("LastModifiedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("ultima_modificao_em");
 
                     b.Property<int>("LevelEmployeer")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("nivel_funcionario");
 
                     b.Property<string>("Name")
-                        .HasColumnType("longtext");
+                        .HasColumnType("longtext")
+                        .HasColumnName("nome");
 
                     b.Property<string>("Office")
-                        .HasColumnType("longtext");
+                        .HasColumnType("longtext")
+                        .HasColumnName("funcao");
 
                     b.Property<long>("Register")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("matricula");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Employeers");
+                    b.HasAlternateKey("Register");
+
+                    b.ToTable("Funcionario");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjectEntra21.Domain.Entiteis;
 using ProjectEntra21.Infrastructure.Database.Common;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace ProjectEntra21.Controllers
 {
@@ -15,53 +18,50 @@ namespace ProjectEntra21.Controllers
             _employeerRepository = employeerRepository;
         }
 
-        /*[HttpGet]
-        public IActionResult get()
+        [HttpGet]
+        public async Task<IList<Employeer>> GetSelectMore()
         {
-            return Ok(_employeerRepository.FindAll());
+            return await _employeerRepository.SelectMore();
         }
 
         [HttpGet("{id}")]
-        public IActionResult Get(long id)
+        public async Task<IActionResult> GetSelectOne([FromRoute] long id)
         {
-            var employeer = _employeerRepository.FindById(id));
-            if (employeer == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(employeer);
+            var employeerSelectOne = await _employeerRepository.SelectOne(x => x.Id == id);
+            return Ok(employeerSelectOne);
         }
-        */
 
         [HttpPost]
-        public IActionResult Post([FromBody] Employeer employeer)
+        public async Task<IActionResult> PostEmployeer([FromBody] Employeer employeer)
         {
             if (employeer == null)
-            {
-                return BadRequest();
-            }
 
-            return Ok(_employeerRepository.InsertOrUpdate(employeer));
+                return BadRequest();
+
+
+            await _employeerRepository.InsertOrUpdate(employeer);
+            return NoContent();
         }
 
         [HttpPut]
-        public IActionResult Put([FromBody] Employeer employeer)
+        public async Task<IActionResult> Update([FromBody] Employeer employeer)
         {
-            if (employeer == null)
-            {
-                return BadRequest();
-            }
-
-            return Ok(_employeerRepository.Update(employeer));
-        }
-        /*
-        [HttpDelete("{id}")]
-        public IActionResult Delete(long id)
-        {
-            _employeerRepository.Delete(id);
+            await _employeerRepository.Update(employeer);
             return NoContent();
         }
-        */
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(long id)
+        {
+            var employeerDelete = await _employeerRepository.SelectOne(x => x.Id == id);
+
+            if (employeerDelete != null)
+            {
+                await _employeerRepository.Delete(employeerDelete);
+                return Ok();
+            }
+
+            return NoContent();
+        }
     }
 }

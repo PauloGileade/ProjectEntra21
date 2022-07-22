@@ -21,27 +21,26 @@ namespace ProjectEntra21.Infrastructure.Database.Common
             Dbset = Context.Set<T>();
         }
 
-        public Task Delete(T entity)
+        public async Task Delete(T entity)
         {
             Dbset.Remove(entity);
-            return Task.CompletedTask;
+            await Context.SaveChangesAsync();
         }
 
         public virtual async Task Insert(T entity)
         {
             entity.CreateAt = DateTime.Now;
             entity.LastModifiedAt = DateTime.Now;
-            // await Dbset.AddAsync(entity);
-            Context.Add(entity);
+            await Dbset.AddAsync(entity);
             await Context.SaveChangesAsync();
         }
 
         public Task InsertOrUpdate(T entity)
         {
             if (Dbset.Any(x => x.Id == entity.Id))
-            {
+
                 return Update(entity);
-            }
+
 
             return Insert(entity);
         }
@@ -49,9 +48,9 @@ namespace ProjectEntra21.Infrastructure.Database.Common
         public async Task<IList<T>> SelectMore(Expression<Func<T, bool>> filter = null)
         {
             if (filter == null)
-            {
+
                 return await Dbset.ToListAsync();
-            }
+
 
             return await Dbset.Where(filter).ToListAsync();
         }

@@ -12,26 +12,27 @@ namespace ProjectEntra21.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Employeers",
+                name: "Funcionario",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Register = table.Column<long>(type: "bigint", nullable: false),
-                    Name = table.Column<string>(type: "longtext", nullable: true)
+                    matricula = table.Column<long>(type: "bigint", nullable: false),
+                    nome = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Document = table.Column<string>(type: "longtext", nullable: true)
+                    documento = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    BirthDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    Office = table.Column<string>(type: "longtext", nullable: true)
+                    data_nascimento = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    funcao = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    LevelEmployeer = table.Column<int>(type: "int", nullable: false),
-                    CreateAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    LastModifiedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                    nivel_funcionario = table.Column<int>(type: "int", nullable: false),
+                    criado_em = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    ultima_modificao_em = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Employeers", x => x.Id);
+                    table.PrimaryKey("PK_Funcionario", x => x.id);
+                    table.UniqueConstraint("AK_Funcionario_matricula", x => x.matricula);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
         }
@@ -39,7 +40,7 @@ namespace ProjectEntra21.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Employeers");
+                name: "Funcionario");
         }
     }
 }

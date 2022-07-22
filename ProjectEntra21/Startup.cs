@@ -1,19 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using ProjectEntra21.Infrastructure;
-using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using System.Threading.Tasks;
 using ProjectEntra21.Infrastructure.Database.Common;
 using ProjectEntra21.Infrastructure.Database.Repositories;
 
@@ -32,7 +24,8 @@ namespace ProjectEntra21
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContextPool<DatabaseContext>(options =>
-                options.UseMySql(Configuration.GetConnectionString("TextileAutomationBD"), ServerVersion.AutoDetect(Configuration.GetConnectionString("TextileAutomationBD"))));
+                options.UseMySql(Configuration.GetConnectionString("TextileAutomationBD"), 
+                    ServerVersion.AutoDetect(Configuration.GetConnectionString("TextileAutomationBD"))));
             services.AddScoped<IEmployeerRepository, EmployeerRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
