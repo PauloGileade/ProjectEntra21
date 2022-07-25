@@ -27,6 +27,7 @@ namespace ProjectEntra21
                 options.UseMySql(Configuration.GetConnectionString("TextileAutomationBD"), 
                     ServerVersion.AutoDetect(Configuration.GetConnectionString("TextileAutomationBD"))));
             services.AddScoped<IEmployeerRepository, EmployeerRepository>();
+            services.AddScoped<ICellRepository, CellRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

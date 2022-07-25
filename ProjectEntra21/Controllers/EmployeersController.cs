@@ -9,11 +9,11 @@ namespace ProjectEntra21.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class EmployeerController : ControllerBase
+    public class EmployeersController : ControllerBase
     {
         private IEmployeerRepository _employeerRepository;
 
-        public EmployeerController(IEmployeerRepository employeerRepository)
+        public EmployeersController(IEmployeerRepository employeerRepository)
         {
             _employeerRepository = employeerRepository;
         }

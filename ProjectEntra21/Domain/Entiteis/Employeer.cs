@@ -2,6 +2,7 @@
 using ProjectEntra21.Domain.Common;
 using ProjectEntra21.Domain.Enums;
 using System;
+using System.Collections.Generic;
 
 namespace ProjectEntra21.Domain.Entiteis
 {

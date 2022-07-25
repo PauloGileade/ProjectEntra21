@@ -9,8 +9,8 @@ using ProjectEntra21.Infrastructure;
 namespace ProjectEntra21.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20220725195353_Employeer")]
-    partial class Employeer
+    [Migration("20220725204349_updateNewEntities")]
+    partial class updateNewEntities
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -18,6 +18,36 @@ namespace ProjectEntra21.Migrations
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.17");
+
+            modelBuilder.Entity("ProjectEntra21.Domain.Entiteis.Cell", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
+
+                    b.Property<int>("CodeCell")
+                        .HasColumnType("int")
+                        .HasColumnName("codigo_celula");
+
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("criado_em");
+
+                    b.Property<DateTime>("LastModifiedAt")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("ultima_modificao_em");
+
+                    b.Property<int>("StatusCell")
+                        .HasColumnType("int")
+                        .HasColumnName("status_celula");
+
+                    b.HasKey("Id");
+
+                    b.HasAlternateKey("CodeCell");
+
+                    b.ToTable("Celula");
+                });
 
             modelBuilder.Entity("ProjectEntra21.Domain.Entiteis.Employeer", b =>
                 {
