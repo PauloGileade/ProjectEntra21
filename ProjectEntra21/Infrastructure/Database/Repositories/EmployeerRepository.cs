@@ -14,7 +14,7 @@ namespace ProjectEntra21.Infrastructure.Database.Repositories
         }
         public new async Task Insert(Employeer employeer)
         {
-            employeer.Register = NewRegister();
+           // employeer.Register = NewRegister();
             Context.Add(employeer);
             await Context.SaveChangesAsync();
         }
