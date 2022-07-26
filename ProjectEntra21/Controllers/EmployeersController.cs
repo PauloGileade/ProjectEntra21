@@ -38,8 +38,7 @@ namespace ProjectEntra21.Controllers
 
                 return BadRequest();
 
-
-            await _employeerRepository.InsertOrUpdate(employeer);
+            await _employeerRepository.Insert(employeer);
             return NoContent();
         }
 

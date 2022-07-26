@@ -9,8 +9,8 @@ using ProjectEntra21.Infrastructure;
 namespace ProjectEntra21.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20220725204349_updateNewEntities")]
-    partial class updateNewEntities
+    [Migration("20220725234637_modificada2")]
+    partial class modificada2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -59,6 +59,10 @@ namespace ProjectEntra21.Migrations
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime(6)")
                         .HasColumnName("data_nascimento");
+
+                    b.Property<int?>("CodeCell")
+                        .HasColumnType("int")
+                        .HasColumnName("codigo_celula");
 
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime(6)")

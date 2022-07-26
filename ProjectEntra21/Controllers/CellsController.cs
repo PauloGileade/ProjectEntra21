@@ -18,7 +18,7 @@ namespace ProjectEntra21.Controllers
         }
 
         [HttpGet]
-        public async Task<IList<Cell>> GetSelectMore()
+        public async Task<ICollection<Cell>> GetSelectMore()
         {
             return await _cellRepository.SelectMore();
         }
@@ -49,7 +49,7 @@ namespace ProjectEntra21.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{code}")]
         public async Task<IActionResult> Delete(int code)
         {
             var cellDelete = await _cellRepository.SelectOne(x => x.CodeCell == code);

@@ -1,20 +1,32 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ProjectEntra21.Domain.Entiteis;
+﻿using ProjectEntra21.Domain.Entiteis;
 using ProjectEntra21.Infrastructure;
 using ProjectEntra21.Infrastructure.Database.Common;
 using ProjectEntra21.Infrastructure.Database.Repositories;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ProjectEntra21.Validations
 {
-    public class EmployeerValidation
+    public static class EmployeerValidation
     {
-        protected readonly DatabaseContext Context;
-        protected readonly DbSet<Employeer> Dbset;
-        public long ValidationRegister()
+
+        public static long ValidationRegister(DatabaseContext context)
         {
-            var newRegister = Context.Employeers.OrderByDescending(x => x.Register).First();
-            return newRegister.Register ++;
+            var newRegister = context.Employeers.Select(x => x.Register).OrderByDescending(x => x).FirstOrDefault();
+
+            return newRegister + 1;
+        }
+
+        public static bool ValidationCodeCell(DatabaseContext context, int? cells)
+        {
+            var cell = context.Cells.Where(x => x.CodeCell == cells).Select(x => x.CodeCell).FirstOrDefault();
+
+            if (cells == 0 || cell == 0)
+
+                return false;
+
+
+            return true;
         }
     }
 }

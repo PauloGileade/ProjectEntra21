@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjectEntra21.Infrastructure;
 
 namespace ProjectEntra21.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220725234306_EmployeerAndCell")]
+    partial class EmployeerAndCell
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,10 +59,6 @@ namespace ProjectEntra21.Migrations
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime(6)")
                         .HasColumnName("data_nascimento");
-
-                    b.Property<int?>("CodeCell")
-                        .HasColumnType("int")
-                        .HasColumnName("codigo_celula");
 
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime(6)")

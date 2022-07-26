@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProjectEntra21.Migrations
 {
-    public partial class updateNewEntities : Migration
+    public partial class EmployeerAndCell : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

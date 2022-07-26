@@ -19,6 +19,7 @@ namespace ProjectEntra21.Infrastructure.Database.Mappings
             builder.Property(x => x.Document).HasColumnName("documento");
             builder.Property(x => x.Office).HasColumnName("funcao");
             builder.Property(x => x.LevelEmployeer).HasColumnName("nivel_funcionario");
+            builder.Property(x => x.CodeCell).HasColumnName("codigo_celula");
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProjectEntra21.Domain.Entiteis;
 using ProjectEntra21.Infrastructure.Database.Common;
+using ProjectEntra21.Validations;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,9 +15,12 @@ namespace ProjectEntra21.Infrastructure.Database.Repositories
         }
         public new async Task Insert(Employeer employeer)
         {
-           // employeer.Register = NewRegister();
-            Context.Add(employeer);
-            await Context.SaveChangesAsync();
+            employeer.Register = EmployeerValidation.ValidationRegister(Context);
+            if (EmployeerValidation.ValidationCodeCell(Context, employeer.CodeCell))
+            {
+                Context.Add(employeer);
+                await Context.SaveChangesAsync();
+            }
         }
 
         public new async Task Update(Employeer employeer)
@@ -28,9 +32,9 @@ namespace ProjectEntra21.Infrastructure.Database.Repositories
         public new Task InsertOrUpdate(Employeer employeer)
         {
             if (Dbset.Any(x => x.Register == employeer.Register))
-            
+
                 return Update(employeer);
-            
+
 
             return Insert(employeer);
         }
