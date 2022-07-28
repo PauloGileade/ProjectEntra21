@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using ProjectEntra21.Domain.Entiteis;
-using ProjectEntra21.Infrastructure.Database.Common;
+using ProjectEntra21.src.Domain.Entiteis;
+using ProjectEntra21.src.Infrastructure.Database.Common;
 
-namespace ProjectEntra21.Infrastructure.Database.Mappings
+namespace ProjectEntra21.src.Infrastructure.Database.Mappings
 {
     public class CellMapping : BaseMapping<Cell>
     {

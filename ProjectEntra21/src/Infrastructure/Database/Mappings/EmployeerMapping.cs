@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using ProjectEntra21.Domain.Entiteis;
-using ProjectEntra21.Infrastructure.Database.Common;
+using ProjectEntra21.src.Domain.Entiteis;
+using ProjectEntra21.src.Infrastructure.Database.Common;
 using System;
 
-namespace ProjectEntra21.Infrastructure.Database.Mappings
+namespace ProjectEntra21.src.Infrastructure.Database.Mappings
 {
     public class EmployeerMapping : BaseMapping<Employeer>
     {
@@ -14,13 +14,12 @@ namespace ProjectEntra21.Infrastructure.Database.Mappings
         {
             builder.ToTable(TableName);
             builder.HasAlternateKey(x => new { x.Register });
-            builder.Property(x => x.Name).HasColumnName("nome");
-            builder.Property(x => x.Register).HasColumnName("matricula");
-            builder.Property(x => x.BirthDate).HasColumnName("data_nascimento");
-            builder.Property(x => x.Document).HasColumnName("documento");
-            builder.Property(x => x.Office).HasColumnName("funcao");
-            builder.Property(x => x.LevelEmployeer).HasColumnName("nivel_funcionario");
-            builder.Property(x => x.CodeCell).HasColumnName("codigo_celula");
+            builder.Property(x => x.Name).IsRequired().HasColumnName("nome");
+            builder.Property(x => x.Register).IsRequired().HasColumnName("matricula");
+            builder.Property(x => x.BirthDate).IsRequired().HasColumnName("data_nascimento");
+            builder.Property(x => x.Document).IsRequired().HasColumnName("documento");
+            builder.Property(x => x.Office).IsRequired().HasColumnName("funcao");
+            builder.Property(x => x.LevelEmployeer).IsRequired().HasColumnName("nivel_funcionario");
         }
     }
 }

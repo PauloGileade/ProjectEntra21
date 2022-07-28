@@ -1,14 +1,14 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
-using ProjectEntra21.Domain.Common;
-using ProjectEntra21.Infrastructure;
+using ProjectEntra21.src.Domain.Common;
+using ProjectEntra21.src.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace ProjectEntra21.Infrastructure.Database.Common
+namespace ProjectEntra21.src.Infrastructure.Database.Common
 {
     public abstract class BaseRepository<T> : IBaseRepository<T> where T : PatternEntity
     {
@@ -58,12 +58,10 @@ namespace ProjectEntra21.Infrastructure.Database.Common
             return await Dbset.Where(filter).FirstOrDefaultAsync();
         }
 
-        public Task Update(T entity)
+        public virtual async Task Update(T entity)
         {
-            entity.LastModifiedAt = DateTime.Now;
             Dbset.Update(entity);
-
-            return Task.CompletedTask;
+            await Context.SaveChangesAsync();
         }
     }
 }

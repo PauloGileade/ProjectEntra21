@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ProjectEntra21.Domain.Entiteis;
-using ProjectEntra21.Infrastructure.Database.Common;
+using ProjectEntra21.src.Application.Database;
+using ProjectEntra21.src.Domain.Entiteis;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

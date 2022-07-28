@@ -1,6 +1,6 @@
-﻿using ProjectEntra21.Domain.Enums;
+﻿using ProjectEntra21.src.Domain.Enums;
 
-namespace ProjectEntra21.Domain.Entiteis
+namespace ProjectEntra21.src.Domain.Entiteis
 {
     public class Product
     {

@@ -1,4 +1,4 @@
-﻿namespace ProjectEntra21.Domain.Enums
+﻿namespace ProjectEntra21.src.Domain.Enums
 {
     public enum LevelEmployeer
     {

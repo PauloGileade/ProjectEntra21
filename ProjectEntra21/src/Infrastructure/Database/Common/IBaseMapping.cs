@@ -1,4 +1,4 @@
-﻿namespace ProjectEntra21.Infrastructure.Database.Common
+﻿namespace ProjectEntra21.src.Infrastructure.Database.Common
 {
     public interface IBaseMapping
     {

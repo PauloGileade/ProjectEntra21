@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using ProjectEntra21.Domain.Common;
+using ProjectEntra21.src.Domain.Common;
 using System;
 
-namespace ProjectEntra21.Infrastructure.Database.Common
+namespace ProjectEntra21.src.Infrastructure.Database.Common
 {
     public abstract class BaseMapping<T> : IBaseMapping where T : PatternEntity
     {

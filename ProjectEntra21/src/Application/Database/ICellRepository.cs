@@ -3,8 +3,7 @@ using ProjectEntra21.src.Infrastructure.Database.Common;
 
 namespace ProjectEntra21.src.Application.Database
 {
-    public interface IEmployeerRepository : IBaseRepository<Employeer>
+    public interface ICellRepository : IBaseRepository<Cell>
     {
-        public long NextRegisterEmployeer();
     }
 }

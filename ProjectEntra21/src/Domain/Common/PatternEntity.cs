@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ProjectEntra21.Domain.Common
+namespace ProjectEntra21.src.Domain.Common
 {
     public class PatternEntity
     {

@@ -3,7 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using ProjectEntra21.Infrastructure;
+using ProjectEntra21.src.Infrastructure;
 
 namespace ProjectEntra21.Migrations
 {

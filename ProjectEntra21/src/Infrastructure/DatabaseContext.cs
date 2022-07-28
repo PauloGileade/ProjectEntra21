@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ProjectEntra21.Domain.Entiteis;
-using ProjectEntra21.Infrastructure.Database.Mappings;
+using ProjectEntra21.src.Domain.Entiteis;
+using ProjectEntra21.src.Infrastructure.Database.Mappings;
 
-namespace ProjectEntra21.Infrastructure
+namespace ProjectEntra21.src.Infrastructure
 {
     public class DatabaseContext : DbContext
     {
@@ -20,7 +20,7 @@ namespace ProjectEntra21.Infrastructure
 
             new EmployeerMapping().Initialize(modelBuilder.Entity<Employeer>());
             new CellMapping().Initialize(modelBuilder.Entity<Cell>());
-           
+
         }
     }
 }

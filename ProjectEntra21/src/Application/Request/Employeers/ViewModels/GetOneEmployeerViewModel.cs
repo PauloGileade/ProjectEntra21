@@ -1,12 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ProjectEntra21.src.Domain.Common;
-using ProjectEntra21.src.Domain.Enums;
+﻿using ProjectEntra21.src.Domain.Enums;
 using System;
-using System.Collections.Generic;
 
-namespace ProjectEntra21.src.Domain.Entiteis
+namespace ProjectEntra21.src.Application.Request.Employeers.ViewModels
 {
-    public class Employeer : PatternEntity
+    public class GetOneEmployeerViewModel
     {
         public long Register { get; set; }
         public string Name { get; set; }

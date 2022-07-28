@@ -1,15 +1,17 @@
-﻿using ProjectEntra21.Domain.Entiteis;
-using ProjectEntra21.Domain.Enums;
-using MediatR;
-using System;
-using System.Threading.Tasks;
-using System.Threading;
+﻿using MediatR;
 using ProjectEntra21.src.Application.Database;
+using ProjectEntra21.src.Domain.Entiteis;
+using ProjectEntra21.src.Domain.Enums;
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
-namespace ProjectEntra21.src.Application.Request
+namespace ProjectEntra21.src.Application.Request.Employeers
 {
     public class PersistEmployeerRequest : IRequest<Employeer>
     {
+        public long Register { get; set; }
         public string Name { get; set; }
         public string Document { get; set; }
         public DateTime BirthDate { get; set; }
@@ -28,21 +30,19 @@ namespace ProjectEntra21.src.Application.Request
 
         public async Task<Employeer> Handle(PersistEmployeerRequest request, CancellationToken cancellationToken)
         {
-            Employeer employeer = await _employeerRepository.SelectOne(x => x.Name == request.Name
-                && x.Document == request.Document);
+            Employeer employeer = await _employeerRepository.SelectOne(x => x.Register == request.Register);
 
-            if (employeer != null)
+            if (employeer == null)
 
-                return employeer;
+                employeer = new Employeer();
 
-            await _employeerRepository.Insert(new Employeer
-            {
-                Name = request.Name,
-                Document = request.Document,
-                BirthDate = request.BirthDate,
-                Office = request.Office,
-                LevelEmployeer = request.LevelEmployeer
-            });
+            employeer.Name = request.Name;
+            employeer.Document = request.Document;
+            employeer.BirthDate = request.BirthDate;
+            employeer.Office = request.Office;
+            employeer.LevelEmployeer = request.LevelEmployeer;
+
+            await _employeerRepository.InsertOrUpdate(employeer);
 
             return employeer;
         }

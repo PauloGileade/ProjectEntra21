@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ProjectEntra21.Domain.Entiteis
+namespace ProjectEntra21.src.Domain.Entiteis
 {
     public class Order
     {

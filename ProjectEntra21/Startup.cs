@@ -6,10 +6,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using ProjectEntra21.Infrastructure;
-using ProjectEntra21.Infrastructure.Database.Common;
-using ProjectEntra21.Infrastructure.Database.Repositories;
 using ProjectEntra21.src.Application.Database;
+using ProjectEntra21.src.Infrastructure;
+using ProjectEntra21.src.Infrastructure.Database.Repositories;
 using System.Reflection;
 
 namespace ProjectEntra21

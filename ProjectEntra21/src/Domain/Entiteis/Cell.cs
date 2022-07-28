@@ -1,8 +1,8 @@
-﻿using ProjectEntra21.Domain.Common;
-using ProjectEntra21.Domain.Enums;
+﻿using ProjectEntra21.src.Domain.Common;
+using ProjectEntra21.src.Domain.Enums;
 using System.Collections.Generic;
 
-namespace ProjectEntra21.Domain.Entiteis
+namespace ProjectEntra21.src.Domain.Entiteis
 {
     public class Cell : PatternEntity
     {
