@@ -1,58 +1,65 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ProjectEntra21.Domain.Entiteis;
-using ProjectEntra21.Infrastructure.Database.Common;
-using System.Collections.Generic;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using ProjectEntra21.src.Application.Request;
+using System;
 using System.Threading.Tasks;
-using System.Linq;
 
 namespace ProjectEntra21.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class EmployeersController : ControllerBase
+    public class EmployeersController : Entra21Controller
     {
-        private IEmployeerRepository _employeerRepository;
-
-        public EmployeersController(IEmployeerRepository employeerRepository)
+        public EmployeersController(IMediator mediator) : base(mediator)
         {
-            _employeerRepository = employeerRepository;
         }
-
+        /*
         [HttpGet]
         public async Task<IList<Employeer>> GetSelectMore()
         {
             return await _employeerRepository.SelectMore();
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetSelectOne([FromRoute] long id)
+        [HttpGet("{register}")]
+        public async Task<IActionResult> GetSelectOne([FromRoute] long register)
         {
-            var employeerSelectOne = await _employeerRepository.SelectOne(x => x.Id == id);
+            var employeerSelectOne = await _employeerRepository.SelectOne(x => x.Register == register);
             return Ok(employeerSelectOne);
         }
-
+        */
         [HttpPost]
-        public async Task<IActionResult> PostEmployeer([FromBody] Employeer employeer)
+        public async Task<IActionResult> PostEmployeer([FromBody] PersistEmployeerRequest persistEmployeerRequest)
         {
-            if (employeer == null)
+            if (persistEmployeerRequest == null)
 
                 return BadRequest();
 
-            await _employeerRepository.Insert(employeer);
-            return NoContent();
+            var response = await _mediator.Send(persistEmployeerRequest);
+            var absolutePath = String.Format("{0}://{1}{2}", Request.Scheme, Request.Host, Request.Path.Value);
+            return Created(new Uri(absolutePath + "/" + response.Register), response);
         }
-
+        /*
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] Employeer employeer)
+        public async Task<IActionResult> Update(Employeer employeer)
         {
-            await _employeerRepository.Update(employeer);
-            return NoContent();
+            var employeerUpdate = await _employeerRepository.SelectOne(x => x.Register == employeer.Register);
+
+            if (employeerUpdate != null)
+            {
+                employeerUpdate.Name = employeer.Name;
+                employeerUpdate.Document = employeer.Document;
+                employeerUpdate.BirthDate = employeer.BirthDate;
+                employeerUpdate.Office = employeer.Office;
+                employeerUpdate.LevelEmployeer = employeer.LevelEmployeer;
+                employeerUpdate.CodeCell = employeer.CodeCell;
+                await _employeerRepository.Update(employeerUpdate);
+                return NoContent();
+            }
+            return BadRequest();
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(long id)
+        [HttpDelete("{register}")]
+        public async Task<IActionResult> Delete(long register)
         {
-            var employeerDelete = await _employeerRepository.SelectOne(x => x.Id == id);
+            var employeerDelete = await _employeerRepository.SelectOne(x => x.Register == register);
 
             if (employeerDelete != null)
             {
@@ -62,5 +69,6 @@ namespace ProjectEntra21.Controllers
 
             return NoContent();
         }
+        */
     }
 }

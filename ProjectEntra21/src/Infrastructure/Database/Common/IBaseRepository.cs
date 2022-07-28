@@ -11,7 +11,6 @@ namespace ProjectEntra21.Infrastructure.Database.Common
         Task Insert(T entity);
         Task Update(T entity);
         Task Delete(T entity);
-        Task InsertOrUpdate(T entity);
         Task<IList<T>> SelectMore(Expression<Func<T, bool>> filter = null);
         Task<T> SelectOne(Expression<Func<T, bool>> filter = null);
     }

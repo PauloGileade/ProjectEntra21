@@ -12,6 +12,7 @@ namespace ProjectEntra21.Infrastructure
 
         public DbSet<Employeer> Employeers { get; set; }
         public DbSet<Cell> Cells { get; set; }
+        public DbSet<CellEmployeer> CellsEmployeers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -19,6 +20,7 @@ namespace ProjectEntra21.Infrastructure
 
             new EmployeerMapping().Initialize(modelBuilder.Entity<Employeer>());
             new CellMapping().Initialize(modelBuilder.Entity<Cell>());
+           
         }
     }
 }

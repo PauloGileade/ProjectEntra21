@@ -29,8 +29,6 @@ namespace ProjectEntra21.Infrastructure.Database.Common
 
         public virtual async Task Insert(T entity)
         {
-            entity.CreateAt = DateTime.Now;
-            entity.LastModifiedAt = DateTime.Now;
             await Dbset.AddAsync(entity);
             await Context.SaveChangesAsync();
         }

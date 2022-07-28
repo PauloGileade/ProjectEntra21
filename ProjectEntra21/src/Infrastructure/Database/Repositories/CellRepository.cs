@@ -25,16 +25,6 @@ namespace ProjectEntra21.Infrastructure.Database.Repositories
             await Context.SaveChangesAsync();
         }
 
-        public new Task InsertOrUpdate(Cell cell)
-        {
-            if (Dbset.Any(x => x.CodeCell == cell.CodeCell))
-
-                return Update(cell);
-
-
-            return Insert(cell);
-        }
-
         public async Task<IList<Cell>> SelectMore()
         {
             return await Dbset.ToListAsync();

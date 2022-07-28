@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ProjectEntra21.Domain.Entiteis;
 using ProjectEntra21.Infrastructure.Database.Common;
+using System;
 
 namespace ProjectEntra21.Infrastructure.Database.Mappings
 {

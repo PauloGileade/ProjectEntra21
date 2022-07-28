@@ -1,3 +1,4 @@
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,8 @@ using Microsoft.OpenApi.Models;
 using ProjectEntra21.Infrastructure;
 using ProjectEntra21.Infrastructure.Database.Common;
 using ProjectEntra21.Infrastructure.Database.Repositories;
+using ProjectEntra21.src.Application.Database;
+using System.Reflection;
 
 namespace ProjectEntra21
 {
@@ -26,9 +29,10 @@ namespace ProjectEntra21
             services.AddDbContextPool<DatabaseContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("TextileAutomationBD"), 
                     ServerVersion.AutoDetect(Configuration.GetConnectionString("TextileAutomationBD"))));
-            services.AddScoped<IEmployeerRepository, EmployeerRepository>();
+            services.AddTransient<IEmployeerRepository, EmployeerRepository>();
             services.AddScoped<ICellRepository, CellRepository>();
             services.AddControllers();
+            services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ProjectEntra21", Version = "v1" });

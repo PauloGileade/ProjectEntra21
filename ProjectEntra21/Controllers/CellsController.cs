@@ -18,7 +18,7 @@ namespace ProjectEntra21.Controllers
         }
 
         [HttpGet]
-        public async Task<ICollection<Cell>> GetSelectMore()
+        public async Task<IList<Cell>> GetSelectMore()
         {
             return await _cellRepository.SelectMore();
         }
@@ -38,7 +38,7 @@ namespace ProjectEntra21.Controllers
                 return BadRequest();
 
 
-            await _cellRepository.InsertOrUpdate(cell);
+            await _cellRepository.Insert(cell);
             return NoContent();
         }
 

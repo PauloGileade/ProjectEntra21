@@ -2,8 +2,7 @@
 
 namespace ProjectEntra21.Infrastructure.Database.Common
 {
-    public interface IEmployeerRepository : IBaseRepository<Employeer>
+    public interface ICellEmployeerRepository : IBaseRepository<CellEmployeer>
     {
-
     }
 }
