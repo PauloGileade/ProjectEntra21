@@ -5,5 +5,7 @@ namespace ProjectEntra21.src.Application.Database
 {
     public interface ICellEmployeerRepository : IBaseRepository<CellEmployeer>
     {
+        public bool ValidationCodeCell(int? codeCell);
+        public bool ValidationRegisterEmployeer(long? registerEmployeer);
     }
 }

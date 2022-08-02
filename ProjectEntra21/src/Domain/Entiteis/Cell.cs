@@ -8,6 +8,5 @@ namespace ProjectEntra21.src.Domain.Entiteis
     {
         public int CodeCell { get; set; }
         public StatusCell StatusCell { get; set; }
-        public CellEmployeer CellEmployeer { get; set; }
     }
 }

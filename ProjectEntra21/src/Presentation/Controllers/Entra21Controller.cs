@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ProjectEntra21.Controllers
+namespace ProjectEntra21.src.Presentation.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

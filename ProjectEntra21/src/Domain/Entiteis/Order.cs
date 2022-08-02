@@ -1,13 +1,18 @@
-﻿using System;
+﻿using ProjectEntra21.src.Domain.Common;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProjectEntra21.src.Domain.Entiteis
 {
-    public class Order
+    public class Order : PatternEntity
     {
-        public DateTime Data { get; set; }
+        public long Code { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime Data { get; set; } = DateTime.Now;
         public Employeer Employeer { get; set; }
-        public IList<Product> Products { get; set; } = new List<Product>();
+        public Product Product { get; set; }
         public Cell Cell { get; set; }
         public int AmountEnter { get; set; }
         public int AmountFinished { get; set; }

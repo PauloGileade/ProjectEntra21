@@ -4,6 +4,7 @@ using ProjectEntra21.src.Domain.Entiteis;
 using ProjectEntra21.src.Infrastructure.Database.Common;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ProjectEntra21.src.Infrastructure.Database.Repositories
@@ -14,33 +15,37 @@ namespace ProjectEntra21.src.Infrastructure.Database.Repositories
         {
         }
 
-        public new async Task Insert(CellEmployeer cellEmployeer)
+        public new Task InsertOrUpdate(CellEmployeer cellEmployeer)
         {
-            Context.Add(cellEmployeer);
-            await Context.SaveChangesAsync();
+            if (Dbset.Any(x => x.Code == cellEmployeer.Code))
+
+                return Update(cellEmployeer);
+
+            return Insert(cellEmployeer);
         }
 
-        public new async Task Update(CellEmployeer cellEmployeer)
+        public bool ValidationCodeCell(int? codeCell)
         {
-            Context.Entry(cellEmployeer).State = EntityState.Modified;
-            await Context.SaveChangesAsync();
+            var cell = Context.Cells.Where(x => x.CodeCell == codeCell).Select(x => x.CodeCell).FirstOrDefault();
+
+            if (codeCell == 0 || cell == 0)
+
+                return false;
+
+
+            return true;
         }
 
-        public async Task<IList<CellEmployeer>> SelectMore()
+        public bool ValidationRegisterEmployeer(long? registerEmployyer)
         {
-            return await Dbset.ToArrayAsync();
-        }
+            var cell = Context.Employeers.Where(x => x.Register == registerEmployyer).Select(x => x.Register).FirstOrDefault();
 
-        public async Task<CellEmployeer> SelectOne(long id)
-        {
-            return await Dbset.FindAsync(id);
-        }
+            if (registerEmployyer == 0 || cell == 0)
 
-        public async Task Delete(long id)
-        {
-            var deleteCellEmployeer = await Dbset.FindAsync(id);
-            Dbset.Remove(deleteCellEmployeer);
-            await Context.SaveChangesAsync();
+                return false;
+
+
+            return true;
         }
     }
 }

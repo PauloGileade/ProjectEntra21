@@ -14,33 +14,14 @@ namespace ProjectEntra21.src.Infrastructure.Database.Repositories
         {
         }
 
-        public new async Task Insert(Cell cell)
+        public new Task InsertOrUpdate(Cell cell)
         {
-            Context.Add(cell);
-            await Context.SaveChangesAsync();
-        }
+            if (Dbset.Any(x => x.CodeCell == cell.CodeCell))
 
-        public new async Task Update(Cell cell)
-        {
-            Context.Entry(cell).State = EntityState.Modified;
-            await Context.SaveChangesAsync();
-        }
+                return Update(cell);
 
-        public async Task<IList<Cell>> SelectMore()
-        {
-            return await Dbset.ToListAsync();
-        }
+            return Insert(cell);
 
-        public async Task<Cell> SelectOne(int code)
-        {
-            return await Dbset.FindAsync(code);
-        }
-
-        public async Task Delete(int code)
-        {
-            var deleteCell = await Dbset.FindAsync(code);
-            Dbset.Remove(deleteCell);
-            await Context.SaveChangesAsync();
         }
     }
 }

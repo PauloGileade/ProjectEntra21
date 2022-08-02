@@ -32,18 +32,5 @@ namespace ProjectEntra21.src.Infrastructure.Database.Repositories
 
             return newRegister + 1;
         }
-        /*
-public bool ValidationCodeCell(int? cells)
-{
-   var cell = Context.Cells.Where(x => x.CodeCell == cells).Select(x => x.CodeCell).FirstOrDefault();
-
-   if (cells == 0 || cell == 0)
-
-       return false;
-
-
-   return true;
-}
-*/
     }
 }

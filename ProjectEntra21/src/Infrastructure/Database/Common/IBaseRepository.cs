@@ -12,7 +12,7 @@ namespace ProjectEntra21.src.Infrastructure.Database.Common
         Task Update(T entity);
         Task Delete(T entity);
         Task InsertOrUpdate (T entity);
-        Task<IList<T>> SelectMore(Expression<Func<T, bool>> filter = null);
+        Task<PaginationResponse<T>> SelectMore(FilterBase filterBase);
         Task<T> SelectOne(Expression<Func<T, bool>> filter = null);
     }
 }

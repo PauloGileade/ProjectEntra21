@@ -13,8 +13,8 @@ namespace ProjectEntra21.src.Infrastructure.Database.Mappings
         {
             builder.ToTable(TableName);
             builder.HasAlternateKey(x => new { x.CodeCell });
-            builder.Property(x => x.CodeCell).HasColumnName("codigo_celula");
-            builder.Property(x => x.StatusCell).HasColumnName("status_celula");
+            builder.Property(x => x.CodeCell).IsRequired().HasColumnName("codigo_celula");
+            builder.Property(x => x.StatusCell).IsRequired().HasColumnName("status_celula");
         }
     }
 }

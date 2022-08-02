@@ -4,6 +4,7 @@ using ProjectEntra21.src.Domain.Entiteis;
 using ProjectEntra21.src.Domain.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,7 +12,6 @@ namespace ProjectEntra21.src.Application.Request.Employeers
 {
     public class PersistEmployeerRequest : IRequest<Employeer>
     {
-        public long Register { get; set; }
         public string Name { get; set; }
         public string Document { get; set; }
         public DateTime BirthDate { get; set; }
@@ -30,7 +30,7 @@ namespace ProjectEntra21.src.Application.Request.Employeers
 
         public async Task<Employeer> Handle(PersistEmployeerRequest request, CancellationToken cancellationToken)
         {
-            Employeer employeer = await _employeerRepository.SelectOne(x => x.Register == request.Register);
+            Employeer employeer = await _employeerRepository.SelectOne(x => x.Document == request.Document);
 
             if (employeer == null)
 

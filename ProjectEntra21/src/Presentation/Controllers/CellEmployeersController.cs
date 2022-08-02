@@ -1,62 +1,57 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ProjectEntra21.src.Application.Database;
-using ProjectEntra21.src.Domain.Entiteis;
-using System.Collections.Generic;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using ProjectEntra21.src.Application.Request.CellEmployeers;
+using ProjectEntra21.src.Application.ViewModels;
+using System;
 using System.Threading.Tasks;
 
-namespace ProjectEntra21.Controllers
+namespace ProjectEntra21.src.Presentation.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class CellEmployeersController : ControllerBase
+    public class CellEmployeersController : Entra21Controller
     {
-        private readonly ICellEmployeerRepository _cellEmployeerRepository;
-
-        public CellEmployeersController(ICellEmployeerRepository cellEmployeerRepository)
+        public CellEmployeersController(IMediator mediator) : base(mediator)
         {
-            _cellEmployeerRepository = cellEmployeerRepository;
         }
-
+        /*
         [HttpGet]
         public async Task<IList<CellEmployeer>> GetSelectMore()
         {
             return await _cellEmployeerRepository.SelectMore();
         }
-
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetSelectOne([FromRoute] long id)
+        */
+        [HttpGet]
+        [Route("{code}")]
+        public async Task<GetCellEmployeerViewModel> GetSelectOneAsync([FromRoute] int code)
         {
-            var cellEmployeerSelectOne = await _cellEmployeerRepository.SelectOne(x => x.Id == id);
-            return Ok(cellEmployeerSelectOne);
+            return await _mediator.Send(new GetOneCellEmployeerRequest { Code = code });
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostCellEmployeer([FromBody] CellEmployeer cellEmployeer)
+        public async Task<IActionResult> PostCellEmployeerAsync([FromBody] PersistCellEmployeerRequest persistCellEmployeerRequest)
         {
-            if(cellEmployeer == null)
+            if (persistCellEmployeerRequest == null)
+
                 return BadRequest();
 
-            await _cellEmployeerRepository.Insert(cellEmployeer);
-            return NoContent();
+            var response = await _mediator.Send(persistCellEmployeerRequest);
+            var absolutePath = string.Format("{0}://{1}{2}", Request.Scheme, Request.Host, Request.Path.Value);
+            return Created(new Uri(absolutePath + "/" + response.Id), response);
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] CellEmployeer cellEmployeer)
+        public async Task<IActionResult> UpdateAsync([FromBody] PersistCellEmployeerRequest persistCellEmployeerRequest)
         {
-            await _cellEmployeerRepository.Update(cellEmployeer);
-            return NoContent();
+            if (persistCellEmployeerRequest == null)
+
+                return BadRequest();
+
+            return Ok(await _mediator.Send(persistCellEmployeerRequest));
         }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(long id)
+        [HttpDelete]
+        [Route("{code}")]
+        public async Task<IActionResult> DeleteAsync([FromRoute] int code)
         {
-            var cellEmployeerDelete = await _cellEmployeerRepository.SelectOne(x => x.Id == id);
-
-            if(cellEmployeerDelete != null)
-            {
-                await _cellEmployeerRepository.Delete(cellEmployeerDelete);
-                return Ok();
-            }
+            await _mediator.Send(new DeleteOneCellEmployeerRequest { Code = code });
 
             return NoContent();
         }

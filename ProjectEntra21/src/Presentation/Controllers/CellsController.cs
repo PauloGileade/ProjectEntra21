@@ -1,64 +1,60 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ProjectEntra21.src.Application.Database;
-using ProjectEntra21.src.Domain.Entiteis;
-using System.Collections.Generic;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using ProjectEntra21.src.Application.Request.Cells;
+using ProjectEntra21.src.Application.ViewModels;
+using System;
 using System.Threading.Tasks;
 
-namespace ProjectEntra21.Controllers
+namespace ProjectEntra21.src.Presentation.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class CellsController : ControllerBase
+    public class CellsController : Entra21Controller
     {
-        private readonly ICellRepository _cellRepository;
-
-        public CellsController(ICellRepository cellRepository)
+        public CellsController(IMediator mediator) : base(mediator)
         {
-            _cellRepository = cellRepository;
         }
-
+        /*
         [HttpGet]
         public async Task<IList<Cell>> GetSelectMore()
         {
             return await _cellRepository.SelectMore();
         }
+        */
 
-        [HttpGet("{code}")]
-        public async Task<IActionResult> GetSelectOne([FromRoute] int code)
+        [HttpGet]
+        [Route("{codeCell}")]
+        public async Task<GetCellViewModel> GetSelectOneAsync([FromRoute] int codeCell)
         {
-            var cellSelectOne = await _cellRepository.SelectOne(x => x.CodeCell == code);
-            return Ok(cellSelectOne);
+            return await _mediator.Send(new GetOneCell { CodeCell = codeCell });
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostCell([FromBody] Cell cell)
+        public async Task<IActionResult> PostCellAsync([FromBody] PersistCellRequest persistCellRequest)
         {
-            if (cell == null)
+            if (persistCellRequest == null)
 
                 return BadRequest();
 
-
-            await _cellRepository.Insert(cell);
-            return NoContent();
+            var response = await _mediator.Send(persistCellRequest);
+            var absolutePath = string.Format("{0}://{1}{2}", Request.Scheme, Request.Host, Request.Path.Value);
+            return Created(new Uri(absolutePath + "/" + response.CodeCell), response);
         }
+
 
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] Cell cell)
+        public async Task<IActionResult> UpdateAsync([FromBody] PersistCellRequest persistCellRequest)
         {
-            await _cellRepository.Update(cell);
-            return NoContent();
+            if (persistCellRequest == null)
+
+                return BadRequest();
+
+            return Ok(await _mediator.Send(persistCellRequest));
         }
 
-        [HttpDelete("{code}")]
-        public async Task<IActionResult> Delete(int code)
+        [HttpDelete]
+        [Route("{codeCell}")]
+        public async Task<IActionResult> DeleteAsync([FromRoute] int codeCell)
         {
-            var cellDelete = await _cellRepository.SelectOne(x => x.CodeCell == code);
-
-            if (cellDelete != null)
-            {
-                await _cellRepository.Delete(cellDelete);
-                return Ok();
-            }
+            await _mediator.Send(new DeleteOneCellRequest { CodeCell = codeCell });
 
             return NoContent();
         }

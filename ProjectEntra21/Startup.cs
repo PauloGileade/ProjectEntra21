@@ -29,7 +29,10 @@ namespace ProjectEntra21
                 options.UseMySql(Configuration.GetConnectionString("TextileAutomationBD"), 
                     ServerVersion.AutoDetect(Configuration.GetConnectionString("TextileAutomationBD"))));
             services.AddTransient<IEmployeerRepository, EmployeerRepository>();
-            services.AddScoped<ICellRepository, CellRepository>();
+            services.AddTransient<ICellRepository, CellRepository>();
+            services.AddTransient<ICellEmployeerRepository, CellEmployeerRepository>();
+            services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddControllers();
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddSwaggerGen(c =>
