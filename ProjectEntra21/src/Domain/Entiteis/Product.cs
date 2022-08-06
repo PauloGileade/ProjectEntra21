@@ -8,6 +8,5 @@ namespace ProjectEntra21.src.Domain.Entiteis
         public long Code { get; set; }
         public string Name { get; set; }
         public TypeBag Type { get; set; }
-        public Employeer Employeer { get; set; }
     }
 }

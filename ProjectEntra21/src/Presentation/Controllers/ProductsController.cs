@@ -1,7 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using ProjectEntra21.src.Application.Query.Products;
 using ProjectEntra21.src.Application.Request.Products;
 using ProjectEntra21.src.Application.ViewModels;
+using ProjectEntra21.src.Domain.Common;
 using System;
 using System.Threading.Tasks;
 
@@ -14,10 +16,24 @@ namespace ProjectEntra21.src.Presentation.Controllers
         }
 
         [HttpGet]
-        [Route("{code}")]
-        public async Task<GetProductViewModel> GetSelectOneAsync([FromRoute] long code)
+        public async Task<ActionResult<PaginationResponse<ProductViewModel>>> GetSelectAll([FromQuery] FilterBase filterBase)
         {
-            return await _mediator.Send(new GetOneProductRequest { Code = code });
+            try
+            {
+                return await _mediator.Send(new GetAllProductQuery { Filters = filterBase });
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("{code}")]
+        public async Task<ProductViewModel> GetSelectOneAsync([FromRoute] long code)
+        {
+            return await _mediator.Send(new GetOneProductQuery { Code = code });
         }
 
         [HttpPost]
@@ -46,7 +62,7 @@ namespace ProjectEntra21.src.Presentation.Controllers
         [Route("{code}")]
         public async Task<IActionResult> DeleteAsync([FromRoute] long code)
         {
-            await _mediator.Send(new DeleteOneProductRequest { Code = code });
+            await _mediator.Send(new DeleteOneProductCommand { Code = code });
 
             return NoContent();
         }

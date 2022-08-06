@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace ProjectEntra21.src.Infrastructure.Database.Common.Extension
 {
     public static class PaginateQueryAsync
-    {
+    {    
         public static async Task<PaginationResponse<T>> PaginateAsync<T>(this IQueryable<T> query, int page, int size)
         {
             page = (page <= 0) ? 0 : page;

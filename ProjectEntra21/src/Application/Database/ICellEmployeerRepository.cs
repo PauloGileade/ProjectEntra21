@@ -7,5 +7,6 @@ namespace ProjectEntra21.src.Application.Database
     {
         public bool ValidationCodeCell(int? codeCell);
         public bool ValidationRegisterEmployeer(long? registerEmployeer);
+        public long NextCode();
     }
 }

@@ -1,5 +1,4 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿    using Microsoft.EntityFrameworkCore;
 using ProjectEntra21.src.Domain.Common;
 using ProjectEntra21.src.Infrastructure;
 using ProjectEntra21.src.Infrastructure.Database.Common.Extension;
@@ -43,13 +42,14 @@ namespace ProjectEntra21.src.Infrastructure.Database.Common
 
             return Insert(entity);
         }
-
-        public async Task<PaginationResponse<T>> SelectMore(FilterBase filterBase)
+        
+        public virtual async Task<PaginationResponse<T>> SelectAll(FilterBase filters)
         {
-
-            return await Dbset.AsNoTracking().PaginateAsync(filterBase.Page, filterBase.Size);
+            return await Dbset
+                .AsTracking()
+                .PaginateAsync(filters._page, filters._size);
         }
-
+        
         public virtual async Task<T> SelectOne(Expression<Func<T, bool>> filter = null)
         {
             return await Dbset.Where(filter).FirstOrDefaultAsync();

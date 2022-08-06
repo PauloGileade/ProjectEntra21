@@ -5,5 +5,6 @@ namespace ProjectEntra21.src.Application.Database
 {
     public interface ICellRepository : IBaseRepository<Cell>
     {
+        public long NextCodeCell();
     }
 }

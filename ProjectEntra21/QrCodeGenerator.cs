@@ -5,7 +5,7 @@ using System.IO;
 namespace ProjectEntra21
 {
     public static class QrCodeGenerator
-    {
+    { 
         public static Bitmap GenerateImage(string url)
         {
             var qrGenerator = new QRCodeGenerator();
@@ -26,5 +26,13 @@ namespace ProjectEntra21
             img.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
             return stream.ToArray();
         }
+        /*
+           [HttpGet("qrcode")]
+        public IActionResult GetQrCode()
+        {
+            var image = QrCodeGenerator.GenerateByteArray("https://balta.io");
+            return File(image, "image/jpeg");
+        }
+        */
     }
 }

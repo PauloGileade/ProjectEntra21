@@ -20,8 +20,16 @@ namespace ProjectEntra21.src.Infrastructure.Database.Repositories
 
                 return Update(cell);
 
-            return Insert(cell);
 
+            cell.CodeCell = NextCodeCell();
+            return Insert(cell);
+        }
+
+        public long NextCodeCell()
+        {
+            var newRegister = Context.Cells.Select(x => x.CodeCell).OrderByDescending(x => x).FirstOrDefault();
+
+            return newRegister + 1;
         }
     }
 }

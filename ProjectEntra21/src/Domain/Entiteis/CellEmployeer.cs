@@ -5,9 +5,9 @@ namespace ProjectEntra21.src.Domain.Entiteis
 {
     public class CellEmployeer : PatternEntity
     {
-        public int Code { get; set; }
-        public Cell Cell { get; set; }
-        public IList<Employeer> Employeers { get; set; } = new List<Employeer>();
+        public long Code { get; set; }
+        public int CodeCell { get; set; }
+        public long RegisterEmployeer { get; set; }
     }
 }
 

@@ -21,7 +21,13 @@ namespace ProjectEntra21.src.Infrastructure.Database.Repositories
 
                 return Update(cellEmployeer);
 
-            return Insert(cellEmployeer);
+            if (ValidationCodeCell(cellEmployeer.CodeCell) && ValidationRegisterEmployeer(cellEmployeer.RegisterEmployeer))
+            {
+                cellEmployeer.Code = NextCode();
+                return Insert(cellEmployeer); 
+            }
+
+            return Task.CompletedTask;
         }
 
         public bool ValidationCodeCell(int? codeCell)
@@ -46,6 +52,13 @@ namespace ProjectEntra21.src.Infrastructure.Database.Repositories
 
 
             return true;
+        }
+
+        public long NextCode()
+        {
+            var newRegister = Context.CellsEmployeers.Select(x => x.Code).OrderByDescending(x => x).FirstOrDefault();
+
+            return newRegister + 1;
         }
     }
 }

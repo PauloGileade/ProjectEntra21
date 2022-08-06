@@ -31,13 +31,13 @@ namespace ProjectEntra21.Migrations
                     b.Property<DateTime>("CreateAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 7, 31, 23, 44, 2, 870, DateTimeKind.Local).AddTicks(8236))
+                        .HasDefaultValue(new DateTime(2022, 8, 2, 23, 39, 38, 42, DateTimeKind.Local).AddTicks(7960))
                         .HasColumnName("criado_em");
 
                     b.Property<DateTime>("LastModifiedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 7, 31, 23, 44, 2, 870, DateTimeKind.Local).AddTicks(8556))
+                        .HasDefaultValue(new DateTime(2022, 8, 2, 23, 39, 38, 42, DateTimeKind.Local).AddTicks(8279))
                         .HasColumnName("ultima_modificao_em");
 
                     b.Property<int>("StatusCell")
@@ -58,30 +58,33 @@ namespace ProjectEntra21.Migrations
                         .HasColumnType("bigint")
                         .HasColumnName("id");
 
-                    b.Property<long?>("CellId")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("Code")
-                        .HasColumnType("int")
+                    b.Property<long>("Code")
+                        .HasColumnType("bigint")
                         .HasColumnName("codigo");
+
+                    b.Property<int>("CodeCell")
+                        .HasColumnType("int")
+                        .HasColumnName("codigo_celula");
 
                     b.Property<DateTime>("CreateAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 7, 31, 23, 44, 2, 872, DateTimeKind.Local).AddTicks(4937))
+                        .HasDefaultValue(new DateTime(2022, 8, 2, 23, 39, 38, 44, DateTimeKind.Local).AddTicks(4563))
                         .HasColumnName("criado_em");
 
                     b.Property<DateTime>("LastModifiedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 7, 31, 23, 44, 2, 872, DateTimeKind.Local).AddTicks(5414))
+                        .HasDefaultValue(new DateTime(2022, 8, 2, 23, 39, 38, 44, DateTimeKind.Local).AddTicks(5013))
                         .HasColumnName("ultima_modificao_em");
+
+                    b.Property<long>("RegisterEmployeer")
+                        .HasColumnType("bigint")
+                        .HasColumnName("matricula_funcionario");
 
                     b.HasKey("Id");
 
-                    b.HasAlternateKey("Code");
-
-                    b.HasIndex("CellId");
+                    b.HasAlternateKey("Code", "RegisterEmployeer");
 
                     b.ToTable("CelulaFuncionario");
                 });
@@ -97,13 +100,10 @@ namespace ProjectEntra21.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("data_nascimento");
 
-                    b.Property<long?>("CellEmployeerId")
-                        .HasColumnType("bigint");
-
                     b.Property<DateTime>("CreateAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 7, 31, 23, 44, 2, 859, DateTimeKind.Local).AddTicks(8767))
+                        .HasDefaultValue(new DateTime(2022, 8, 2, 23, 39, 38, 32, DateTimeKind.Local).AddTicks(8755))
                         .HasColumnName("criado_em");
 
                     b.Property<string>("Document")
@@ -114,7 +114,7 @@ namespace ProjectEntra21.Migrations
                     b.Property<DateTime>("LastModifiedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 7, 31, 23, 44, 2, 864, DateTimeKind.Local).AddTicks(84))
+                        .HasDefaultValue(new DateTime(2022, 8, 2, 23, 39, 38, 36, DateTimeKind.Local).AddTicks(6910))
                         .HasColumnName("ultima_modificao_em");
 
                     b.Property<int>("LevelEmployeer")
@@ -138,8 +138,6 @@ namespace ProjectEntra21.Migrations
                     b.HasKey("Id");
 
                     b.HasAlternateKey("Register");
-
-                    b.HasIndex("CellEmployeerId");
 
                     b.ToTable("Funcionario");
                 });
@@ -169,13 +167,13 @@ namespace ProjectEntra21.Migrations
                     b.Property<DateTime>("CreateAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 7, 31, 23, 44, 2, 874, DateTimeKind.Local).AddTicks(6945))
+                        .HasDefaultValue(new DateTime(2022, 8, 2, 23, 39, 38, 48, DateTimeKind.Local).AddTicks(2942))
                         .HasColumnName("criado_em");
 
                     b.Property<DateTime>("Data")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 7, 31, 23, 44, 2, 875, DateTimeKind.Local).AddTicks(4804))
+                        .HasDefaultValue(new DateTime(2022, 8, 2, 23, 39, 38, 49, DateTimeKind.Local).AddTicks(1706))
                         .HasColumnName("data_ordem");
 
                     b.Property<long?>("EmployeerId")
@@ -184,7 +182,7 @@ namespace ProjectEntra21.Migrations
                     b.Property<DateTime>("LastModifiedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 7, 31, 23, 44, 2, 874, DateTimeKind.Local).AddTicks(7276))
+                        .HasDefaultValue(new DateTime(2022, 8, 2, 23, 39, 38, 48, DateTimeKind.Local).AddTicks(3512))
                         .HasColumnName("ultima_modificao_em");
 
                     b.Property<long?>("ProductId")
@@ -217,16 +215,13 @@ namespace ProjectEntra21.Migrations
                     b.Property<DateTime>("CreateAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 7, 31, 23, 44, 2, 873, DateTimeKind.Local).AddTicks(3257))
+                        .HasDefaultValue(new DateTime(2022, 8, 2, 23, 39, 38, 45, DateTimeKind.Local).AddTicks(9352))
                         .HasColumnName("criado_em");
-
-                    b.Property<long?>("EmployeerId")
-                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("LastModifiedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 7, 31, 23, 44, 2, 873, DateTimeKind.Local).AddTicks(3838))
+                        .HasDefaultValue(new DateTime(2022, 8, 2, 23, 39, 38, 45, DateTimeKind.Local).AddTicks(9800))
                         .HasColumnName("ultima_modificao_em");
 
                     b.Property<string>("Name")
@@ -242,27 +237,7 @@ namespace ProjectEntra21.Migrations
 
                     b.HasAlternateKey("Code");
 
-                    b.HasIndex("EmployeerId");
-
                     b.ToTable("Produto");
-                });
-
-            modelBuilder.Entity("ProjectEntra21.src.Domain.Entiteis.CellEmployeer", b =>
-                {
-                    b.HasOne("ProjectEntra21.src.Domain.Entiteis.Cell", "Cell")
-                        .WithMany()
-                        .HasForeignKey("CellId");
-
-                    b.Navigation("Cell");
-                });
-
-            modelBuilder.Entity("ProjectEntra21.src.Domain.Entiteis.Employeer", b =>
-                {
-                    b.HasOne("ProjectEntra21.src.Domain.Entiteis.CellEmployeer", "CellEmployeer")
-                        .WithMany("Employeers")
-                        .HasForeignKey("CellEmployeerId");
-
-                    b.Navigation("CellEmployeer");
                 });
 
             modelBuilder.Entity("ProjectEntra21.src.Domain.Entiteis.Order", b =>
@@ -284,25 +259,6 @@ namespace ProjectEntra21.Migrations
                     b.Navigation("Employeer");
 
                     b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("ProjectEntra21.src.Domain.Entiteis.Product", b =>
-                {
-                    b.HasOne("ProjectEntra21.src.Domain.Entiteis.Employeer", "Employeer")
-                        .WithMany("Products")
-                        .HasForeignKey("EmployeerId");
-
-                    b.Navigation("Employeer");
-                });
-
-            modelBuilder.Entity("ProjectEntra21.src.Domain.Entiteis.CellEmployeer", b =>
-                {
-                    b.Navigation("Employeers");
-                });
-
-            modelBuilder.Entity("ProjectEntra21.src.Domain.Entiteis.Employeer", b =>
-                {
-                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

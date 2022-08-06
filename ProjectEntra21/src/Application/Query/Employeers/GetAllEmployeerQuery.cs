@@ -3,19 +3,20 @@ using MediatR;
 using ProjectEntra21.src.Application.Database;
 using ProjectEntra21.src.Application.ViewModels;
 using ProjectEntra21.src.Domain.Common;
-using ProjectEntra21.src.Domain.Entiteis;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
+
 namespace ProjectEntra21.src.Application.Query.Employeers
 {
-    public class GetAllEmployeerQuery : IRequest<PaginationResponse<GetEmployeerViewModel>>
+    public class GetAllEmployeerQuery : IRequest<PaginationResponse<EmployeerViewModel>>
     {
         public FilterBase Filters { get; set; }
     }
 
-    public class GetAllEmployeerQueryHandler : IRequestHandler<GetAllEmployeerQuery, PaginationResponse<GetEmployeerViewModel>>
+    public class GetAllEmployeerQueryHandler : IRequestHandler<GetAllEmployeerQuery, PaginationResponse<EmployeerViewModel>>
     {
         private readonly IEmployeerRepository _employeerRepository;
         private readonly IMapper _mapper;
@@ -26,13 +27,13 @@ namespace ProjectEntra21.src.Application.Query.Employeers
             _mapper = mapper;
         }
 
-        public async Task<PaginationResponse<GetEmployeerViewModel>> Handle(GetAllEmployeerQuery request, CancellationToken cancellationToken)
+        public async Task<PaginationResponse<EmployeerViewModel>> Handle(GetAllEmployeerQuery request, CancellationToken cancellationToken)
         {
-            var queryResult = await _employeerRepository.SelectMore(request.Filters);
+            var queryResult = await _employeerRepository.SelectAll(request.Filters);
+            var mappedItems = _mapper.Map<IEnumerable<EmployeerViewModel>>(queryResult.Data);
 
-            var mappedItems = _mapper.Map<IEnumerable<GetEmployeerViewModel>>(queryResult.Data);
-
-            return new PaginationResponse<GetEmployeerViewModel>(mappedItems, queryResult.CurrentPage, queryResult.TotalItems, queryResult.TotalPages);
+            return new PaginationResponse<EmployeerViewModel>(mappedItems, queryResult.TotalItems,
+                    queryResult.CurrentPage, request.Filters._size);
         }
     }
 }

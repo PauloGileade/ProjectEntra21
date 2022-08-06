@@ -1,21 +1,24 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ProjectEntra21.src.Domain.Common
 {
     public class PaginationResponse<T>
     {
-        public IEnumerable<T> Data { get; private set; }
+        public IEnumerable<T> Data { get; set; }
         public int CurrentPage { get; private set; }
         public int TotalItems { get; private set; }
         public int TotalPages { get; private set; }
 
-        public PaginationResponse(IEnumerable<T> data, int currentPage, int totalItems, int totalPages)
+        public PaginationResponse(IEnumerable<T> items, int totalItems, int currentPage, int pageSize)
         {
-            Data = data;
+            Data = items;
             CurrentPage = currentPage;
             TotalItems = totalItems;
-            TotalPages = (int)Math.Ceiling(currentPage / (double) totalPages);
+            TotalPages = (int)Math.Ceiling(totalItems / (double)pageSize);
         }
     }
 }

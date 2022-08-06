@@ -1,9 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using ProjectEntra21.src.Application.Database;
 using ProjectEntra21.src.Application.Query.Employeers;
 using ProjectEntra21.src.Application.Request.Employeers;
 using ProjectEntra21.src.Application.ViewModels;
 using ProjectEntra21.src.Domain.Common;
+using ProjectEntra21.src.Domain.Entiteis;
 using System;
 using System.Threading.Tasks;
 
@@ -11,42 +13,33 @@ namespace ProjectEntra21.src.Presentation.Controllers
 {
     public class EmployeersController : Entra21Controller
     {
+
         public EmployeersController(IMediator mediator) : base(mediator)
         {
         }
-        /*
-           [HttpGet("qrcode")]
-        public IActionResult GetQrCode()
-        {
-            var image = QrCodeGenerator.GenerateByteArray("https://balta.io");
-            return File(image, "image/jpeg");
-        }
-        */
 
         [HttpGet]
-        public async Task<ActionResult<PaginationResponse<GetEmployeerViewModel>>> GetSelectMore([FromQuery] FilterBase filterBase)
+        public async Task<ActionResult<PaginationResponse<EmployeerViewModel>>> GetSelectAll([FromQuery] FilterBase filterBase)
         {
             try
             {
-                var result = await _mediator.Send(new GetAllEmployeerQuery {Filters = filterBase });
-                return Ok(result);
+                return await _mediator.Send(new GetAllEmployeerQuery { Filters = filterBase });
             }
             catch (Exception ex)
             {
-
                 return BadRequest(ex.Message);
             }
         }
 
         [HttpGet]
         [Route("{register}")]
-        public async Task<GetEmployeerViewModel> GetSelectOneAsync([FromRoute] long register)
+        public async Task<EmployeerViewModel> GetSelectOneAsync([FromRoute] long register)
         {
-            return await _mediator.Send(new GetOneEmployeerRequest { Register = register });
+            return await _mediator.Send(new GetOneEmployeerQuery { Register = register });
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostEmployeerAsync([FromBody] PersistEmployeerRequest persistEmployeerRequest)
+        public async Task<IActionResult> PostEmployeerAsync([FromBody] PersistEmployeerCommand persistEmployeerRequest)
         {
             if (persistEmployeerRequest == null)
 
@@ -58,7 +51,7 @@ namespace ProjectEntra21.src.Presentation.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateAsync([FromBody] PersistEmployeerRequest persistEmployeerRequest)
+        public async Task<IActionResult> UpdateAsync([FromBody] PersistEmployeerCommand persistEmployeerRequest)
         {
             if (persistEmployeerRequest == null)
 
@@ -71,7 +64,11 @@ namespace ProjectEntra21.src.Presentation.Controllers
         [Route("{register}")]
         public async Task<IActionResult> DeleteAsync([FromRoute] long register)
         {
-            await _mediator.Send(new DeleteOneEmployeerRequest { Register = register });
+            if (register == 0)
+
+                return NotFound();
+
+            await _mediator.Send(new DeleteOneEmployeerCommand { Register = register });
 
             return NoContent();
         }

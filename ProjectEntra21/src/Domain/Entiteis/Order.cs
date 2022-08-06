@@ -8,8 +8,6 @@ namespace ProjectEntra21.src.Domain.Entiteis
     public class Order : PatternEntity
     {
         public long Code { get; set; }
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Data { get; set; } = DateTime.Now;
         public Employeer Employeer { get; set; }
         public Product Product { get; set; }

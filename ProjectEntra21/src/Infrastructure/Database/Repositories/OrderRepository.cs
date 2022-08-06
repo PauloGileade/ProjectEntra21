@@ -18,8 +18,8 @@ namespace ProjectEntra21.src.Infrastructure.Database.Repositories
 
                 return Update(order);
 
-            order.Code = NextCodeOrder();
 
+            order.Code = NextCodeOrder();
             return Insert(order);
         }
 

@@ -1,7 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using ProjectEntra21.src.Application.Query.Cells;
 using ProjectEntra21.src.Application.Request.Cells;
 using ProjectEntra21.src.Application.ViewModels;
+using ProjectEntra21.src.Domain.Common;
 using System;
 using System.Threading.Tasks;
 
@@ -12,23 +14,30 @@ namespace ProjectEntra21.src.Presentation.Controllers
         public CellsController(IMediator mediator) : base(mediator)
         {
         }
-        /*
+
         [HttpGet]
-        public async Task<IList<Cell>> GetSelectMore()
+        public async Task<ActionResult<PaginationResponse<CellViewModel>>> GetSelectAll([FromQuery] FilterBase filterBase)
         {
-            return await _cellRepository.SelectMore();
+            try
+            {
+                return await _mediator.Send(new GetAllCellQuery { Filters = filterBase });
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
-        */
 
         [HttpGet]
         [Route("{codeCell}")]
-        public async Task<GetCellViewModel> GetSelectOneAsync([FromRoute] int codeCell)
+        public async Task<CellViewModel> GetSelectOneAsync([FromRoute] int codeCell)
         {
-            return await _mediator.Send(new GetOneCell { CodeCell = codeCell });
+            return await _mediator.Send(new GetOneCellQuery { CodeCell = codeCell });
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostCellAsync([FromBody] PersistCellRequest persistCellRequest)
+        public async Task<IActionResult> PostCellAsync([FromBody] PersistCellCommand persistCellRequest)
         {
             if (persistCellRequest == null)
 
@@ -41,7 +50,7 @@ namespace ProjectEntra21.src.Presentation.Controllers
 
 
         [HttpPut]
-        public async Task<IActionResult> UpdateAsync([FromBody] PersistCellRequest persistCellRequest)
+        public async Task<IActionResult> UpdateAsync([FromBody] PersistCellCommand persistCellRequest)
         {
             if (persistCellRequest == null)
 
@@ -54,7 +63,7 @@ namespace ProjectEntra21.src.Presentation.Controllers
         [Route("{codeCell}")]
         public async Task<IActionResult> DeleteAsync([FromRoute] int codeCell)
         {
-            await _mediator.Send(new DeleteOneCellRequest { CodeCell = codeCell });
+            await _mediator.Send(new DeleteOneCellCommand { CodeCell = codeCell });
 
             return NoContent();
         }

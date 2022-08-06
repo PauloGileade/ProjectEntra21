@@ -18,8 +18,8 @@ namespace ProjectEntra21.src.Infrastructure.Database.Repositories
 
                 return Update(product);
 
-            product.Code = NextCodeProduct();
 
+            product.Code = NextCodeProduct();
             return Insert(product);
         }
 

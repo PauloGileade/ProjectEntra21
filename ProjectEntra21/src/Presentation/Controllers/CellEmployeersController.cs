@@ -1,7 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using ProjectEntra21.src.Application.Query.CellEmployeers;
 using ProjectEntra21.src.Application.Request.CellEmployeers;
 using ProjectEntra21.src.Application.ViewModels;
+using ProjectEntra21.src.Domain.Common;
 using System;
 using System.Threading.Tasks;
 
@@ -12,22 +14,30 @@ namespace ProjectEntra21.src.Presentation.Controllers
         public CellEmployeersController(IMediator mediator) : base(mediator)
         {
         }
-        /*
+
         [HttpGet]
-        public async Task<IList<CellEmployeer>> GetSelectMore()
+        public async Task<ActionResult<PaginationResponse<CellEmployeerViewModel>>> GetSelectAll([FromQuery] FilterBase filterBase)
         {
-            return await _cellEmployeerRepository.SelectMore();
+            try
+            {
+                return await _mediator.Send(new GetAllCellEmployeerQuery { Filters = filterBase });
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
-        */
+
         [HttpGet]
         [Route("{code}")]
-        public async Task<GetCellEmployeerViewModel> GetSelectOneAsync([FromRoute] int code)
+        public async Task<CellEmployeerViewModel> GetSelectOneAsync([FromRoute] int code)
         {
-            return await _mediator.Send(new GetOneCellEmployeerRequest { Code = code });
+            return await _mediator.Send(new GetOneCellEmployeerQuery { Code = code });
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostCellEmployeerAsync([FromBody] PersistCellEmployeerRequest persistCellEmployeerRequest)
+        public async Task<IActionResult> PostCellEmployeerAsync([FromBody] PersistCellEmployeerCommand persistCellEmployeerRequest)
         {
             if (persistCellEmployeerRequest == null)
 
@@ -39,7 +49,7 @@ namespace ProjectEntra21.src.Presentation.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateAsync([FromBody] PersistCellEmployeerRequest persistCellEmployeerRequest)
+        public async Task<IActionResult> UpdateAsync([FromBody] PersistCellEmployeerCommand persistCellEmployeerRequest)
         {
             if (persistCellEmployeerRequest == null)
 
@@ -51,7 +61,7 @@ namespace ProjectEntra21.src.Presentation.Controllers
         [Route("{code}")]
         public async Task<IActionResult> DeleteAsync([FromRoute] int code)
         {
-            await _mediator.Send(new DeleteOneCellEmployeerRequest { Code = code });
+            await _mediator.Send(new DeleteOneCellEmployeerCommand { Code = code });
 
             return NoContent();
         }

@@ -21,10 +21,9 @@ namespace ProjectEntra21.src.Infrastructure.Database.Repositories
 
                 return Update(employeer);
 
+
             employeer.Register = NextRegisterEmployeer();
-
             return Insert(employeer);
-
         }
         public long NextRegisterEmployeer()
         {

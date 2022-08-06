@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using ProjectEntra21.src.Application.Database;
+using ProjectEntra21.src.Application.Mapper;
+using ProjectEntra21.src.Application.Request.Employeers;
 using ProjectEntra21.src.Infrastructure;
 using ProjectEntra21.src.Infrastructure.Database.Repositories;
 using System.Reflection;
@@ -34,6 +36,11 @@ namespace ProjectEntra21
             services.AddTransient<IProductRepository, ProductRepository>();
             services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddControllers();
+            services.AddAutoMapper(typeof(CellEmployeerMapper));
+            services.AddAutoMapper(typeof(CellMapper));
+            services.AddAutoMapper(typeof(EmployeerMapper));
+            services.AddAutoMapper(typeof(OrderMapper));
+            services.AddAutoMapper(typeof(ProductMapper));
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddSwaggerGen(c =>
             {
