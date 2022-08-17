@@ -8,7 +8,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using ProjectEntra21.src.Application.Database;
 using ProjectEntra21.src.Application.Mapper;
-using ProjectEntra21.src.Application.Request.Employeers;
 using ProjectEntra21.src.Infrastructure;
 using ProjectEntra21.src.Infrastructure.Database.Repositories;
 using System.Reflection;
@@ -46,7 +45,9 @@ namespace ProjectEntra21
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ProjectEntra21", Version = "v1" });
             });
+    
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -57,6 +58,13 @@ namespace ProjectEntra21
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProjectEntra21 v1"));
             }
+
+            app.UseCors(options =>
+            {
+                options.WithOrigins("http://localhost:3000");
+                options.AllowAnyMethod();
+                options.AllowAnyHeader();
+            });
 
             app.UseHttpsRedirection();
 

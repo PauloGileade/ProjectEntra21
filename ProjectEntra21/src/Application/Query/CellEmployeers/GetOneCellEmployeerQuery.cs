@@ -1,36 +1,42 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using ProjectEntra21.src.Application.Database;
 using ProjectEntra21.src.Application.ViewModels;
+using ProjectEntra21.src.Domain.Common;
 using ProjectEntra21.src.Domain.Entiteis;
+using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace ProjectEntra21.src.Application.Query.CellEmployeers
 {
-    public class GetOneCellEmployeerQuery : IRequest<CellEmployeerViewModel>
+    public class GetOneCellEmployeerQuery : IRequest<PaginationResponse<CellEmployeerViewModel>>
     {
-        public long Code { get; set; }
+        public long CodeCell { get; set; }
+        public DateTime Date { get; set; }
+        public FilterBase Filters { get; set; }
     }
 
-    public class GetOneCellEmployeerRequestHandler : IRequestHandler<GetOneCellEmployeerQuery, CellEmployeerViewModel>
+    public class GetOneCellEmployeerRequestHandler : IRequestHandler<GetOneCellEmployeerQuery, PaginationResponse<CellEmployeerViewModel>>
     {
         private readonly ICellEmployeerRepository _cellEmployeerRepository;
+        private readonly IMapper _mapper;
 
-        public GetOneCellEmployeerRequestHandler(ICellEmployeerRepository cellEmployeerRepository)
+        public GetOneCellEmployeerRequestHandler(ICellEmployeerRepository cellEmployeerRepository, IMapper mapper)
         {
             _cellEmployeerRepository = cellEmployeerRepository;
+            _mapper = mapper;
         }
 
-        public async Task<CellEmployeerViewModel> Handle(GetOneCellEmployeerQuery request, CancellationToken cancellationToken)
+        public async Task<PaginationResponse<CellEmployeerViewModel>> Handle(GetOneCellEmployeerQuery request, CancellationToken cancellationToken)
         {
-            CellEmployeer cellEmployeer = await _cellEmployeerRepository.SelectOne(x => x.Code == request.Code);
+            var queryResult = await _cellEmployeerRepository.SelectMore(request.CodeCell, request.Date, request.Filters);
 
-            return new CellEmployeerViewModel
-            {
-                Code = cellEmployeer.Code,
-                CodeCell = cellEmployeer.CodeCell,
-                RegisterEmployeer = cellEmployeer.RegisterEmployeer
-            };
+            var mappedItems = _mapper.Map<IEnumerable<CellEmployeerViewModel>>(queryResult.Data);
+
+            return new PaginationResponse<CellEmployeerViewModel>(mappedItems, queryResult.TotalItems,
+                    queryResult.CurrentPage, request.Filters._size);
         }
     }
 }

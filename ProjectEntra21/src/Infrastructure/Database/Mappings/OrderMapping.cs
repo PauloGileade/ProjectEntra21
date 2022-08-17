@@ -15,9 +15,8 @@ namespace ProjectEntra21.src.Infrastructure.Database.Mappings
             builder.ToTable(TableName);
             builder.HasAlternateKey(x => new { x.Code });
             builder.Property(x => x.Code).IsRequired().HasColumnName("codigo_ordem");
-            builder.Property(x => x.Data).IsRequired().HasColumnName("data_ordem").HasDefaultValue(DateTime.Now);
             builder.Property(x => x.AmountEnter).IsRequired().HasColumnName("quantidade_entrada");
-            builder.Property(x => x.AmountFinished).IsRequired().HasColumnName("quantidade_saida");
+            builder.Property(x => x.AmountFinished).HasColumnName("quantidade_saida");
         }
     }
 }

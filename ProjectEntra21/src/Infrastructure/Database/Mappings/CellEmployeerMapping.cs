@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ProjectEntra21.src.Domain.Entiteis;
 using ProjectEntra21.src.Infrastructure.Database.Common;
+using System;
 
 namespace ProjectEntra21.src.Infrastructure.Database.Mappings
 {
@@ -12,10 +13,8 @@ namespace ProjectEntra21.src.Infrastructure.Database.Mappings
         protected override void MappingEntity(EntityTypeBuilder<CellEmployeer> builder)
         {
             builder.ToTable(TableName);
-            builder.HasAlternateKey(x => new { x.Code, x.RegisterEmployeer });
+            builder.HasAlternateKey(x => new { x.Code});
             builder.Property(x => x.Code).IsRequired().HasColumnName("codigo");
-            builder.Property(x => x.RegisterEmployeer).IsRequired().HasColumnName("matricula_funcionario");
-            builder.Property(x => x.CodeCell).IsRequired().HasColumnName("codigo_celula");
         }
     }
 }

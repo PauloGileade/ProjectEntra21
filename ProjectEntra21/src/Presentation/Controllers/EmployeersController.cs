@@ -39,25 +39,25 @@ namespace ProjectEntra21.src.Presentation.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostEmployeerAsync([FromBody] PersistEmployeerCommand persistEmployeerRequest)
+        public async Task<IActionResult> PostEmployeerAsync([FromBody] PersistEmployeerCommand persistEmployeerCommand)
         {
-            if (persistEmployeerRequest == null)
+            if (persistEmployeerCommand == null)
 
                 return BadRequest();
 
-            var response = await _mediator.Send(persistEmployeerRequest);
+            var response = await _mediator.Send(persistEmployeerCommand);
             var absolutePath = string.Format("{0}://{1}{2}", Request.Scheme, Request.Host, Request.Path.Value);
             return Created(new Uri(absolutePath + "/" + response.Register), response);
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateAsync([FromBody] PersistEmployeerCommand persistEmployeerRequest)
+        public async Task<IActionResult> UpdateAsync([FromBody] PersistEmployeerCommand persistEmployeerCommand)
         {
-            if (persistEmployeerRequest == null)
+            if (persistEmployeerCommand == null)
 
                 return BadRequest();
 
-            return Ok(await _mediator.Send(persistEmployeerRequest));
+            return Ok(await _mediator.Send(persistEmployeerCommand));
         }
 
         [HttpDelete]

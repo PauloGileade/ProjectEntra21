@@ -14,38 +14,38 @@ namespace ProjectEntra21.src.Presentation.Controllers
         public CellEmployeersController(IMediator mediator) : base(mediator)
         {
         }
-
+        
         [HttpGet]
-        public async Task<ActionResult<PaginationResponse<CellEmployeerViewModel>>> GetSelectAll([FromQuery] FilterBase filterBase)
+        [Route("{codeCell}/{date}")]
+        public async Task<ActionResult<PaginationResponse<CellEmployeerViewModel>>> GetSelectMoreAsync([FromRoute] long codeCell, DateTime date, 
+                [FromQuery] FilterBase filterBase)
         {
             try
             {
-                return await _mediator.Send(new GetAllCellEmployeerQuery { Filters = filterBase });
-
+                return await _mediator.Send(new GetOneCellEmployeerQuery { CodeCell = codeCell, Date = date, Filters = filterBase });
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
-
-        [HttpGet]
-        [Route("{code}")]
-        public async Task<CellEmployeerViewModel> GetSelectOneAsync([FromRoute] int code)
-        {
-            return await _mediator.Send(new GetOneCellEmployeerQuery { Code = code });
-        }
-
+        
         [HttpPost]
-        public async Task<IActionResult> PostCellEmployeerAsync([FromBody] PersistCellEmployeerCommand persistCellEmployeerRequest)
+        public async Task<IActionResult> PostCellEmployeerAsync([FromBody] PersistCellEmployeerCommand persistCellEmployeerCommand)
         {
-            if (persistCellEmployeerRequest == null)
+            if (persistCellEmployeerCommand == null)
 
                 return BadRequest();
 
-            var response = await _mediator.Send(persistCellEmployeerRequest);
+
+            var response = await _mediator.Send(persistCellEmployeerCommand);
+
+            if (response == null)
+                return BadRequest();
+
+
             var absolutePath = string.Format("{0}://{1}{2}", Request.Scheme, Request.Host, Request.Path.Value);
-            return Created(new Uri(absolutePath + "/" + response.Id), response);
+            return Created(new Uri(absolutePath + "/" + response.Code), response);
         }
 
         [HttpPut]

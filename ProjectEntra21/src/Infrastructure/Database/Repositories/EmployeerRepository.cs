@@ -1,9 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ProjectEntra21.src.Application.Database;
+﻿using ProjectEntra21.src.Application.Database;
 using ProjectEntra21.src.Domain.Entiteis;
-using ProjectEntra21.src.Infrastructure;
 using ProjectEntra21.src.Infrastructure.Database.Common;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 

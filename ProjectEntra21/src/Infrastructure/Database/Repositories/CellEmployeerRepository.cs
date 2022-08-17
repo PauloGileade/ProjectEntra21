@@ -1,10 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProjectEntra21.src.Application.Database;
+using ProjectEntra21.src.Domain.Common;
 using ProjectEntra21.src.Domain.Entiteis;
 using ProjectEntra21.src.Infrastructure.Database.Common;
+using ProjectEntra21.src.Infrastructure.Database.Common.Extension;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace ProjectEntra21.src.Infrastructure.Database.Repositories
@@ -21,37 +25,16 @@ namespace ProjectEntra21.src.Infrastructure.Database.Repositories
 
                 return Update(cellEmployeer);
 
-            if (ValidationCodeCell(cellEmployeer.CodeCell) && ValidationRegisterEmployeer(cellEmployeer.RegisterEmployeer))
+            var countInsert = Context.CellsEmployeers.Where(x => x.CreateAt >= DateTime.Now.Date
+                    && x.CreateAt < DateTime.Now.Date.AddDays(1) && x.Cell.CodeCell == cellEmployeer.Cell.CodeCell).Count();
+
+            if (countInsert < 6)
             {
                 cellEmployeer.Code = NextCode();
-                return Insert(cellEmployeer); 
+                return Insert(cellEmployeer);
             }
 
             return Task.CompletedTask;
-        }
-
-        public bool ValidationCodeCell(int? codeCell)
-        {
-            var cell = Context.Cells.Where(x => x.CodeCell == codeCell).Select(x => x.CodeCell).FirstOrDefault();
-
-            if (codeCell == 0 || cell == 0)
-
-                return false;
-
-
-            return true;
-        }
-
-        public bool ValidationRegisterEmployeer(long? registerEmployyer)
-        {
-            var cell = Context.Employeers.Where(x => x.Register == registerEmployyer).Select(x => x.Register).FirstOrDefault();
-
-            if (registerEmployyer == 0 || cell == 0)
-
-                return false;
-
-
-            return true;
         }
 
         public long NextCode()
@@ -59,6 +42,25 @@ namespace ProjectEntra21.src.Infrastructure.Database.Repositories
             var newRegister = Context.CellsEmployeers.Select(x => x.Code).OrderByDescending(x => x).FirstOrDefault();
 
             return newRegister + 1;
+        }
+
+        public override async Task<PaginationResponse<CellEmployeer>> SelectAll(FilterBase filters)
+        {
+            return await Dbset
+                .Include(x => x.Cell)
+                .Include(x => x.Employeer)
+                .AsTracking()
+                .PaginateAsync(filters._page, filters._size);
+        }
+
+        public async Task<PaginationResponse<CellEmployeer>> SelectMore(long codeCell, DateTime date, FilterBase filters)
+        {
+            return await Dbset.Where(x => x.Cell.CodeCell == codeCell
+            && x.CreateAt >= date.Date.Date && x.CreateAt < date.Date.AddDays(1))
+                .Include(x => x.Cell)
+                .Include(x => x.Employeer)
+                .AsNoTracking()
+                .PaginateAsync(filters._page, filters._size);
         }
     }
 }

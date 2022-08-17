@@ -37,25 +37,25 @@ namespace ProjectEntra21.src.Presentation.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostProductAsync([FromBody] PersistProductRequest persistProductRequest)
+        public async Task<IActionResult> PostProductAsync([FromBody] PersistProductRequest persistProductCommand)
         {
-            if (persistProductRequest == null)
+            if (persistProductCommand == null)
 
                 return BadRequest();
 
-            var response = await _mediator.Send(persistProductRequest);
+            var response = await _mediator.Send(persistProductCommand);
             var absolutePath = string.Format("{0}://{1}{2}", Request.Scheme, Request.Host, Request.Path.Value);
             return Created(new Uri(absolutePath + "/" + response.Code), response);
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateAsync([FromBody] PersistProductRequest persistProductRequest)
+        public async Task<IActionResult> UpdateAsync([FromBody] PersistProductRequest persistProductCommand)
         {
-            if (persistProductRequest == null)
+            if (persistProductCommand == null)
 
                 return BadRequest();
 
-            return Ok(await _mediator.Send(persistProductRequest));
+            return Ok(await _mediator.Send(persistProductCommand));
         }
 
         [HttpDelete]

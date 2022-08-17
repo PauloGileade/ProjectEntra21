@@ -37,26 +37,26 @@ namespace ProjectEntra21.src.Presentation.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostCellAsync([FromBody] PersistCellCommand persistCellRequest)
+        public async Task<IActionResult> PostCellAsync([FromBody] PersistCellCommand persistCellCommand)
         {
-            if (persistCellRequest == null)
+            if (persistCellCommand == null)
 
                 return BadRequest();
 
-            var response = await _mediator.Send(persistCellRequest);
+            var response = await _mediator.Send(persistCellCommand);
             var absolutePath = string.Format("{0}://{1}{2}", Request.Scheme, Request.Host, Request.Path.Value);
             return Created(new Uri(absolutePath + "/" + response.CodeCell), response);
         }
 
 
         [HttpPut]
-        public async Task<IActionResult> UpdateAsync([FromBody] PersistCellCommand persistCellRequest)
+        public async Task<IActionResult> UpdateAsync([FromBody] PersistCellCommand persistCellCommand)
         {
-            if (persistCellRequest == null)
+            if (persistCellCommand == null)
 
                 return BadRequest();
 
-            return Ok(await _mediator.Send(persistCellRequest));
+            return Ok(await _mediator.Send(persistCellCommand));
         }
 
         [HttpDelete]
