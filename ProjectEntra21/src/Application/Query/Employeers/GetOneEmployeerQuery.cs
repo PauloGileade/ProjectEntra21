@@ -25,6 +25,10 @@ namespace ProjectEntra21.src.Application.Query.Employeers
         {
             Employeer employeer = await _employeerRepository.SelectOne(x => x.Register == request.Register);
 
+            if (employeer == null)
+                return null;
+
+
             return new EmployeerViewModel
             {
                 Register = employeer.Register,
@@ -32,7 +36,7 @@ namespace ProjectEntra21.src.Application.Query.Employeers
                 Document = employeer.Document,
                 BirthDate = employeer.BirthDate,
                 Office = employeer.Office,
-                LevelEmployeer = employeer.LevelEmployeer,
+                LevelEmployeer = employeer.LevelEmployeer.ToString(),
             };
         }
     }

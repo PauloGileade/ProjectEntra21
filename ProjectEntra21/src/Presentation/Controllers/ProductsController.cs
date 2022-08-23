@@ -31,9 +31,17 @@ namespace ProjectEntra21.src.Presentation.Controllers
 
         [HttpGet]
         [Route("{code}")]
-        public async Task<ProductViewModel> GetSelectOneAsync([FromRoute] long code)
+        public async Task<ActionResult<ProductViewModel>> GetSelectOneAsync([FromRoute] long code)
         {
-            return await _mediator.Send(new GetOneProductQuery { Code = code });
+            try
+            {
+                return await _mediator.Send(new GetOneProductQuery { Code = code });
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost]

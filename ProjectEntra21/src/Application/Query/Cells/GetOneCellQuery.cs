@@ -25,10 +25,13 @@ namespace ProjectEntra21.src.Application.Query.Cells
         {
             Cell cell = await _cellRepository.SelectOne(x => x.CodeCell == request.CodeCell);
 
+            if (cell == null) 
+                return null;
+
             return new CellViewModel
             {
                 CodeCell = cell.CodeCell,
-                StatusCell = cell.StatusCell,
+                StatusCell = cell.StatusCell.ToString(),
             };
         }
     }

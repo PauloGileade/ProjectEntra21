@@ -28,11 +28,15 @@ namespace ProjectEntra21.src.Application.Query.Products
         {
             Product product = await _productRepository.SelectOne(x => x.Code == request.Code);
 
+            if (product == null) 
+                return null;
+
+
             return new ProductViewModel
             {
                 Code = product.Code,
                 Name = product.Name,
-                Type = product.Type,
+                Type = product.Type.ToString(),
             };
         }
     }

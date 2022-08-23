@@ -12,9 +12,10 @@ namespace ProjectEntra21.src.Application.Request.Employeers
 {
     public class PersistEmployeerCommand : IRequest<Employeer>
     {
+        public long Register { get; set; }
         public string Name { get; set; }
         public string Document { get; set; }
-        public DateTime BirthDate { get; set; }
+        public string BirthDate { get; set; }
         public string Office { get; set; }
         public LevelEmployeer LevelEmployeer { get; set; }
     }
@@ -30,7 +31,7 @@ namespace ProjectEntra21.src.Application.Request.Employeers
 
         public async Task<Employeer> Handle(PersistEmployeerCommand request, CancellationToken cancellationToken)
         {
-            Employeer employeer = await _employeerRepository.SelectOne(x => x.Document == request.Document);
+            Employeer employeer = await _employeerRepository.SelectOne(x => x.Register == request.Register);
 
             if (employeer == null)
 

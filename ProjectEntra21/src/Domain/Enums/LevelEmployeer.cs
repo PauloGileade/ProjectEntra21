@@ -2,8 +2,8 @@
 {
     public enum LevelEmployeer
     {
-        Junior,
-        Pleno,
-        Senior
+        Junior = 1,
+        Pleno = 2,
+        Senior = 3,
     }
 }

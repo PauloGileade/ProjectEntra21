@@ -6,6 +6,6 @@ namespace ProjectEntra21.src.Application.ViewModels
     {
         public long Code { get; set; }
         public string Name { get; set; }
-        public TypeBag Type { get; set; }
+        public string Type { get; set; }
     }
 }

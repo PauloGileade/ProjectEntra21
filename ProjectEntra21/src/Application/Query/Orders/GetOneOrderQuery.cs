@@ -30,18 +30,17 @@ namespace ProjectEntra21.src.Application.Query.Orders
             Order order = await _orderRepository.SelectOne(x => x.CellEmployeer.Employeer.Register == request.RegisterEmployeer
             && x.CreateAt >= request.Date.Date && x.CreateAt < request.Date.AddDays(1) && x.Product.Code == request.CodeProduct);
 
+            if (order == null) 
+                return null;
+
 
             return new OrderViewModel
             {
                 CodeCell = order.CellEmployeer.Cell.CodeCell,
-                StatusCell = order.CellEmployeer.Cell.StatusCell,
                 CodeProduct = order.Product.Code,
                 NameProduct = order.Product.Name,
-                TypeProduct = order.Product.Type,
                 RegisterEmployeer = order.CellEmployeer.Employeer.Register,
                 NameEmployeer = order.CellEmployeer.Employeer.Name,
-                Office = order.CellEmployeer.Employeer.Office,
-                LevelEmployeer = order.CellEmployeer.Employeer.LevelEmployeer,
                 AmountEnter = order.AmountEnter,
                 AmountFinished = order.AmountFinished,
                 CreatAt = order.CreateAt

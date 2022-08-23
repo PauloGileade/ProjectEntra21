@@ -33,26 +33,25 @@ namespace ProjectEntra21.src.Application.Query.Orders
 
         public async Task<PaginationResponse<OrderViewModel>> Handle(GetAllOrderQuery request, CancellationToken cancellationToken)
         {
-          
+
             var queryResult = await _orderRepository.SelectAll(request.RegisterEmployeer, request.Date, request.Filters);
             var mappedItems = _mapper.Map<IEnumerable<Order>>(queryResult.Data);
 
-            List<OrderViewModel> list = new ();
+            List<OrderViewModel> list = new();
 
-            foreach(var mappedItem in mappedItems)
+            foreach (var mappedItem in mappedItems)
             {
-                list.Add(new OrderViewModel { CodeCell = mappedItem.CellEmployeer.Cell.CodeCell,
-                                              StatusCell = mappedItem.CellEmployeer.Cell.StatusCell,
-                                              CodeProduct = mappedItem.Product.Code,
-                                              NameProduct = mappedItem.Product.Name,
-                                              TypeProduct = mappedItem.Product.Type,
-                                              RegisterEmployeer = mappedItem.CellEmployeer.Employeer.Register,
-                                              NameEmployeer = mappedItem.CellEmployeer.Employeer.Name,
-                                              Office = mappedItem.CellEmployeer.Employeer.Office,
-                                              LevelEmployeer = mappedItem.CellEmployeer.Employeer.LevelEmployeer,
-                                              AmountEnter = mappedItem.AmountEnter,
-                                              AmountFinished = mappedItem.AmountFinished,
-                                              CreatAt = mappedItem.CreateAt});
+                list.Add(new OrderViewModel
+                {
+                    CodeCell = mappedItem.CellEmployeer.Cell.CodeCell,
+                    CodeProduct = mappedItem.Product.Code,
+                    NameProduct = mappedItem.Product.Name,
+                    RegisterEmployeer = mappedItem.CellEmployeer.Employeer.Register,
+                    NameEmployeer = mappedItem.CellEmployeer.Employeer.Name,
+                    AmountEnter = mappedItem.AmountEnter,
+                    AmountFinished = mappedItem.AmountFinished,
+                    CreatAt = mappedItem.CreateAt
+                });
 
             }
 

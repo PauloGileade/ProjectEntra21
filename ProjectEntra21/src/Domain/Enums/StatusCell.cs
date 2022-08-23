@@ -2,8 +2,8 @@
 {
     public enum StatusCell
     {
-        Active,
-        Finished,
-        Blocked
+        Ativa = 1,
+        Finalizada = 2,
+        Bloqueada = 3,
     }
 }

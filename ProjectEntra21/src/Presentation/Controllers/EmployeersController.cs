@@ -28,7 +28,7 @@ namespace ProjectEntra21.src.Presentation.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
-            }
+            }   
         }
 
         [HttpGet]

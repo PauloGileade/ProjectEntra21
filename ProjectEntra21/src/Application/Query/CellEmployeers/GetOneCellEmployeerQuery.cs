@@ -32,10 +32,18 @@ namespace ProjectEntra21.src.Application.Query.CellEmployeers
         public async Task<PaginationResponse<CellEmployeerViewModel>> Handle(GetOneCellEmployeerQuery request, CancellationToken cancellationToken)
         {
             var queryResult = await _cellEmployeerRepository.SelectMore(request.CodeCell, request.Date, request.Filters);
+            var mappedItems = _mapper.Map<IEnumerable<CellEmployeer>>(queryResult.Data);
 
-            var mappedItems = _mapper.Map<IEnumerable<CellEmployeerViewModel>>(queryResult.Data);
+            List<CellEmployeerViewModel> list = new();
 
-            return new PaginationResponse<CellEmployeerViewModel>(mappedItems, queryResult.TotalItems,
+            foreach (var mappedItem in mappedItems)
+            {
+                list.Add(new CellEmployeerViewModel { RegisterEmployeer = mappedItem.Employeer.Register,
+                                                      NameEmployeer = mappedItem.Employeer.Name,
+                                                      Office = mappedItem.Employeer.Office,
+                                                      LevelEmployeer = mappedItem.Employeer.LevelEmployeer.ToString()});
+            }
+            return new PaginationResponse<CellEmployeerViewModel>(list, queryResult.TotalItems,
                     queryResult.CurrentPage, request.Filters._size);
         }
     }
