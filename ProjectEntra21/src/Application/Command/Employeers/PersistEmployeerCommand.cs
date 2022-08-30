@@ -17,7 +17,7 @@ namespace ProjectEntra21.src.Application.Request.Employeers
         public string Document { get; set; }
         public string BirthDate { get; set; }
         public string Office { get; set; }
-        public LevelEmployeer LevelEmployeer { get; set; }
+        public string LevelEmployeer { get; set; }
     }
 
     public class PersistEmployeerCommandHandler : IRequestHandler<PersistEmployeerCommand, Employeer>
@@ -41,7 +41,7 @@ namespace ProjectEntra21.src.Application.Request.Employeers
             employeer.Document = request.Document;
             employeer.BirthDate = request.BirthDate;
             employeer.Office = request.Office;
-            employeer.LevelEmployeer = request.LevelEmployeer;
+            employeer.LevelEmployeer = Enum.Parse<LevelEmployeer>(request.LevelEmployeer);
 
             await _employeerRepository.InsertOrUpdate(employeer);
 

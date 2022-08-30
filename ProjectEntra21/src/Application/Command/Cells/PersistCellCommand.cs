@@ -2,6 +2,7 @@
 using ProjectEntra21.src.Application.Database;
 using ProjectEntra21.src.Domain.Entiteis;
 using ProjectEntra21.src.Domain.Enums;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,7 +11,7 @@ namespace ProjectEntra21.src.Application.Request.Cells
     public class PersistCellCommand : IRequest<Cell>
     {
         public int CodeCell { get; set; }
-        public StatusCell StatusCell { get; set; }
+        public string StatusCell { get; set; }
     }
 
     public class PersistCellCommandHandler : IRequestHandler<PersistCellCommand, Cell>
@@ -31,7 +32,7 @@ namespace ProjectEntra21.src.Application.Request.Cells
                 cell = new Cell();
 
             cell.CodeCell = request.CodeCell;
-            cell.StatusCell = request.StatusCell;
+            cell.StatusCell = Enum.Parse<StatusCell>(request.StatusCell);
 
             await _cellRepository.InsertOrUpdate(cell);
 

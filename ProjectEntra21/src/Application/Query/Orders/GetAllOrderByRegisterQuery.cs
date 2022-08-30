@@ -13,28 +13,29 @@ using System.Threading.Tasks;
 
 namespace ProjectEntra21.src.Application.Query.Orders
 {
-    public class GetAllOrderQuery : IRequest<PaginationResponse<OrderViewModel>>
+    public class GetAllOrderByRegisterQuery : IRequest<PaginationResponse<OrderViewModel>>
     {
         public long RegisterEmployeer { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime DateStart { get; set; }
+        public DateTime DateEnd { get; set; }
         public FilterBase Filters { get; set; }
     }
 
-    public class GetAllOrderQueryHandler : IRequestHandler<GetAllOrderQuery, PaginationResponse<OrderViewModel>>
+    public class GetAllOrderByRegisterQueryHandler : IRequestHandler<GetAllOrderByRegisterQuery, PaginationResponse<OrderViewModel>>
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IMapper _mapper;
 
-        public GetAllOrderQueryHandler(IOrderRepository orderRepository, IMapper mapper)
+        public GetAllOrderByRegisterQueryHandler(IOrderRepository orderRepository, IMapper mapper)
         {
             _orderRepository = orderRepository;
             _mapper = mapper;
         }
 
-        public async Task<PaginationResponse<OrderViewModel>> Handle(GetAllOrderQuery request, CancellationToken cancellationToken)
+        public async Task<PaginationResponse<OrderViewModel>> Handle(GetAllOrderByRegisterQuery request, CancellationToken cancellationToken)
         {
 
-            var queryResult = await _orderRepository.SelectAll(request.RegisterEmployeer, request.Date, request.Filters);
+            var queryResult = await _orderRepository.SelectAllByRegister(request.RegisterEmployeer, request.DateStart, request.DateEnd, request.Filters);
             var mappedItems = _mapper.Map<IEnumerable<Order>>(queryResult.Data);
 
             List<OrderViewModel> list = new();
@@ -50,9 +51,8 @@ namespace ProjectEntra21.src.Application.Query.Orders
                     NameEmployeer = mappedItem.CellEmployeer.Employeer.Name,
                     AmountEnter = mappedItem.AmountEnter,
                     AmountFinished = mappedItem.AmountFinished,
-                    CreatAt = mappedItem.CreateAt
+                    CreatAt = mappedItem.CreateAt.Date.ToShortDateString()
                 });
-
             }
 
             return new PaginationResponse<OrderViewModel>(list, queryResult.TotalItems,

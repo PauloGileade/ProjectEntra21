@@ -16,35 +16,50 @@ namespace ProjectEntra21.src.Presentation.Controllers
         {
         }
 
+        
         [HttpGet]
-        [Route("{register}/{date}")]
-        public async Task<ActionResult<PaginationResponse<OrderViewModel>>> GetSelectAllOrderAsync([FromRoute] long register, DateTime date,
+        [Route("{codeCell}/{date}")]
+        public async Task<ActionResult<PaginationResponse<OrderViewModel>>> GetAllOrderByCodecellAsync([FromRoute] long codeCell, DateTime date,
                [FromQuery] FilterBase filterBase)
         {
             try
             {
-                return await _mediator.Send(new GetAllOrderQuery { RegisterEmployeer = register, Date = date, Filters = filterBase });
+                return await _mediator.Send(new GetAllOrderByCodecellQuery { CodeCell = codeCell, Date = date, Filters = filterBase });
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
-
+        
         [HttpGet]
-        [Route("{register}/{codeProduct}/{date}")]
-        public async Task<ActionResult<OrderViewModel>> GetSelectOneAsync([FromRoute] long register, long codeProduct, DateTime date)
+        [Route("{dateStart}/{dateEnd}/{register}")]
+        public async Task<ActionResult<PaginationResponse<OrderViewModel>>> GetAllOrderByRegisterAsync([FromRoute] DateTime dateStart, DateTime dateEnd, long register,
+               [FromQuery] FilterBase filterBase)
         {
             try
             {
-                return await _mediator.Send(new GetOneOrderQuery { RegisterEmployeer = register, CodeProduct = codeProduct, Date = date });
+                return await _mediator.Send(new GetAllOrderByRegisterQuery { RegisterEmployeer = register, DateStart = dateStart, DateEnd = dateEnd, Filters = filterBase });
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
-
+       
+        [HttpGet]
+        [Route("{register}/{codeProduct}/{dateStart}/{dateEnd}")]
+        public async Task<ActionResult<OrderViewModel>> GetOneOrderByRegisterAsync([FromRoute] long register, long codeProduct, DateTime dateStart, DateTime dateEnd)
+        {
+            try
+            {
+                return await _mediator.Send(new GetOneOrderByRegisterQuery { RegisterEmployeer = register, CodeProduct = codeProduct, DateStart = dateStart, DateEnd = dateEnd });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
         [HttpPost]
         public async Task<IActionResult> PostOrdemAsync([FromBody] PersistOrderCommand persistOrderCommand)

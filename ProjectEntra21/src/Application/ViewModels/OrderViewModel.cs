@@ -13,6 +13,6 @@ namespace ProjectEntra21.src.Application.ViewModels
         public string NameEmployeer { get; set; }
         public int AmountEnter { get; set; }
         public int? AmountFinished { get; set; }
-        public DateTime CreatAt { get; set; }
+        public string CreatAt { get; set; }
     }
 }

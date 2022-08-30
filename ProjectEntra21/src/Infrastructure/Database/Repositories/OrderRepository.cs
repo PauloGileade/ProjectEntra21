@@ -35,14 +35,26 @@ namespace ProjectEntra21.src.Infrastructure.Database.Repositories
             return newCode + 1;
         }
 
-        public async Task<PaginationResponse<Order>> SelectAll(long register, DateTime date, FilterBase filters)
+        public async Task<PaginationResponse<Order>> SelectAllByRegister(long register, DateTime dateStart, DateTime dateEnd, FilterBase filters)
         {
             return await Dbset.Where(x => x.CellEmployeer.Employeer.Register == register
+           && x.CreateAt >= dateStart.Date.Date && x.CreateAt < dateEnd.Date.AddDays(1))
+               .Include(x => x.Product)
+               .Include(x => x.CellEmployeer.Cell)
+               .Include(x => x.CellEmployeer.Employeer)
+               .AsNoTracking()
+               .PaginateAsync(filters._page, filters._size);
+        }
+
+        public async Task<PaginationResponse<Order>> SelectAllByCodecell(long codeCell, DateTime date, FilterBase filters)
+        {
+            return await Dbset.Where(x => x.CellEmployeer.Cell.CodeCell == codeCell
            && x.CreateAt >= date.Date.Date && x.CreateAt < date.Date.AddDays(1))
                .Include(x => x.Product)
                .Include(x => x.CellEmployeer.Cell)
                .Include(x => x.CellEmployeer.Employeer)
                .AsNoTracking()
+               .OrderBy(x => x.CellEmployeer.Employeer.Register)
                .PaginateAsync(filters._page, filters._size);
         }
 

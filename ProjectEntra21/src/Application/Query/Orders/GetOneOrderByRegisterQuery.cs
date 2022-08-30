@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using ProjectEntra21.src.Application.Database;
 using ProjectEntra21.src.Application.ViewModels;
-using ProjectEntra21.src.Domain.Common;
 using ProjectEntra21.src.Domain.Entiteis;
 using System;
 using System.Threading;
@@ -9,14 +8,15 @@ using System.Threading.Tasks;
 
 namespace ProjectEntra21.src.Application.Query.Orders
 {
-    public class GetOneOrderQuery : IRequest<OrderViewModel>
+    public class GetOneOrderByRegisterQuery : IRequest<OrderViewModel>
     {
         public long RegisterEmployeer { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime DateStart { get; set; }
+        public DateTime DateEnd { get; set; }
         public long CodeProduct { get; set; }
     }
 
-    public class GetOneOrderRequestHandler : IRequestHandler<GetOneOrderQuery, OrderViewModel>
+    public class GetOneOrderRequestHandler : IRequestHandler<GetOneOrderByRegisterQuery, OrderViewModel>
     {
         private readonly IOrderRepository _orderRepository;
 
@@ -25,10 +25,10 @@ namespace ProjectEntra21.src.Application.Query.Orders
             _orderRepository = orderRepository;
         }
 
-        public async Task<OrderViewModel> Handle(GetOneOrderQuery request, CancellationToken cancellationToken)
+        public async Task<OrderViewModel> Handle(GetOneOrderByRegisterQuery request, CancellationToken cancellationToken)
         {
             Order order = await _orderRepository.SelectOne(x => x.CellEmployeer.Employeer.Register == request.RegisterEmployeer
-            && x.CreateAt >= request.Date.Date && x.CreateAt < request.Date.AddDays(1) && x.Product.Code == request.CodeProduct);
+            && x.CreateAt >= request.DateStart.Date && x.CreateAt < request.DateEnd.AddDays(1) && x.Product.Code == request.CodeProduct);
 
             if (order == null) 
                 return null;
@@ -43,7 +43,7 @@ namespace ProjectEntra21.src.Application.Query.Orders
                 NameEmployeer = order.CellEmployeer.Employeer.Name,
                 AmountEnter = order.AmountEnter,
                 AmountFinished = order.AmountFinished,
-                CreatAt = order.CreateAt
+                CreatAt = order.CreateAt.Date.ToShortDateString()
             };
         }
     }

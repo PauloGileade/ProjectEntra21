@@ -2,6 +2,7 @@
 using ProjectEntra21.src.Application.Database;
 using ProjectEntra21.src.Domain.Entiteis;
 using ProjectEntra21.src.Domain.Enums;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,7 +12,7 @@ namespace ProjectEntra21.src.Application.Request.Products
     {
         public long Code { get; set; }
         public string Name { get; set; }
-        public TypeBag Type { get; set; }
+        public string Type { get; set; }
     }
 
     public class PersistProductCommandHandler : IRequestHandler<PersistProductRequest, Product>
@@ -32,7 +33,7 @@ namespace ProjectEntra21.src.Application.Request.Products
                 product = new Product();
 
             product.Name = request.Name;
-            product.Type = request.Type;
+            product.Type = Enum.Parse<TypeBag>(request.Type);
 
             await _productRepository.InsertOrUpdate(product);
 
