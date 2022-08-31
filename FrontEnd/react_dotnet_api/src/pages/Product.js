@@ -172,7 +172,7 @@ function Product() {
         <Row md="12" sm="2" xs="1">
           <Table bordered hover responsive size="sm">
             <thead className="table-warning">
-              <tr>
+              <tr align="center">
                 <th scope="col">Codigo</th>
                 <th scope="col">Nome do produto</th>
                 <th scope="col">Tipo</th>
@@ -181,7 +181,7 @@ function Product() {
             </thead>
             <tbody className="table-light">
               {data.map((product) => (
-                <tr key={product.code}>
+                <tr align="center" key={product.code}>
                   <td>{product.code}</td>
                   <td>{product.name}</td>
                   <td>{product.type}</td>

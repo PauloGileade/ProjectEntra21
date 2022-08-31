@@ -36,7 +36,7 @@ function CellEmployeer() {
         <h2>Operações</h2>
         <Table bordered hover responsive size="sm">
           <thead className="table-warning">
-            <tr>
+            <tr align="center">
               <th scope="col">Matricula Funcionario</th>
               <th scope="col">Nome</th>
               <th scope="col">Função</th>
@@ -46,7 +46,7 @@ function CellEmployeer() {
           </thead>
           <tbody className="table-light">
             {data.map((CellEmployeer) => (
-              <tr key={CellEmployeer.registerEmployeer}>
+              <tr align="center" key={CellEmployeer.registerEmployeer}>
                 <td>{CellEmployeer.registerEmployeer}</td>
                 <td>{CellEmployeer.nameEmployeer}</td>
                 <td>{CellEmployeer.office}</td>

@@ -50,69 +50,69 @@ function Order() {
     console.log(orderselect);
   };
 
-   const pedidoGet = async () => {
-     await axios
-       .get(baseUrl + "/" + codecell + "/" + date)
-       .then((response) => {
-         console.log(response);
-         setData(response.data.data);
-       })
-       .catch((error) => {
-         console.log(error);
-       });
-   };
+  const pedidoGet = async () => {
+    await axios
+      .get(baseUrl + "/" + codecell + "/" + date)
+      .then((response) => {
+        console.log(response);
+        setData(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-   const pedidoGetByRegister = async () => {
-     await axios
-       .get(baseUrl + "/" + dateStart + "/" + dateEnd + "/" + register)
-       .then((response) => {
-         console.log(response);
-         setData(response.data.data);
-       })
-       .catch((error) => {
-         console.log(error);
-       });
-   };
+  const pedidoGetByRegister = async () => {
+    await axios
+      .get(baseUrl + "/" + dateStart + "/" + dateEnd + "/" + register)
+      .then((response) => {
+        console.log(response);
+        setData(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-   const pedidoGetByCodeProduct = async () => {
-     await axios
-       .get(
-         baseUrl +
-           "/" +
-           register +
-           "/" +
-           codeProduct +
-           "/" +
-           dateStart +
-           "/" +
-           dateEnd
-       )
-       .then((response) => {
-         console.log(response);
-         setData([response.data]);
-       })
-       .catch((error) => {
-         console.log(error);
-       });
-   };
+  const pedidoGetByCodeProduct = async () => {
+    await axios
+      .get(
+        baseUrl +
+          "/" +
+          register +
+          "/" +
+          codeProduct +
+          "/" +
+          dateStart +
+          "/" +
+          dateEnd
+      )
+      .then((response) => {
+        console.log(response);
+        setData([response.data]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-   const pedidoPut = async () => {
-     orderselect.registerEmployeer = parseInt(orderselect.registerEmployeer);
-     orderselect.codeProduct = parseInt(orderselect.codeProduct);
-     orderselect.amountEnter = parseInt(orderselect.amountEnter);
-     await axios
-       .put(baseUrl, orderselect)
-       .then((response) => {
+  const pedidoPut = async () => {
+    orderselect.registerEmployeer = parseInt(orderselect.registerEmployeer);
+    orderselect.codeProduct = parseInt(orderselect.codeProduct);
+    orderselect.amountEnter = parseInt(orderselect.amountEnter);
+    await axios
+      .put(baseUrl, orderselect)
+      .then((response) => {
         const update = [...data];
         update[update.map((u) => u.codeCell).indexOf(response.data.codeCell)] =
           response.data;
         setData(update);
-         abrirFecharModalEditar();
-       })
-       .catch((error) => {
-         console.log(error);
-       });
-   };
+        abrirFecharModalEditar();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   useEffect(() => {
     pedidoGet();
@@ -120,15 +120,30 @@ function Order() {
     pedidoGetByCodeProduct();
   }, []);
 
+  let sumEnter = 0;
+  let sumFinished = 0;
+  let average = 0;
+
+  data.forEach((order) => {
+    sumEnter += order.amountEnter;
+    sumFinished += order.amountFinished;
+    average = sumFinished / data.length;
+  });
+
+  data.forEach((order) => {
+    
+    
+  });
+
   return (
     <div>
       <HeaderPlatform />
-      <div className="container">
-        <br/>
-        <h2>Painel De Orderns</h2>
+      <div>
+        <br />
+        <h2>Painel De Ordens</h2>
         <Table bordered hover responsive size="sm">
           <thead className="table-warning">
-            <tr>
+            <tr align="center">
               <th>Codigo celula</th>
               <th>Codigo produto</th>
               <th>Nome produto</th>
@@ -137,12 +152,12 @@ function Order() {
               <th>Quantidade entrada</th>
               <th>Quantidade saida</th>
               <th>Data criação</th>
-              <th>Operação</th>
+              <th>Adicionar entrada</th>
             </tr>
           </thead>
           <tbody className="table-light">
             {data.map((order) => (
-              <tr key={order.codeCell}>
+              <tr align="center" key={order.codeCell}>
                 <td>{order.codeCell}</td>
                 <td>{order.codeProduct}</td>
                 <td>{order.nameProduct}</td>
@@ -156,7 +171,7 @@ function Order() {
                     className="btn btn-primary"
                     onClick={() => selectOrder(order, "Editar")}
                   >
-                    Editar
+                    Adicionar
                   </button>
                 </td>
               </tr>
@@ -169,7 +184,7 @@ function Order() {
               <i className="fa fa-file-text fa-2x text-lightblue"></i>
               <div className="card_inner">
                 <h5 className="text-primary-p">Total De Orderns</h5>
-                <span className="font-bold text-title">578</span>
+                <span className="font-bold text-title">{data.length}</span>
               </div>
             </div>
 
@@ -177,7 +192,7 @@ function Order() {
               <i className="fa-solid fa-money-bill-1-wave"></i>
               <div className="card_inner">
                 <h5 className="text-primary-p">Total De Entrada</h5>
-                <span className="font-bold text-title">500</span>
+                <span className="font-bold text-title">{sumEnter}</span>
               </div>
             </div>
 
@@ -185,7 +200,7 @@ function Order() {
               <i className="fa fa-archive fa2x text-yellow"></i>
               <div className="card_inner">
                 <h5 className="text-primary-p">Total De Saida</h5>
-                <span className="font-bold text-title">670</span>
+                <span className="font-bold text-title">{sumFinished}</span>
               </div>
             </div>
 
@@ -193,7 +208,7 @@ function Order() {
               <i className="fa fa-bars fa-2x text-green"></i>
               <div className="card_inner">
                 <h5 className="text-primary-p">Média Produção</h5>
-                <span className="font-bold text-title">40</span>
+                <span className="font-bold text-title">{average.toPrecision(2)}</span>
               </div>
             </div>
           </div>
@@ -227,14 +242,13 @@ function Order() {
                 className="form-control"
                 name="amountEnter"
                 onChange={handleChange}
-                value={orderselect && orderselect.amountEnter}
               ></input>
             </div>
           </ModalBody>
           <ModalFooter>
             <button className="btn btn-primary" onClick={() => pedidoPut()}>
               {" "}
-              Editar
+              Adicionar
             </button>
             <button
               className="btn btn-danger"

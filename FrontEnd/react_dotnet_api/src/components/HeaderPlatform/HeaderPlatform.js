@@ -248,7 +248,7 @@ function HeaderPlatform() {
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  <strong>Orderns</strong>
+                  <strong>Ordens</strong>
                 </a>
                 <div className="dropdown-menu">
                   <a

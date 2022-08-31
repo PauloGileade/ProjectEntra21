@@ -16,90 +16,103 @@ namespace ProjectEntra21.src.Presentation.Controllers
         {
         }
 
-        
         [HttpGet]
-        [Route("{codeCell}/{date}")]
-        public async Task<ActionResult<PaginationResponse<OrderViewModel>>> GetAllOrderByCodecellAsync([FromRoute] long codeCell, DateTime date,
+        public async Task<ActionResult<PaginationResponse<OrderViewModel>>> GetAllOrder([FromQuery] FilterBase filterBase)
+        {
+            try
+            {
+                return await _mediator.Send(new GetAllOrderQuery { Filters = filterBase });
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+            [HttpGet]
+            [Route("{codeCell}/{date}")]
+            public async Task<ActionResult<PaginationResponse<OrderViewModel>>> GetAllOrderByCodecellAsync([FromRoute] long codeCell, DateTime date,
                [FromQuery] FilterBase filterBase)
-        {
-            try
             {
-                return await _mediator.Send(new GetAllOrderByCodecellQuery { CodeCell = codeCell, Date = date, Filters = filterBase });
+                try
+                {
+                    return await _mediator.Send(new GetAllOrderByCodecellQuery { CodeCell = codeCell, Date = date, Filters = filterBase });
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
             }
-            catch (Exception ex)
+
+            [HttpGet]
+            [Route("{dateStart}/{dateEnd}/{register}")]
+            public async Task<ActionResult<PaginationResponse<OrderViewModel>>> GetAllOrderByRegisterAsync([FromRoute] DateTime dateStart, DateTime dateEnd, long register,
+                   [FromQuery] FilterBase filterBase)
             {
-                return BadRequest(ex.Message);
+                try
+                {
+                    return await _mediator.Send(new GetAllOrderByRegisterQuery { RegisterEmployeer = register, DateStart = dateStart, DateEnd = dateEnd, Filters = filterBase });
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
             }
-        }
-        
-        [HttpGet]
-        [Route("{dateStart}/{dateEnd}/{register}")]
-        public async Task<ActionResult<PaginationResponse<OrderViewModel>>> GetAllOrderByRegisterAsync([FromRoute] DateTime dateStart, DateTime dateEnd, long register,
-               [FromQuery] FilterBase filterBase)
-        {
-            try
+
+            [HttpGet]
+            [Route("{register}/{codeProduct}/{dateStart}/{dateEnd}")]
+            public async Task<ActionResult<OrderViewModel>> GetOneOrderByRegisterAsync([FromRoute] long register, long codeProduct, DateTime dateStart, DateTime dateEnd)
             {
-                return await _mediator.Send(new GetAllOrderByRegisterQuery { RegisterEmployeer = register, DateStart = dateStart, DateEnd = dateEnd, Filters = filterBase });
+                try
+                {
+                    return await _mediator.Send(new GetOneOrderByRegisterQuery { RegisterEmployeer = register, CodeProduct = codeProduct, DateStart = dateStart, DateEnd = dateEnd });
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
             }
-            catch (Exception ex)
+
+            [HttpPost]
+            public async Task<IActionResult> PostOrdemAsync([FromBody] PersistOrderCommand persistOrderCommand)
             {
-                return BadRequest(ex.Message);
+                if (persistOrderCommand == null)
+
+                    return BadRequest();
+
+
+                var response = await _mediator.Send(persistOrderCommand);
+
+                if (response == null)
+                    return BadRequest();
+
+
+                var absolutePath = string.Format("{0}://{1}{2}", Request.Scheme, Request.Host, Request.Path.Value);
+                return Created(new Uri(absolutePath + "/" + response.Code), response);
             }
-        }
-       
-        [HttpGet]
-        [Route("{register}/{codeProduct}/{dateStart}/{dateEnd}")]
-        public async Task<ActionResult<OrderViewModel>> GetOneOrderByRegisterAsync([FromRoute] long register, long codeProduct, DateTime dateStart, DateTime dateEnd)
-        {
-            try
+
+            [HttpPut]
+            public async Task<IActionResult> UpdateAsync([FromBody] PersistOrderCommand persistOrderCommand)
             {
-                return await _mediator.Send(new GetOneOrderByRegisterQuery { RegisterEmployeer = register, CodeProduct = codeProduct, DateStart = dateStart, DateEnd = dateEnd });
+                if (persistOrderCommand == null)
+
+                    return BadRequest();
+
+                return Ok(await _mediator.Send(persistOrderCommand));
             }
-            catch (Exception ex)
+
+            [HttpPut]
+            [Route("{codeQrcode}")]
+            public async Task<IActionResult> UpdateAmountFinishedAsync([FromRoute] string codeQrcode)
             {
-                return BadRequest(ex.Message);
+                string[] vect = codeQrcode.Split(';');
+
+                return Ok(await _mediator.Send(new UpdateAmountFinishedCommand
+                {
+                    RegisterEmployeer = long.Parse(vect[0]),
+                    CodeProduct = long.Parse(vect[1])
+                }));
             }
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> PostOrdemAsync([FromBody] PersistOrderCommand persistOrderCommand)
-        {
-            if (persistOrderCommand == null)
-
-                return BadRequest();
-
-
-            var response = await _mediator.Send(persistOrderCommand);
-
-            if (response == null)
-                return BadRequest();
-
-
-            var absolutePath = string.Format("{0}://{1}{2}", Request.Scheme, Request.Host, Request.Path.Value);
-            return Created(new Uri(absolutePath + "/" + response.Code), response);
-        }
-
-        [HttpPut]
-        public async Task<IActionResult> UpdateAsync([FromBody] PersistOrderCommand persistOrderCommand)
-        {
-            if (persistOrderCommand == null)
-
-                return BadRequest();
-
-            return Ok(await _mediator.Send(persistOrderCommand));
-        }
-
-        [HttpPut]
-        [Route("{codeQrcode}")]
-        public async Task<IActionResult> UpdateAmountFinishedAsync([FromRoute] string codeQrcode)
-        {
-            string[] vect = codeQrcode.Split(';');
-
-            return Ok(await _mediator.Send(new UpdateAmountFinishedCommand
-            {
-                RegisterEmployeer = long.Parse(vect[0]),
-                CodeProduct = long.Parse(vect[1])
-            }));
         }
     }
-}

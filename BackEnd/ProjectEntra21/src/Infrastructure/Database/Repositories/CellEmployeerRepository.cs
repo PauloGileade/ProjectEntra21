@@ -5,10 +5,7 @@ using ProjectEntra21.src.Domain.Entiteis;
 using ProjectEntra21.src.Infrastructure.Database.Common;
 using ProjectEntra21.src.Infrastructure.Database.Common.Extension;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace ProjectEntra21.src.Infrastructure.Database.Repositories
@@ -28,7 +25,7 @@ namespace ProjectEntra21.src.Infrastructure.Database.Repositories
             var countInsert = Context.CellsEmployeers.Where(x => x.CreateAt >= DateTime.Now.Date
                     && x.CreateAt < DateTime.Now.Date.AddDays(1) && x.Cell.CodeCell == cellEmployeer.Cell.CodeCell).Count();
 
-            if (countInsert < 6)
+            if (countInsert < 12)
             {
                 cellEmployeer.Code = NextCode();
                 return Insert(cellEmployeer);

@@ -132,7 +132,7 @@ function Cell() {
         <Row md="12" sm="2" xs="1">
           <Table bordered hover responsive size="sm">
             <thead className="table-warning">
-              <tr>
+              <tr align="center">
                 <th scope="col sm">Codigo da celula</th>
                 <th scope="col sm">Status</th>
                 <th scope="col sm">Operação</th>
@@ -140,7 +140,7 @@ function Cell() {
             </thead>
             <tbody className="table-light">
               {data.map((cell) => (
-                <tr key={cell.codeCell}>
+                <tr align="center" key={cell.codeCell}>
                   <td>{cell.codeCell}</td>
                   <td>{cell.statusCell}</td>
                   <td>

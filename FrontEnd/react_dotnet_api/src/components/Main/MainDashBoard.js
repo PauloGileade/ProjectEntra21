@@ -5,7 +5,18 @@ import FormLabel from "@mui/material/FormLabel";
 import { useState, useEffect } from "react";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import { Modal, ModalBody, ModalFooter, ModalHeader, Table } from "reactstrap";
+import {
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+  Table,
+  Card,
+  CardBody,
+  CardTitle,
+  CardSubtitle,
+  CardText
+} from "reactstrap";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
@@ -30,10 +41,22 @@ const MainDashBoard = () => {
   };
 
   function redirect() {
-    window.location.href = "/dashboard/" + celula + "/" + dataDados;
+    window.location.href = "/order/" + celula + "/" + dataDados;
   }
 
   const pedidoGet = async () => {
+    await axios
+      .get(baseUrl)
+      .then((response) => {
+        console.log(response);
+        setData(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const pedidoGetByCell = async () => {
     await axios
       .get(baseUrl + "/" + codecell + "/" + date)
       .then((response) => {
@@ -46,10 +69,20 @@ const MainDashBoard = () => {
   };
 
   useEffect(() => {
+    pedidoGetByCell()
     pedidoGet();
   }, []);
 
-debugger
+  let sumEnter = 0;
+  let sumFinished = 0;
+  let average = 0;
+
+  data.forEach((order) => {
+    sumEnter += order.amountEnter;
+    sumFinished += order.amountFinished;
+    average = sumFinished / data.length
+  });
+
   return (
     <div>
       <main>
@@ -62,7 +95,7 @@ debugger
           </div>
           <div className="charts__left__title">
             <div>
-              <h1>Buscar Orderns</h1>
+              <h1>Filtrar Ordens</h1>
             </div>
           </div>
           <FormControl>
@@ -107,10 +140,10 @@ debugger
             </Button>
           </Stack>
           <br />
-          <h2>Painel De Orderns</h2>
+          <h2>Painel De Ordens</h2>
           <Table bordered hover responsive size="sm">
-            <thead className="table-warning">
-              <tr>
+            <thead className="table__order">
+              <tr align="center">
                 <th>Codigo celula</th>
                 <th>Codigo produto</th>
                 <th>Nome produto</th>
@@ -123,7 +156,7 @@ debugger
             </thead>
             <tbody className="table-light">
               {data.map((order) => (
-                <tr key={order.codeCell}>
+                <tr align="center" key={order.codeCell}>
                   <td>{order.codeCell}</td>
                   <td>{order.codeProduct}</td>
                   <td>{order.nameProduct}</td>
@@ -174,13 +207,14 @@ debugger
               </button>
             </ModalFooter>
           </Modal>
+
           <div className="container">
             <div className="main__cards">
               <div className="card">
                 <i className="fa fa-file-text fa-2x text-lightblue"></i>
                 <div className="card_inner">
-                  <h5 className="text-primary-p">Total De Orderns</h5>
-                  <span className="font-bold text-title">578</span>
+                  <h5 className="text-primary-p">Total De Ordens</h5>
+                  <span className="font-bold text-title">{data.length}</span>
                 </div>
               </div>
 
@@ -188,7 +222,7 @@ debugger
                 <i className="fa-solid fa-money-bill-1-wave"></i>
                 <div className="card_inner">
                   <h5 className="text-primary-p">Total De Entrada</h5>
-                  <span className="font-bold text-title">500</span>
+                  <span className="font-bold text-title">{sumEnter}</span>
                 </div>
               </div>
 
@@ -196,7 +230,7 @@ debugger
                 <i className="fa fa-archive fa2x text-yellow"></i>
                 <div className="card_inner">
                   <h5 className="text-primary-p">Total De Saida</h5>
-                  <span className="font-bold text-title">670</span>
+                  <span className="font-bold text-title">{sumFinished}</span>
                 </div>
               </div>
 
@@ -204,7 +238,9 @@ debugger
                 <i className="fa fa-bars fa-2x text-green"></i>
                 <div className="card_inner">
                   <h5 className="text-primary-p">Média Produção</h5>
-                  <span className="font-bold text-title">40</span>
+                  <span className="font-bold text-title">
+                    {average.toPrecision(2)}
+                  </span>
                 </div>
               </div>
             </div>

@@ -176,6 +176,11 @@ main {
     font-size: 14px;
 }
 
+.table__order {
+    background-color: #FFC107;
+}
+
+
 @media only screen and (max-width: 855px) {
     .main__cards {
         grid-template-columns: 1fr;

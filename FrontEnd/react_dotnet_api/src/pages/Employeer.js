@@ -171,9 +171,9 @@ function Employeer() {
         <div>
           <br />
         </div>
-        <Table  bordered hover responsive size="sm">
+        <Table bordered hover responsive size="sm">
           <thead className="table-warning">
-            <tr>
+            <tr align="center">
               <th scope="col s12 m2">Matricula</th>
               <th scope="col s12 m2">Nome Completo</th>
               <th scope="col s12 m2">Documento</th>
@@ -186,7 +186,7 @@ function Employeer() {
           <tbody className="table-light">
             {data &&
               data.map((employeer) => (
-                <tr key={employeer.register}>
+                <tr align="center" key={employeer.register}>
                   <td>{employeer.register}</td>
                   <td>{employeer.name}</td>
                   <td>{employeer.document}</td>
