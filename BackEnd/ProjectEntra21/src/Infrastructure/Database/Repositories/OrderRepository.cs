@@ -35,14 +35,14 @@ namespace ProjectEntra21.src.Infrastructure.Database.Repositories
             return newCode + 1;
         }
 
+
         public async Task<PaginationResponse<Order>> SelectAllOrder(FilterBase filters)
         {
-            return await Dbset.Where(x => x.CreateAt >= DateTime.Now.Date.Date && x.CreateAt < DateTime.Now.Date.AddDays(1))
+            return await Dbset.Where(x => x.CreateAt >= DateTime.Now.Date && x.CreateAt < DateTime.Now.Date.AddDays(1))
                .Include(x => x.Product)
                .Include(x => x.CellEmployeer.Cell)
                .Include(x => x.CellEmployeer.Employeer)
                .AsNoTracking()
-               .OrderBy(x => x.CellEmployeer.Cell.CodeCell)
                .PaginateAsync(filters._page, filters._size);
         }
 

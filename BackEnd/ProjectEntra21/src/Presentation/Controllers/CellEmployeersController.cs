@@ -4,6 +4,7 @@ using ProjectEntra21.src.Application.Query.CellEmployeers;
 using ProjectEntra21.src.Application.Request.CellEmployeers;
 using ProjectEntra21.src.Application.ViewModels;
 using ProjectEntra21.src.Domain.Common;
+using ProjectEntra21.src.Domain.Enums;
 using System;
 using System.Threading.Tasks;
 
@@ -17,7 +18,7 @@ namespace ProjectEntra21.src.Presentation.Controllers
         
         [HttpGet]
         [Route("{codeCell}/{date}")]
-        public async Task<ActionResult<PaginationResponse<CellEmployeerViewModel>>> GetSelectMoreAsync([FromRoute] long codeCell, DateTime date, 
+        public async Task<ActionResult<PaginationResponse<CellEmployeerViewModel>>> GetSelectMoreAsync([FromRoute] long codeCell, DateTime date,
                 [FromQuery] FilterBase filterBase)
         {
             try

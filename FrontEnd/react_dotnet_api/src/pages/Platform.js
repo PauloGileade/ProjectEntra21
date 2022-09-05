@@ -1,9 +1,11 @@
 import HeaderPlatform from "../components/HeaderPlatform/HeaderPlatform";
+import "./global.css";
 
 function Platform() {
   return (
     <div>
       <HeaderPlatform />
+      <main className="main__global">
         <div className="main__container">
           <div className="main__title">
             <div className="main__greeting">
@@ -11,7 +13,8 @@ function Platform() {
               <p>Bem vindo a plataforma de controle</p>
             </div>
           </div>
-          </div>
+        </div>
+      </main>
     </div>
   );
 }

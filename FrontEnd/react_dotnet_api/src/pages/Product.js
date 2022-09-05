@@ -8,9 +8,10 @@ import {
   ModalFooter,
   ModalHeader,
   Table,
-  Row
+  Row,
 } from "reactstrap";
 import HeaderPlatform from "../components/HeaderPlatform/HeaderPlatform";
+import "./global.css";
 
 function Product() {
   const baseUrl = "https://localhost:5001/api/Products";
@@ -146,214 +147,219 @@ function Product() {
   return (
     <div>
       <HeaderPlatform />
-      <div className="container">
-        <h2>Produtos</h2>
-        <Button
-          color="primary
+      <main className="main__global">
+        <div className="container">
+          <h2>Produtos</h2>
+          <Button
+            color="primary
         "
-          outline
-          className="btn"
-          onClick={() => abrirFecharModalIncluir()}
-        >
-          Cadastrar Novo
-        </Button>{" "}
-        <Button
-          color="primary
+            outline
+            className="btn"
+            onClick={() => abrirFecharModalIncluir()}
+          >
+            Cadastrar Novo
+          </Button>{" "}
+          <Button
+            color="primary
         "
-          outline
-          className="btn"
-          onClick={() => abrirFecharModalFiltro()}
-        >
-          Buscar Por Codigo
-        </Button>{" "}
-        <div>
-          <br />
-        </div>
-        <Row md="12" sm="2" xs="1">
-          <Table bordered hover responsive size="sm">
-            <thead className="table-warning">
-              <tr align="center">
-                <th scope="col">Codigo</th>
-                <th scope="col">Nome do produto</th>
-                <th scope="col">Tipo</th>
-                <th scope="col">Operação</th>
-              </tr>
-            </thead>
-            <tbody className="table-light">
-              {data.map((product) => (
-                <tr align="center" key={product.code}>
-                  <td>{product.code}</td>
-                  <td>{product.name}</td>
-                  <td>{product.type}</td>
-                  <td>
-                    <button
-                      className="btn btn-primary"
-                      onClick={() => selectProduct(product, "Editar")}
-                    >
-                      Editar
-                    </button>
-                    <button
-                      className="btn btn-danger"
-                      onClick={() => selectProduct(product, "Excluir")}
-                    >
-                      Excluir
-                    </button>
-                  </td>
+            outline
+            className="btn"
+            onClick={() => abrirFecharModalFiltro()}
+          >
+            Buscar Por Codigo
+          </Button>{" "}
+          <div>
+            <br />
+          </div>
+          <Row md="12" sm="2" xs="1">
+            <Table bordered hover responsive size="sm">
+              <thead className="table-warning">
+                <tr align="center">
+                  <th>Codigo</th>
+                  <th>Nome do produto</th>
+                  <th>Tipo</th>
+                  <th>Operação</th>
                 </tr>
-              ))}
-            </tbody>
-          </Table>
-        </Row>
-        <Modal isOpen={modalIncluir}>
-          <ModalHeader>Incluir Produto</ModalHeader>
-          <ModalBody>
-            <div className="form-group">
-              <label>Nome:</label>
-              <br />
-              <input
-                type="text"
-                className="form-control"
-                name="name"
-                onChange={handleChange}
-              ></input>
-              <label htmlFor="type">Tipo:</label>
-              <br />
-              <select
-                type="text"
-                className="form"
-                name="type"
-                onChange={handleChange}
+              </thead>
+              <tbody className="table-light">
+                {data.map((product) => (
+                  <tr align="center" key={product.code}>
+                    <td>{product.code}</td>
+                    <td>{product.name}</td>
+                    <td>{product.type}</td>
+                    <td>
+                      <button
+                        className="btn btn-primary"
+                        onClick={() => selectProduct(product, "Editar")}
+                      >
+                        Editar
+                      </button>
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => selectProduct(product, "Excluir")}
+                      >
+                        Excluir
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </Row>
+          <Modal isOpen={modalIncluir}>
+            <ModalHeader>Incluir Produto</ModalHeader>
+            <ModalBody>
+              <div className="form-group">
+                <label>Nome:</label>
+                <br />
+                <input
+                  type="text"
+                  className="form-control"
+                  name="name"
+                  onChange={handleChange}
+                ></input>
+                <label htmlFor="type">Tipo:</label>
+                <br />
+                <select
+                  type="text"
+                  className="form"
+                  name="type"
+                  onChange={handleChange}
+                >
+                  <option value="">
+                    <em></em>
+                  </option>
+                  <option>C1</option>
+                  <option>C2</option>
+                  <option>C3</option>
+                  <option>C4</option>
+                  <option>C5</option>
+                  <option>C6</option>
+                </select>
+              </div>
+            </ModalBody>
+            <ModalFooter>
+              <button className="btn btn-primary" onClick={() => pedidoPost()}>
+                {" "}
+                Incluir
+              </button>
+              <button
+                className="btn btn-danger"
+                onClick={() => abrirFecharModalIncluir()}
               >
-                <option value="">
-                  <em></em>
-                </option>
-                <option>C1</option>
-                <option>C2</option>
-                <option>C3</option>
-                <option>C4</option>
-                <option>C5</option>
-                <option>C6</option>
-              </select>
-            </div>
-          </ModalBody>
-          <ModalFooter>
-            <button className="btn btn-primary" onClick={() => pedidoPost()}>
-              {" "}
-              Incluir
-            </button>
-            <button
-              className="btn btn-danger"
-              onClick={() => abrirFecharModalIncluir()}
-            >
-              Cancelar
-            </button>
-          </ModalFooter>
-        </Modal>
-        <Modal isOpen={modalEditar}>
-          <ModalHeader>Editar Produto</ModalHeader>
-          <ModalBody>
-            <div className="form-group">
-              <label>Codigo:</label>
-              <input
-                type="text"
-                className="form-control"
-                readOnly
-                value={productselect && productselect.code}
-              />
-              <br />
-              <label>Nome:</label>
-              <br />
-              <input
-                type="text"
-                className="form-control"
-                name="name"
-                onChange={handleChange}
-                value={productselect && productselect.name}
-              ></input>
-              <label htmlFor="type">Tipo:</label>
-              <br />
-              <select
-                type="text"
-                className="form"
-                name="type"
-                onChange={handleChange}
-                value={productselect && productselect.type}
+                Cancelar
+              </button>
+            </ModalFooter>
+          </Modal>
+          <Modal isOpen={modalEditar}>
+            <ModalHeader>Editar Produto</ModalHeader>
+            <ModalBody>
+              <div className="form-group">
+                <label>Codigo:</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  readOnly
+                  value={productselect && productselect.code}
+                />
+                <br />
+                <label>Nome:</label>
+                <br />
+                <input
+                  type="text"
+                  className="form-control"
+                  name="name"
+                  onChange={handleChange}
+                  value={productselect && productselect.name}
+                ></input>
+                <label htmlFor="type">Tipo:</label>
+                <br />
+                <select
+                  type="text"
+                  className="form"
+                  name="type"
+                  onChange={handleChange}
+                  value={productselect && productselect.type}
+                >
+                  <option value="">
+                    <em></em>
+                  </option>
+                  <option>C1</option>
+                  <option>C2</option>
+                  <option>C3</option>
+                  <option>C4</option>
+                  <option>C5</option>
+                  <option>C6</option>
+                </select>
+              </div>
+            </ModalBody>
+            <ModalFooter>
+              <button className="btn btn-primary" onClick={() => pedidoPut()}>
+                {" "}
+                Editar
+              </button>
+              <button
+                className="btn btn-danger"
+                onClick={() => abrirFecharModalEditar()}
               >
-                <option value="">
-                  <em></em>
-                </option>
-                <option>C1</option>
-                <option>C2</option>
-                <option>C3</option>
-                <option>C4</option>
-                <option>C5</option>
-                <option>C6</option>
-              </select>
-            </div>
-          </ModalBody>
-          <ModalFooter>
-            <button className="btn btn-primary" onClick={() => pedidoPut()}>
-              {" "}
-              Editar
-            </button>
-            <button
-              className="btn btn-danger"
-              onClick={() => abrirFecharModalEditar()}
-            >
-              Cancelar
-            </button>
-          </ModalFooter>
-        </Modal>
-        <Modal isOpen={modalFiltro}>
-          <ModalHeader>Buscar Produto</ModalHeader>
-          <ModalBody>
-            <div className="form-group">
-              <label>Codigo:</label>
-              <br />
-              <input
-                type="text"
-                className="form-control"
-                name="code"
-                onChange={handleChangeGet}
-              ></input>
-            </div>
-          </ModalBody>
+                Cancelar
+              </button>
+            </ModalFooter>
+          </Modal>
+          <Modal isOpen={modalFiltro}>
+            <ModalHeader>Buscar Produto</ModalHeader>
+            <ModalBody>
+              <div className="form-group">
+                <label>Codigo:</label>
+                <br />
+                <input
+                  type="text"
+                  className="form-control"
+                  name="code"
+                  onChange={handleChangeGet}
+                ></input>
+              </div>
+            </ModalBody>
 
-          <ModalFooter>
-            <button
-              className="btn btn-primary"
-              onClick={() => pedidoGetByCode()}
-            >
-              {" "}
-              Buscar
-            </button>
-            <button
-              className="btn btn-danger"
-              onClick={() => abrirFecharModalFiltro()}
-            >
-              Cancelar
-            </button>
-          </ModalFooter>
-        </Modal>
-        <Modal isOpen={modalExcluir}>
-          <ModalBody>
-            Confirma a exclusão deste (a) Produto :{" "}
-            {productselect && productselect.name} ?
-          </ModalBody>
-          <ModalFooter>
-            <button className="btn btn-primary" onClick={() => pedidoDelete()}>
-              {"  "}
-              Sim
-            </button>
-            <button
-              className="btn btn-danger"
-              onClick={() => abrirFecharModalExcluir()}
-            >
-              Não
-            </button>
-          </ModalFooter>
-        </Modal>
-      </div>
+            <ModalFooter>
+              <button
+                className="btn btn-primary"
+                onClick={() => pedidoGetByCode()}
+              >
+                {" "}
+                Buscar
+              </button>
+              <button
+                className="btn btn-danger"
+                onClick={() => abrirFecharModalFiltro()}
+              >
+                Cancelar
+              </button>
+            </ModalFooter>
+          </Modal>
+          <Modal isOpen={modalExcluir}>
+            <ModalBody>
+              Confirma a exclusão deste (a) Produto :{" "}
+              {productselect && productselect.name} ?
+            </ModalBody>
+            <ModalFooter>
+              <button
+                className="btn btn-primary"
+                onClick={() => pedidoDelete()}
+              >
+                {"  "}
+                Sim
+              </button>
+              <button
+                className="btn btn-danger"
+                onClick={() => abrirFecharModalExcluir()}
+              >
+                Não
+              </button>
+            </ModalFooter>
+          </Modal>
+        </div>
+      </main>
     </div>
   );
 }

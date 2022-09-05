@@ -43,6 +43,7 @@ namespace ProjectEntra21.src.Application.Query.Orders
                 NameEmployeer = order.CellEmployeer.Employeer.Name,
                 AmountEnter = order.AmountEnter,
                 AmountFinished = order.AmountFinished,
+                Phase = order.CellEmployeer.Phase.ToString(),
                 CreatAt = order.CreateAt.Date.ToShortDateString()
             };
         }

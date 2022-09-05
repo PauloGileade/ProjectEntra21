@@ -15,6 +15,7 @@ namespace ProjectEntra21.src.Infrastructure.Database.Mappings
             builder.ToTable(TableName);
             builder.HasAlternateKey(x => new { x.Code});
             builder.Property(x => x.Code).IsRequired().HasColumnName("codigo");
+            builder.Property(x => x.Phase).IsRequired().HasColumnName("Fase");
         }
     }
 }

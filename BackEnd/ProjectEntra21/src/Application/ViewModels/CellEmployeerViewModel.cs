@@ -9,5 +9,6 @@ namespace ProjectEntra21.src.Application.ViewModels
         public string NameEmployeer { get; set; }
         public string Office { get; set; }
         public string LevelEmployeer { get; set; }
+        public string Phase { get; set; }
     }
 }

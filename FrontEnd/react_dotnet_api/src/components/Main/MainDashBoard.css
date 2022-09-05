@@ -2,6 +2,7 @@ main {
     background: #f3f4f6;
     grid-area: main;
     overflow-y: auto;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .main__container {
@@ -42,7 +43,7 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    height: 70px;
+    height: 40px;
     padding: 25px;
     border-radius: 5px;
     background-color: #FFF;
@@ -68,11 +69,17 @@ main {
     gap: 30px;
     margin-top: 50px;
 }
+@keyframes example {
+  25%  {background-color: #FFC107;}
+
+}
 
 .charts__left {
     padding: 25px;
     border-radius: 5px;
     background: #FFF;
+    animation-name: example;
+    animation-duration: 3s;
     box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #FFF;
 }
 
@@ -91,7 +98,7 @@ main {
 .charts__left__title > i {
     color: #FFF;
     font-size: 20px;
-    background: #FFC100;
+    background: #FFC107;
     border-radius: 200px 0px 200px 200px;
     -moz-border-radius: 200px 0px 200px 200px;
     -webkit-border-radius: 200px 0px 200px 200px;
@@ -127,7 +134,7 @@ main {
 .charts__left__title > i {
     color: #FFF;
     font-size: 20px;
-    background: #39447a;
+    background: #FFC107;
     border-radius: 200px 0px 200px 200px;
     border: 0px solid #000;
     padding: 15px;
@@ -177,9 +184,12 @@ main {
 }
 
 .table__order {
-    background-color: #FFC107;
+    background-color: #d6d8d9;
 }
 
+.table__painel:hover {
+   background-color: #FFC107;
+}
 
 @media only screen and (max-width: 855px) {
     .main__cards {

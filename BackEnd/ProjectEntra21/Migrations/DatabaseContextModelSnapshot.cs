@@ -31,13 +31,13 @@ namespace ProjectEntra21.Migrations
                     b.Property<DateTime>("CreateAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 8, 22, 11, 0, 53, 725, DateTimeKind.Local).AddTicks(1418))
+                        .HasDefaultValue(new DateTime(2022, 9, 5, 19, 38, 58, 868, DateTimeKind.Local).AddTicks(8864))
                         .HasColumnName("criado_em");
 
                     b.Property<DateTime>("LastModifiedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 8, 22, 11, 0, 53, 725, DateTimeKind.Local).AddTicks(1696))
+                        .HasDefaultValue(new DateTime(2022, 9, 5, 19, 38, 58, 868, DateTimeKind.Local).AddTicks(9147))
                         .HasColumnName("ultima_modificao_em");
 
                     b.Property<int>("StatusCell")
@@ -68,7 +68,7 @@ namespace ProjectEntra21.Migrations
                     b.Property<DateTime>("CreateAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 8, 22, 11, 0, 53, 726, DateTimeKind.Local).AddTicks(1449))
+                        .HasDefaultValue(new DateTime(2022, 9, 5, 19, 38, 58, 869, DateTimeKind.Local).AddTicks(9091))
                         .HasColumnName("criado_em");
 
                     b.Property<long?>("EmployeerId")
@@ -77,8 +77,12 @@ namespace ProjectEntra21.Migrations
                     b.Property<DateTime>("LastModifiedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 8, 22, 11, 0, 53, 726, DateTimeKind.Local).AddTicks(1771))
+                        .HasDefaultValue(new DateTime(2022, 9, 5, 19, 38, 58, 869, DateTimeKind.Local).AddTicks(9371))
                         .HasColumnName("ultima_modificao_em");
+
+                    b.Property<int>("Phase")
+                        .HasColumnType("int")
+                        .HasColumnName("Fase");
 
                     b.HasKey("Id");
 
@@ -106,7 +110,7 @@ namespace ProjectEntra21.Migrations
                     b.Property<DateTime>("CreateAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 8, 22, 11, 0, 53, 716, DateTimeKind.Local).AddTicks(1029))
+                        .HasDefaultValue(new DateTime(2022, 9, 5, 19, 38, 58, 859, DateTimeKind.Local).AddTicks(3499))
                         .HasColumnName("criado_em");
 
                     b.Property<string>("Document")
@@ -117,7 +121,7 @@ namespace ProjectEntra21.Migrations
                     b.Property<DateTime>("LastModifiedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 8, 22, 11, 0, 53, 719, DateTimeKind.Local).AddTicks(9121))
+                        .HasDefaultValue(new DateTime(2022, 9, 5, 19, 38, 58, 863, DateTimeKind.Local).AddTicks(2826))
                         .HasColumnName("ultima_modificao_em");
 
                     b.Property<int>("LevelEmployeer")
@@ -170,13 +174,13 @@ namespace ProjectEntra21.Migrations
                     b.Property<DateTime>("CreateAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 8, 22, 11, 0, 53, 727, DateTimeKind.Local).AddTicks(8467))
+                        .HasDefaultValue(new DateTime(2022, 9, 5, 19, 38, 58, 872, DateTimeKind.Local).AddTicks(659))
                         .HasColumnName("criado_em");
 
                     b.Property<DateTime>("LastModifiedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 8, 22, 11, 0, 53, 727, DateTimeKind.Local).AddTicks(8776))
+                        .HasDefaultValue(new DateTime(2022, 9, 5, 19, 38, 58, 872, DateTimeKind.Local).AddTicks(985))
                         .HasColumnName("ultima_modificao_em");
 
                     b.Property<long?>("ProductId")
@@ -207,13 +211,13 @@ namespace ProjectEntra21.Migrations
                     b.Property<DateTime>("CreateAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 8, 22, 11, 0, 53, 726, DateTimeKind.Local).AddTicks(8327))
+                        .HasDefaultValue(new DateTime(2022, 9, 5, 19, 38, 58, 871, DateTimeKind.Local).AddTicks(83))
                         .HasColumnName("criado_em");
 
                     b.Property<DateTime>("LastModifiedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 8, 22, 11, 0, 53, 726, DateTimeKind.Local).AddTicks(8572))
+                        .HasDefaultValue(new DateTime(2022, 9, 5, 19, 38, 58, 871, DateTimeKind.Local).AddTicks(380))
                         .HasColumnName("ultima_modificao_em");
 
                     b.Property<string>("Name")
@@ -230,6 +234,43 @@ namespace ProjectEntra21.Migrations
                     b.HasAlternateKey("Code");
 
                     b.ToTable("Produto");
+                });
+
+            modelBuilder.Entity("ProjectEntra21.src.Domain.Entiteis.TotalPartial", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
+
+                    b.Property<long?>("CellId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreateAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime(6)")
+                        .HasDefaultValue(new DateTime(2022, 9, 5, 19, 38, 58, 873, DateTimeKind.Local).AddTicks(3155))
+                        .HasColumnName("criado_em");
+
+                    b.Property<DateTime>("LastModifiedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime(6)")
+                        .HasDefaultValue(new DateTime(2022, 9, 5, 19, 38, 58, 873, DateTimeKind.Local).AddTicks(3450))
+                        .HasColumnName("ultima_modificao_em");
+
+                    b.Property<int>("Phase")
+                        .HasColumnType("int")
+                        .HasColumnName("fase");
+
+                    b.Property<int>("Total")
+                        .HasColumnType("int")
+                        .HasColumnName("total_saida");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CellId");
+
+                    b.ToTable("TotalParcial");
                 });
 
             modelBuilder.Entity("ProjectEntra21.src.Domain.Entiteis.CellEmployeer", b =>
@@ -260,6 +301,15 @@ namespace ProjectEntra21.Migrations
                     b.Navigation("CellEmployeer");
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("ProjectEntra21.src.Domain.Entiteis.TotalPartial", b =>
+                {
+                    b.HasOne("ProjectEntra21.src.Domain.Entiteis.Cell", "Cell")
+                        .WithMany()
+                        .HasForeignKey("CellId");
+
+                    b.Navigation("Cell");
                 });
 #pragma warning restore 612, 618
         }

@@ -5,18 +5,7 @@ import FormLabel from "@mui/material/FormLabel";
 import { useState, useEffect } from "react";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import {
-  Modal,
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  Table,
-  Card,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  CardText
-} from "reactstrap";
+import { Modal, ModalBody, ModalFooter, ModalHeader, Table } from "reactstrap";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
@@ -69,18 +58,37 @@ const MainDashBoard = () => {
   };
 
   useEffect(() => {
-    pedidoGetByCell()
+    pedidoGetByCell();
     pedidoGet();
   }, []);
 
   let sumEnter = 0;
   let sumFinished = 0;
   let average = 0;
+  let maior = 0;
+  let employeer1;
 
   data.forEach((order) => {
-    sumEnter += order.amountEnter;
-    sumFinished += order.amountFinished;
-    average = sumFinished / data.length
+    if (order.phase === "Inicial") {
+      sumEnter += order.amountEnter;
+    }
+    if (order.phase === "Final") {
+      sumFinished += order.amountFinished;
+    }
+    average = sumFinished / data.length;
+  });
+
+  data.forEach((order) => {
+    if (order.amountFinished > maior) {
+      maior = order.amountFinished;
+      employeer1 =
+        order.nameEmployeer +
+        " / Celula " +
+        order.codeCell +
+        "/ " +
+        maior +
+        " Bag";
+    }
   });
 
   return (
@@ -139,9 +147,20 @@ const MainDashBoard = () => {
               Celula 6
             </Button>
           </Stack>
+          <div className="charts">
+            <div className="charts__left">
+              <div className="charts__left__title">
+                <div>
+                  <h2>1°</h2>
+                  <h5 className="text-primary-p">{employeer1}</h5>
+                </div>
+                <i class="fa-solid fa-medal"></i>
+              </div>
+            </div>
+          </div>
           <br />
           <h2>Painel De Ordens</h2>
-          <Table bordered hover responsive size="sm">
+          <Table bordered responsive size="sm">
             <thead className="table__order">
               <tr align="center">
                 <th>Codigo celula</th>
@@ -152,11 +171,16 @@ const MainDashBoard = () => {
                 <th>Quantidade entrada</th>
                 <th>Quantidade saida</th>
                 <th>Data criação</th>
+                <th>Fase</th>
               </tr>
             </thead>
-            <tbody className="table-light">
+            <tbody>
               {data.map((order) => (
-                <tr align="center" key={order.codeCell}>
+                <tr
+                  className="table__painel"
+                  align="center"
+                  key={order.codeCell}
+                >
                   <td>{order.codeCell}</td>
                   <td>{order.codeProduct}</td>
                   <td>{order.nameProduct}</td>
@@ -165,6 +189,7 @@ const MainDashBoard = () => {
                   <td>{order.amountEnter}</td>
                   <td>{order.amountFinished}</td>
                   <td>{order.creatAt}</td>
+                  <td>{order.phase}</td>
                 </tr>
               ))}
             </tbody>
@@ -211,7 +236,6 @@ const MainDashBoard = () => {
           <div className="container">
             <div className="main__cards">
               <div className="card">
-                <i className="fa fa-file-text fa-2x text-lightblue"></i>
                 <div className="card_inner">
                   <h5 className="text-primary-p">Total De Ordens</h5>
                   <span className="font-bold text-title">{data.length}</span>
@@ -219,7 +243,6 @@ const MainDashBoard = () => {
               </div>
 
               <div className="card">
-                <i className="fa-solid fa-money-bill-1-wave"></i>
                 <div className="card_inner">
                   <h5 className="text-primary-p">Total De Entrada</h5>
                   <span className="font-bold text-title">{sumEnter}</span>
@@ -227,7 +250,6 @@ const MainDashBoard = () => {
               </div>
 
               <div className="card">
-                <i className="fa fa-archive fa2x text-yellow"></i>
                 <div className="card_inner">
                   <h5 className="text-primary-p">Total De Saida</h5>
                   <span className="font-bold text-title">{sumFinished}</span>
@@ -235,7 +257,6 @@ const MainDashBoard = () => {
               </div>
 
               <div className="card">
-                <i className="fa fa-bars fa-2x text-green"></i>
                 <div className="card_inner">
                   <h5 className="text-primary-p">Média Produção</h5>
                   <span className="font-bold text-title">

@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using ProjectEntra21.src.Application.Database;
 using ProjectEntra21.src.Domain.Entiteis;
+using ProjectEntra21.src.Domain.Enums;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace ProjectEntra21.src.Application.Request.CellEmployeers
     {
         public int CodeCell { get; set; }
         public long RegisterEmployeer { get; set; }
+        public PhaseCell Phase { get; set; }
     }
 
     public class PersistEmployeerCommandHandler : IRequestHandler<PersistCellEmployeerCommand, CellEmployeer>
@@ -44,18 +46,7 @@ namespace ProjectEntra21.src.Application.Request.CellEmployeers
 
             CellEmployeer cellEmployeer = await _cellEmployeerRepository.SelectOne(x => x.Employeer.Register == request.RegisterEmployeer
                  && x.CreateAt >= DateTime.Now.Date.Date
-                    && x.CreateAt < DateTime.Now.Date.Date.AddDays(1)); ;
-
-            if (cellEmployeer != null && cellEmployeer.CreateAt.ToString("dd/MM/yyyy") == DateTime.Now.ToString("dd/MM/yyyy"))
-            {
-
-                cellEmployeer.Cell = cell;
-                cellEmployeer.Employeer = employeer;
-
-                await _cellEmployeerRepository.InsertOrUpdate(cellEmployeer);
-
-                return cellEmployeer;
-            }
+                    && x.CreateAt < DateTime.Now.Date.Date.AddDays(1)  && x.Phase == request.Phase); ;
 
 
             if (cellEmployeer == null)
@@ -64,6 +55,7 @@ namespace ProjectEntra21.src.Application.Request.CellEmployeers
 
             cellEmployeer.Cell = cell;
             cellEmployeer.Employeer = employeer;
+            cellEmployeer.Phase = request.Phase;
 
             await _cellEmployeerRepository.InsertOrUpdate(cellEmployeer);
 

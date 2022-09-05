@@ -10,5 +10,6 @@ namespace ProjectEntra21.src.Application.Database
     {
         public long NextCode();
         public Task<PaginationResponse<CellEmployeer>> SelectMore(long codeCell, DateTime date, FilterBase filters);
+        public Task<CellEmployeer> SelectOneEmployeer(long resgister);
     }
 }

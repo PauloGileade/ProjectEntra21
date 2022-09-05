@@ -23,6 +23,7 @@ function HeaderPlatform() {
   const [orderselect, setOrderSelect] = useState({
     registerEmployeer: "",
     codeProduct: "",
+    phase: "",
     amountEnter: "",
   });
 
@@ -346,6 +347,21 @@ function HeaderPlatform() {
               name="amountEnter"
               onChange={handleChange}
             ></input>
+            <label htmlFor="levelEmployeer">Fase:</label>
+            <br />
+            <select
+              type="text"
+              className="form"
+              name="phase"
+              onChange={handleChange}
+            >
+              <option value="">
+                <em></em>
+              </option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+            </select>
           </div>
         </ModalBody>
 

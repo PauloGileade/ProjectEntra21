@@ -4,6 +4,7 @@ using ProjectEntra21.src.Application.Database;
 using ProjectEntra21.src.Application.ViewModels;
 using ProjectEntra21.src.Domain.Common;
 using ProjectEntra21.src.Domain.Entiteis;
+using ProjectEntra21.src.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -38,10 +39,13 @@ namespace ProjectEntra21.src.Application.Query.CellEmployeers
 
             foreach (var mappedItem in mappedItems)
             {
-                list.Add(new CellEmployeerViewModel { RegisterEmployeer = mappedItem.Employeer.Register,
-                                                      NameEmployeer = mappedItem.Employeer.Name,
-                                                      Office = mappedItem.Employeer.Office,
-                                                      LevelEmployeer = mappedItem.Employeer.LevelEmployeer.ToString()});
+                list.Add(new CellEmployeerViewModel
+                {
+                    RegisterEmployeer = mappedItem.Employeer.Register,
+                    NameEmployeer = mappedItem.Employeer.Name,
+                    Office = mappedItem.Employeer.Office,
+                    LevelEmployeer = mappedItem.Employeer.LevelEmployeer.ToString(),
+                    Phase = mappedItem.Phase.ToString()});
             }
             return new PaginationResponse<CellEmployeerViewModel>(list, queryResult.TotalItems,
                     queryResult.CurrentPage, request.Filters._size);

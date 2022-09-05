@@ -5,7 +5,10 @@ using ProjectEntra21.src.Domain.Entiteis;
 using ProjectEntra21.src.Infrastructure.Database.Common;
 using ProjectEntra21.src.Infrastructure.Database.Common.Extension;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace ProjectEntra21.src.Infrastructure.Database.Repositories
@@ -58,6 +61,16 @@ namespace ProjectEntra21.src.Infrastructure.Database.Repositories
                 .Include(x => x.Employeer)
                 .AsNoTracking()
                 .PaginateAsync(filters._page, filters._size);
+        }
+
+        public async Task<CellEmployeer> SelectOneEmployeer(long resgister)
+        {
+            return await Dbset.Where(x => x.Employeer.Register == resgister && x.CreateAt < DateTime.Now.Date)
+                .Include(x => x.Cell)
+                .Include(x => x.Employeer)
+                .AsNoTracking()
+                .OrderByDescending(x => x.CreateAt)
+                .FirstOrDefaultAsync();
         }
     }
 }

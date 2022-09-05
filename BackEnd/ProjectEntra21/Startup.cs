@@ -34,6 +34,7 @@ namespace ProjectEntra21
             services.AddTransient<ICellEmployeerRepository, CellEmployeerRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
             services.AddTransient<IOrderRepository, OrderRepository>();
+            services.AddTransient<ITotalPartialRepository, TotalPartialRepository>();
             services.AddControllers();
             services.AddAutoMapper(typeof(CellEmployeerMapper));
             services.AddAutoMapper(typeof(CellMapper));

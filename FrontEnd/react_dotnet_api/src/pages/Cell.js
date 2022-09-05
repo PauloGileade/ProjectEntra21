@@ -3,15 +3,15 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import {
   Button,
-  Container,
   Modal,
   ModalBody,
   ModalFooter,
   ModalHeader,
   Table,
-  Row
+  Row,
 } from "reactstrap";
 import HeaderPlatform from "../components/HeaderPlatform/HeaderPlatform";
+import "./global.css";
 
 function Cell() {
   const baseUrl = "https://localhost:5001/api/Cells";
@@ -115,149 +115,154 @@ function Cell() {
   return (
     <div>
       <HeaderPlatform />
-      <div className="container">
-        <h2>Celulas</h2>
-        <Button
-          color="primary
+      <main className="main__global">
+        <div className="container">
+          <h2>Celulas</h2>
+          <Button
+            color="primary
         "
-          outline
-          className="btn"
-          onClick={() => abrirFecharModalIncluir()}
-        >
-          Cadastrar Nova
-        </Button>{" "}
-        <div>
-          <br />
-        </div>
-        <Row md="12" sm="2" xs="1">
-          <Table bordered hover responsive size="sm">
-            <thead className="table-warning">
-              <tr align="center">
-                <th scope="col sm">Codigo da celula</th>
-                <th scope="col sm">Status</th>
-                <th scope="col sm">Operação</th>
-              </tr>
-            </thead>
-            <tbody className="table-light">
-              {data.map((cell) => (
-                <tr align="center" key={cell.codeCell}>
-                  <td>{cell.codeCell}</td>
-                  <td>{cell.statusCell}</td>
-                  <td>
-                    <button
-                      className="btn btn-primary"
-                      onClick={() => selectCell(cell, "Editar")}
-                    >
-                      Editar
-                    </button>
-                    <button
-                      className="btn btn-danger"
-                      onClick={() => selectCell(cell, "Excluir")}
-                    >
-                      Excluir
-                    </button>
-                  </td>
+            outline
+            className="btn"
+            onClick={() => abrirFecharModalIncluir()}
+          >
+            Cadastrar Nova
+          </Button>{" "}
+          <div>
+            <br />
+          </div>
+          <Row md="12" sm="2" xs="1">
+            <Table bordered hover responsive size="sm">
+              <thead className="table-warning">
+                <tr align="center">
+                  <th>Codigo</th>
+                  <th>Status</th>
+                  <th>Operação</th>
                 </tr>
-              ))}
-            </tbody>
-          </Table>
-        </Row>
-        <Modal isOpen={modalIncluir}>
-          <ModalHeader>Incluir Celula</ModalHeader>
-          <ModalBody>
-            <div className="form-group">
-              <label htmlFor="type">Status:</label>
-              <br />
-              <select
-                type="text"
-                className="form"
-                name="statusCell"
-                onChange={handleChange}
+              </thead>
+              <tbody className="table-light">
+                {data.map((cell) => (
+                  <tr align="center" key={cell.codeCell}>
+                    <td>{cell.codeCell}</td>
+                    <td>{cell.statusCell}</td>
+                    <td>
+                      <button
+                        className="btn btn-primary"
+                        onClick={() => selectCell(cell, "Editar")}
+                      >
+                        Editar
+                      </button>
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => selectCell(cell, "Excluir")}
+                      >
+                        Excluir
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </Row>
+          <Modal isOpen={modalIncluir}>
+            <ModalHeader>Incluir Celula</ModalHeader>
+            <ModalBody>
+              <div className="form-group">
+                <label htmlFor="type">Status:</label>
+                <br />
+                <select
+                  type="text"
+                  className="form"
+                  name="statusCell"
+                  onChange={handleChange}
+                >
+                  <option value="">
+                    <em></em>
+                  </option>
+                  <option>Ativa</option>
+                  <option>Finalizada</option>
+                  <option>Bloqueada</option>
+                </select>
+              </div>
+            </ModalBody>
+            <ModalFooter>
+              <button className="btn btn-primary" onClick={() => pedidoPost()}>
+                {" "}
+                Incluir
+              </button>
+              <button
+                className="btn btn-danger"
+                onClick={() => abrirFecharModalIncluir()}
               >
-                <option value="">
-                  <em></em>
-                </option>
-                <option>Ativa</option>
-                <option>Finalizada</option>
-                <option>Bloqueada</option>
-              </select>
-            </div>
-          </ModalBody>
-          <ModalFooter>
-            <button className="btn btn-primary" onClick={() => pedidoPost()}>
-              {" "}
-              Incluir
-            </button>
-            <button
-              className="btn btn-danger"
-              onClick={() => abrirFecharModalIncluir()}
-            >
-              Cancelar
-            </button>
-          </ModalFooter>
-        </Modal>
-        <Modal isOpen={modalEditar}>
-          <ModalHeader>Editar Celula</ModalHeader>
-          <ModalBody>
-            <div className="form-group">
-              <label>Codigo:</label>
-              <input
-                type="text"
-                className="form-control"
-                readOnly
-                value={cellselect && cellselect.codeCell}
-              />
-              <br />
-              <label htmlFor="type">Status:</label>
-              <br />
-              <select
-                type="text"
-                className="form"
-                name="statusCell"
-                onChange={handleChange}
-                value={cellselect && cellselect.statusCell}
+                Cancelar
+              </button>
+            </ModalFooter>
+          </Modal>
+          <Modal isOpen={modalEditar}>
+            <ModalHeader>Editar Celula</ModalHeader>
+            <ModalBody>
+              <div className="form-group">
+                <label>Codigo:</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  readOnly
+                  value={cellselect && cellselect.codeCell}
+                />
+                <br />
+                <label htmlFor="type">Status:</label>
+                <br />
+                <select
+                  type="text"
+                  className="form"
+                  name="statusCell"
+                  onChange={handleChange}
+                  value={cellselect && cellselect.statusCell}
+                >
+                  <option value="">
+                    <em></em>
+                  </option>
+                  <option>Ativa</option>
+                  <option>Finalizada</option>
+                  <option>Bloqueada</option>
+                </select>
+              </div>
+            </ModalBody>
+            <ModalFooter>
+              <button className="btn btn-primary" onClick={() => pedidoPut()}>
+                {" "}
+                Editar
+              </button>
+              <button
+                className="btn btn-danger"
+                onClick={() => abrirFecharModalEditar()}
               >
-                <option value="">
-                  <em></em>
-                </option>
-                <option>Ativa</option>
-                <option>Finalizada</option>
-                <option>Bloqueada</option>
-              </select>
-            </div>
-          </ModalBody>
-          <ModalFooter>
-            <button className="btn btn-primary" onClick={() => pedidoPut()}>
-              {" "}
-              Editar
-            </button>
-            <button
-              className="btn btn-danger"
-              onClick={() => abrirFecharModalEditar()}
-            >
-              Cancelar
-            </button>
-          </ModalFooter>
-        </Modal>
-        <Modal isOpen={modalExcluir}>
-          <ModalBody>
-            Confirma a exclusão deste (a) Celula :{" "}
-            {cellselect && cellselect.codeCell} ?
-          </ModalBody>
-          <ModalFooter>
-            <button className="btn btn-primary" onClick={() => pedidoDelete()}>
-              {"  "}
-              Sim
-            </button>
-            <button
-              className="btn btn-danger"
-              onClick={() => abrirFecharModalExcluir()}
-            >
-              Não
-            </button>
-          </ModalFooter>
-        </Modal>
-      </div>
+                Cancelar
+              </button>
+            </ModalFooter>
+          </Modal>
+          <Modal isOpen={modalExcluir}>
+            <ModalBody>
+              Confirma a exclusão deste (a) Celula :{" "}
+              {cellselect && cellselect.codeCell} ?
+            </ModalBody>
+            <ModalFooter>
+              <button
+                className="btn btn-primary"
+                onClick={() => pedidoDelete()}
+              >
+                {"  "}
+                Sim
+              </button>
+              <button
+                className="btn btn-danger"
+                onClick={() => abrirFecharModalExcluir()}
+              >
+                Não
+              </button>
+            </ModalFooter>
+          </Modal>
+        </div>
+      </main>
     </div>
   );
 }

@@ -5,6 +5,7 @@ import { Table } from "reactstrap";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { useParams } from "react-router-dom";
 import HeaderPlatform from "../components/HeaderPlatform/HeaderPlatform";
+import "./global.css";
 
 function Order() {
   const baseUrl = "https://localhost:5001/api/Orders";
@@ -130,135 +131,138 @@ function Order() {
     average = sumFinished / data.length;
   });
 
-  data.forEach((order) => {
-    
-    
-  });
+  data.forEach((order) => {});
 
   return (
     <div>
       <HeaderPlatform />
-      <div>
-        <br />
-        <h2>Painel De Ordens</h2>
-        <Table bordered hover responsive size="sm">
-          <thead className="table-warning">
-            <tr align="center">
-              <th>Codigo celula</th>
-              <th>Codigo produto</th>
-              <th>Nome produto</th>
-              <th>Matricula funcionario</th>
-              <th>Nome funcionario</th>
-              <th>Quantidade entrada</th>
-              <th>Quantidade saida</th>
-              <th>Data criação</th>
-              <th>Adicionar entrada</th>
-            </tr>
-          </thead>
-          <tbody className="table-light">
-            {data.map((order) => (
-              <tr align="center" key={order.codeCell}>
-                <td>{order.codeCell}</td>
-                <td>{order.codeProduct}</td>
-                <td>{order.nameProduct}</td>
-                <td>{order.registerEmployeer}</td>
-                <td>{order.nameEmployeer}</td>
-                <td>{order.amountEnter}</td>
-                <td>{order.amountFinished}</td>
-                <td>{order.creatAt}</td>
-                <td>
-                  <button
-                    className="btn btn-primary"
-                    onClick={() => selectOrder(order, "Editar")}
-                  >
-                    Adicionar
-                  </button>
-                </td>
+      <main className="main__global">
+        <div>
+          <br />
+          <h2>Painel De Ordens</h2>
+          <Table bordered hover responsive size="sm">
+            <thead className="table-warning">
+              <tr align="center">
+                <th>Codigo celula</th>
+                <th>Codigo produto</th>
+                <th>Nome produto</th>
+                <th>Matricula funcionario</th>
+                <th>Nome funcionario</th>
+                <th>Quantidade entrada</th>
+                <th>Quantidade saida</th>
+                <th>Data criação</th>
+                <th>Fase</th>
+                <th>Adicionar entrada</th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
-        <div className="container">
-          <div className="main__cards">
-            <div className="card">
-              <i className="fa fa-file-text fa-2x text-lightblue"></i>
-              <div className="card_inner">
-                <h5 className="text-primary-p">Total De Orderns</h5>
-                <span className="font-bold text-title">{data.length}</span>
+            </thead>
+            <tbody className="table-light">
+              {data.map((order) => (
+                <tr align="center" key={order.codeCell}>
+                  <td>{order.codeCell}</td>
+                  <td>{order.codeProduct}</td>
+                  <td>{order.nameProduct}</td>
+                  <td>{order.registerEmployeer}</td>
+                  <td>{order.nameEmployeer}</td>
+                  <td>{order.amountEnter}</td>
+                  <td>{order.amountFinished}</td>
+                  <td>{order.creatAt}</td>
+                  <td>{order.phase}</td>
+                  <td>
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => selectOrder(order, "Editar")}
+                    >
+                      Adicionar
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+          <div className="container">
+            <div className="main__cards">
+              <div className="card">
+                <i className="fa fa-file-text fa-2x text-lightblue"></i>
+                <div className="card_inner">
+                  <h5 className="text-primary-p">Total De Orderns</h5>
+                  <span className="font-bold text-title">{data.length}</span>
+                </div>
               </div>
-            </div>
 
-            <div className="card">
-              <i className="fa-solid fa-money-bill-1-wave"></i>
-              <div className="card_inner">
-                <h5 className="text-primary-p">Total De Entrada</h5>
-                <span className="font-bold text-title">{sumEnter}</span>
+              <div className="card">
+                <i className="fa-solid fa-money-bill-1-wave"></i>
+                <div className="card_inner">
+                  <h5 className="text-primary-p">Total De Entrada</h5>
+                  <span className="font-bold text-title">{sumEnter}</span>
+                </div>
               </div>
-            </div>
 
-            <div className="card">
-              <i className="fa fa-archive fa2x text-yellow"></i>
-              <div className="card_inner">
-                <h5 className="text-primary-p">Total De Saida</h5>
-                <span className="font-bold text-title">{sumFinished}</span>
+              <div className="card">
+                <i className="fa fa-archive fa2x text-yellow"></i>
+                <div className="card_inner">
+                  <h5 className="text-primary-p">Total De Saida</h5>
+                  <span className="font-bold text-title">{sumFinished}</span>
+                </div>
               </div>
-            </div>
 
-            <div className="card">
-              <i className="fa fa-bars fa-2x text-green"></i>
-              <div className="card_inner">
-                <h5 className="text-primary-p">Média Produção</h5>
-                <span className="font-bold text-title">{average.toPrecision(2)}</span>
+              <div className="card">
+                <i className="fa fa-bars fa-2x text-green"></i>
+                <div className="card_inner">
+                  <h5 className="text-primary-p">Média Produção</h5>
+                  <span className="font-bold text-title">
+                    {average.toPrecision(2)}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <Modal isOpen={modalEditar}>
-          <ModalHeader>Editar Ordem</ModalHeader>
-          <ModalBody>
-            <div className="form-group">
-              <label>Matricula Do Funcionario:</label>
-              <input
-                type="text"
-                className="form-control"
-                disabled
-                value={orderselect && orderselect.registerEmployeer}
-              />
-              <br />
-              <label>Codigo Do Produto:</label>
-              <br />
-              <input
-                type="text"
-                className="form-control"
-                disabled
-                onChange={handleChange}
-                value={orderselect && orderselect.codeProduct}
-              ></input>
-              <label>Quantidade De Entrada:</label>
-              <br />
-              <input
-                type="text"
-                className="form-control"
-                name="amountEnter"
-                onChange={handleChange}
-              ></input>
-            </div>
-          </ModalBody>
-          <ModalFooter>
-            <button className="btn btn-primary" onClick={() => pedidoPut()}>
-              {" "}
-              Adicionar
-            </button>
-            <button
-              className="btn btn-danger"
-              onClick={() => abrirFecharModalEditar()}
-            >
-              Cancelar
-            </button>
-          </ModalFooter>
-        </Modal>
-      </div>
+          <Modal isOpen={modalEditar}>
+            <ModalHeader>Editar Ordem</ModalHeader>
+            <ModalBody>
+              <div className="form-group">
+                <label>Matricula Do Funcionario:</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  disabled
+                  value={orderselect && orderselect.registerEmployeer}
+                />
+                <br />
+                <label>Codigo Do Produto:</label>
+                <br />
+                <input
+                  type="text"
+                  className="form-control"
+                  disabled
+                  onChange={handleChange}
+                  value={orderselect && orderselect.codeProduct}
+                ></input>
+                <label>Quantidade De Entrada:</label>
+                <br />
+                <input
+                  type="text"
+                  className="form-control"
+                  name="amountEnter"
+                  onChange={handleChange}
+                ></input>
+              </div>
+            </ModalBody>
+            <ModalFooter>
+              <button className="btn btn-primary" onClick={() => pedidoPut()}>
+                {" "}
+                Adicionar
+              </button>
+              <button
+                className="btn btn-danger"
+                onClick={() => abrirFecharModalEditar()}
+              >
+                Cancelar
+              </button>
+            </ModalFooter>
+          </Modal>
+        </div>
+      </main>
     </div>
   );
 }

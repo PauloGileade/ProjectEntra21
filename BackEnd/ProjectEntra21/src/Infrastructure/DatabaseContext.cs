@@ -15,6 +15,7 @@ namespace ProjectEntra21.src.Infrastructure
         public DbSet<CellEmployeer> CellsEmployeers { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<TotalPartial> TotalPartials { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,6 +26,7 @@ namespace ProjectEntra21.src.Infrastructure
             new CellEmployeerMapping().Initialize(modelBuilder.Entity<CellEmployeer>());
             new ProductMapping().Initialize(modelBuilder.Entity<Product>());
             new OrderMapping().Initialize(modelBuilder.Entity<Order>());
+            new TotalPartialMapping().Initialize(modelBuilder.Entity<TotalPartial>());
         }
     }
 }
