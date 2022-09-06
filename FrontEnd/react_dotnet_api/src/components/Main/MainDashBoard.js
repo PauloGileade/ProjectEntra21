@@ -75,7 +75,7 @@ const MainDashBoard = () => {
     if (order.phase === "Final") {
       sumFinished += order.amountFinished;
     }
-    average = sumFinished / data.length;
+    average = order.amountEnter / sumFinished;
   });
 
   data.forEach((order) => {

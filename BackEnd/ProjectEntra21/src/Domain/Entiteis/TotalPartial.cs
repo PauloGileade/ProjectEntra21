@@ -8,5 +8,6 @@ namespace ProjectEntra21.src.Domain.Entiteis
         public int Total { get; set; }
         public PhaseCell Phase { get; set; }
         public Cell Cell { get; set; }
+        public Product Product { get; set; }
     }
 }

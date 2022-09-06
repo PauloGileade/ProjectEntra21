@@ -15,12 +15,13 @@ namespace ProjectEntra21.src.Infrastructure.Database.Repositories
         {
         }
 
-        public async Task<TotalPartial> SelectTotalPartial(int phase)
+        public async Task<TotalPartial> SelectTotalPartial(int phase, long product)
         {
             var enumPharse = Enum.Parse<PhaseCell>(phase.ToString());
 
-            return await Dbset.Where(x => x.Phase == enumPharse)
+            return await Dbset.Where(x => x.Phase == enumPharse && x.Product.Code == product)
                 .Include(x => x.Cell)
+                .Include(x => x.Product)
                 .FirstOrDefaultAsync();
         }
     }

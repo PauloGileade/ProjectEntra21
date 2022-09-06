@@ -42,18 +42,27 @@ namespace ProjectEntra21.src.Application.Command.Orders
             await _orderRepository.Update(order);
 
 
-
-
-
             if (PhaseCell.Inicial == Enum.Parse<PhaseCell>(request.Phase) || PhaseCell.Intermediaria == Enum.Parse<PhaseCell>(request.Phase))
             {
-                TotalPartial totalFinishedPartial = await _totalPartialRepository.SelectTotalPartial(int.Parse(request.Phase));
-                totalFinishedPartial.Total = totalFinishedPartial.Total == 0 ? 1 : totalFinishedPartial.Total + 1;
+                TotalPartial totalFinishedPartial = await _totalPartialRepository.SelectTotalPartial(int.Parse(request.Phase), request.CodeProduct);
+
+                if (totalFinishedPartial == null)
+                {
+                    totalFinishedPartial = new TotalPartial
+                    {
+                        Total = 1,
+                        Phase = order.CellEmployeer.Phase,
+                        Cell = order.CellEmployeer.Cell,
+                        Product = order.Product,
+                    };
+
+                    await _totalPartialRepository.Insert(totalFinishedPartial);
+                }
+                else
+                    totalFinishedPartial.Total = totalFinishedPartial.Total == 0 ? 1 : totalFinishedPartial.Total + 1;
 
                 await _totalPartialRepository.Update(totalFinishedPartial);
             }
-
-
 
             return order;
         }

@@ -8,6 +8,6 @@ namespace ProjectEntra21.src.Application.Database
 {
     public interface ITotalPartialRepository : IBaseRepository<TotalPartial>
     {
-        public Task<TotalPartial> SelectTotalPartial(int phase);
+        public Task<TotalPartial> SelectTotalPartial(int phase, long product);
     }
 }
