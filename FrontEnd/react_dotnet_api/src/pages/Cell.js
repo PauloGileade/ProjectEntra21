@@ -117,6 +117,7 @@ function Cell() {
       <HeaderPlatform />
       <main className="main__global">
         <div className="container">
+          <br />
           <h2>Celulas</h2>
           <Button
             color="primary

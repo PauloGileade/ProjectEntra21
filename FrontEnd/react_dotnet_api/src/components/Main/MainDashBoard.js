@@ -8,6 +8,7 @@ import Button from "@mui/material/Button";
 import { Modal, ModalBody, ModalFooter, ModalHeader, Table } from "reactstrap";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import Order from "../../pages/Order";
 
 const MainDashBoard = () => {
   const [data, setData] = useState([]);
@@ -66,7 +67,6 @@ const MainDashBoard = () => {
   let sumFinished = 0;
   let maiorProdução = 0;
   let employeerNumberOne = "";
-  let meta = "";
   let largerPhaseInitial = 0;
   let largerPhaseIntermediary = 0;
   let largerPhaseFinal = 0;
@@ -75,10 +75,10 @@ const MainDashBoard = () => {
   let NumberOneFinal = "";
 
   data.forEach((order) => {
-    if (order.amountFinished >= 280) {
-      meta = "Alcançada";
+    if (order.amountFinished >= 180) {
+      order.goal = "Alcançada";
     } else {
-      meta = "Não alcançada";
+      order.goal = "Não Alcançada";
     }
   });
 
@@ -91,10 +91,7 @@ const MainDashBoard = () => {
     }
   });
 
-  let average = sumEnter / sumFinished;
-
   data.forEach((order) => {
-
     if (order.amountFinished > maiorProdução) {
       maiorProdução = order.amountFinished;
       employeerNumberOne =
@@ -107,51 +104,48 @@ const MainDashBoard = () => {
         maiorProdução +
         " Bag";
     }
-      if (
-        order.amountFinished > largerPhaseInitial &&
-        order.phase === "Inicial"
-      ) {
-        largerPhaseInitial = order.amountFinished;
-        NumberOneInitial =
-          order.nameEmployeer +
-          "/ Celula " +
-          order.codeCell +
-          "/ fase " +
-          order.phase +
-          "/ " +
-          largerPhaseInitial +
-          " Bag";
-      }
-       if (
-         order.amountFinished > largerPhaseIntermediary &&
-         order.phase === "Intermediaria"
-       ) {
-         largerPhaseIntermediary = order.amountFinished;
-         NumberOneIntermediary =
-           order.nameEmployeer +
-           "/ Celula " +
-           order.codeCell +
-           "/ fase " +
-           order.phase +
-           "/ " +
-           largerPhaseIntermediary +
-           " Bag";
-       }
-        if (
-          order.amountFinished > largerPhaseFinal &&
-          order.phase === "Final"
-        ) {
-          largerPhaseFinal = order.amountFinished;
-          NumberOneFinal =
-            order.nameEmployeer +
-            "/ Celula " +
-            order.codeCell +
-            "/ fase " +
-            order.phase +
-            "/ " +
-            largerPhaseFinal +
-            " Bag";
-        }
+    if (
+      order.amountFinished > largerPhaseInitial &&
+      order.phase === "Inicial"
+    ) {
+      largerPhaseInitial = order.amountFinished;
+      NumberOneInitial =
+        order.nameEmployeer +
+        "/ Celula " +
+        order.codeCell +
+        "/ fase " +
+        order.phase +
+        "/ " +
+        largerPhaseInitial +
+        " Bag";
+    }
+    if (
+      order.amountFinished > largerPhaseIntermediary &&
+      order.phase === "Intermediaria"
+    ) {
+      largerPhaseIntermediary = order.amountFinished;
+      NumberOneIntermediary =
+        order.nameEmployeer +
+        "/ Celula " +
+        order.codeCell +
+        "/ fase " +
+        order.phase +
+        "/ " +
+        largerPhaseIntermediary +
+        " Bag";
+    }
+    if (order.amountFinished > largerPhaseFinal && order.phase === "Final") {
+      largerPhaseFinal = order.amountFinished;
+      NumberOneFinal =
+        order.nameEmployeer +
+        "/ Celula " +
+        order.codeCell +
+        "/ fase " +
+        order.phase +
+        "/ " +
+        largerPhaseFinal +
+        " Bag";
+    }
   });
 
   return (
@@ -173,42 +167,44 @@ const MainDashBoard = () => {
             <FormLabel id="demo-row-radio-buttons-group-label"></FormLabel>
           </FormControl>
           <Stack spacing={5} direction="row">
-            <Button
-              variant="contained"
-              onClick={() => abrirFecharModalFiltro(1)}
-            >
-              Celula 1
-            </Button>
-            <Button
-              variant="contained"
-              onClick={() => abrirFecharModalFiltro(2)}
-            >
-              Celula 2
-            </Button>
-            <Button
-              variant="contained"
-              onClick={() => abrirFecharModalFiltro(3)}
-            >
-              Celula 3
-            </Button>
-            <Button
-              variant="contained"
-              onClick={() => abrirFecharModalFiltro(4)}
-            >
-              Celula 4
-            </Button>
-            <Button
-              variant="contained"
-              onClick={() => abrirFecharModalFiltro(5)}
-            >
-              Celula 5
-            </Button>
-            <Button
-              variant="contained"
-              onClick={() => abrirFecharModalFiltro(6)}
-            >
-              Celula 6
-            </Button>
+            <div className="button__main">
+              <Button
+                variant="contained"
+                onClick={() => abrirFecharModalFiltro(1)}
+              >
+                Celula 1
+              </Button>
+              <Button
+                variant="contained"
+                onClick={() => abrirFecharModalFiltro(2)}
+              >
+                Celula 2
+              </Button>
+              <Button
+                variant="contained"
+                onClick={() => abrirFecharModalFiltro(3)}
+              >
+                Celula 3
+              </Button>
+              <Button
+                variant="contained"
+                onClick={() => abrirFecharModalFiltro(4)}
+              >
+                Celula 4
+              </Button>
+              <Button
+                variant="contained"
+                onClick={() => abrirFecharModalFiltro(5)}
+              >
+                Celula 5
+              </Button>
+              <Button
+                variant="contained"
+                onClick={() => abrirFecharModalFiltro(6)}
+              >
+                Celula 6
+              </Button>
+            </div>
           </Stack>
           <div className="charts">
             <div className="charts__left">
@@ -217,7 +213,7 @@ const MainDashBoard = () => {
                   <h2>Maior Produção</h2>
                   <h5 className="text-primary-p">{employeerNumberOne}</h5>
                 </div>
-                <i class="fa-solid fa-medal"></i>
+                <i className="fa-solid fa-medal"></i>
               </div>
             </div>
             <div className="charts__left">
@@ -226,7 +222,7 @@ const MainDashBoard = () => {
                   <h2>1° Fase Inicial</h2>
                   <h5 className="text-primary-p">{NumberOneInitial}</h5>
                 </div>
-                <i class="fa-solid fa-medal"></i>
+                <i className="fa-solid fa-medal"></i>
               </div>
             </div>
             <div className="charts__left">
@@ -235,7 +231,7 @@ const MainDashBoard = () => {
                   <h2>1° Fase Intermediaria</h2>
                   <h5 className="text-primary-p">{NumberOneIntermediary}</h5>
                 </div>
-                <i class="fa-solid fa-medal"></i>
+                <i className="fa-solid fa-medal"></i>
               </div>
             </div>
             <div className="charts__left">
@@ -244,7 +240,7 @@ const MainDashBoard = () => {
                   <h2>1° Fase Final</h2>
                   <h5 className="text-primary-p">{NumberOneFinal}</h5>
                 </div>
-                <i class="fa-solid fa-medal"></i>
+                <i className="fa-solid fa-medal"></i>
               </div>
             </div>
           </div>
@@ -254,7 +250,7 @@ const MainDashBoard = () => {
           <Table bordered responsive size="sm">
             <thead className="table__order">
               <tr align="center">
-                <th>Codigo celula</th>
+                <th>Celula</th>
                 <th>Codigo produto</th>
                 <th>Nome produto</th>
                 <th>Matricula</th>
@@ -282,7 +278,7 @@ const MainDashBoard = () => {
                   <td>{order.amountFinished}</td>
                   <td>{order.creatAt}</td>
                   <td>{order.phase}</td>
-                  <td>{meta}</td>
+                  <td>{order.goal}</td>
                 </tr>
               ))}
             </tbody>
@@ -328,7 +324,6 @@ const MainDashBoard = () => {
 
           <div className="container">
             <div className="main__cards">
-              
               <div className="card">
                 <div className="card_inner">
                   <h5 className="text-primary-p">Total De Ordens</h5>
@@ -349,16 +344,6 @@ const MainDashBoard = () => {
                   <span className="font-bold text-title">{sumFinished}</span>
                 </div>
               </div>
-
-              <div className="card">
-                <div className="card_inner">
-                  <h5 className="text-primary-p">Média Produção</h5>
-                  <span className="font-bold text-title">
-                    {average.toPrecision(2)}
-                  </span>
-                </div>
-              </div>
-
             </div>
           </div>
         </div>

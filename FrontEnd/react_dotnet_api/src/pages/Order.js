@@ -135,7 +135,13 @@ function Order() {
     }
   });
 
-  let average = sumEnter / sumFinished;
+  data.forEach((order) => {
+    if (order.amountFinished >= 180) {
+      order.goal = "Alcançada";
+    } else {
+      order.goal = "Não Alcançada";
+    }
+  });
 
   return (
     <div>
@@ -147,7 +153,7 @@ function Order() {
           <Table bordered hover responsive size="sm">
             <thead className="table__order">
               <tr align="center">
-                <th>Codigo celula</th>
+                <th>Celula</th>
                 <th>Codigo produto</th>
                 <th>Nome produto</th>
                 <th>Matricula</th>
@@ -156,6 +162,7 @@ function Order() {
                 <th>Quantidade saida</th>
                 <th>Data criação</th>
                 <th>Fase</th>
+                <th>Meta</th>
                 <th>Adicionar entrada</th>
               </tr>
             </thead>
@@ -175,6 +182,7 @@ function Order() {
                   <td>{order.amountFinished}</td>
                   <td>{order.creatAt}</td>
                   <td>{order.phase}</td>
+                  <td>{order.goal}</td>
                   <td>
                     <button
                       className="btn btn-primary"
@@ -190,7 +198,6 @@ function Order() {
           <div className="container">
             <div className="main__cards">
               <div className="card">
-                <i className="fa fa-file-text fa-2x text-lightblue"></i>
                 <div className="card_inner">
                   <h5 className="text-primary-p">Total De Ordens</h5>
                   <span className="font-bold text-title">{data.length}</span>
@@ -198,7 +205,6 @@ function Order() {
               </div>
 
               <div className="card">
-                <i className="fa-solid fa-money-bill-1-wave"></i>
                 <div className="card_inner">
                   <h5 className="text-primary-p">Total De Entrada</h5>
                   <span className="font-bold text-title">{sumEnter}</span>
@@ -206,20 +212,9 @@ function Order() {
               </div>
 
               <div className="card">
-                <i className="fa fa-archive fa2x text-yellow"></i>
                 <div className="card_inner">
                   <h5 className="text-primary-p">Total De Saida</h5>
                   <span className="font-bold text-title">{sumFinished}</span>
-                </div>
-              </div>
-
-              <div className="card">
-                <i className="fa fa-bars fa-2x text-green"></i>
-                <div className="card_inner">
-                  <h5 className="text-primary-p">Média Produção</h5>
-                  <span className="font-bold text-title">
-                    {average.toPrecision(2)}
-                  </span>
                 </div>
               </div>
             </div>

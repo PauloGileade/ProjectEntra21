@@ -49,7 +49,9 @@ namespace ProjectEntra21.src.Application.Query.Orders
                     AmountEnter = mappedItem.AmountEnter,
                     AmountFinished = mappedItem.AmountFinished,
                     Phase = mappedItem.CellEmployeer.Phase.ToString(),
-                    CreatAt = mappedItem.CreateAt.Date.ToShortDateString()
+                    CreatAt = mappedItem.CreateAt.Date.ToShortDateString(),
+                    Goal = ""
+
                 });
 
             }

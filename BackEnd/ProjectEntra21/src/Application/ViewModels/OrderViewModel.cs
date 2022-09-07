@@ -15,5 +15,6 @@ namespace ProjectEntra21.src.Application.ViewModels
         public int? AmountFinished { get; set; }
         public string CreatAt { get; set; }
         public string Phase { get; set; }
+        public string Goal { get; set; }
     }
 }

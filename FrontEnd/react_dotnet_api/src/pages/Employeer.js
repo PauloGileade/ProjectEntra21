@@ -152,6 +152,7 @@ function Employeer() {
       <HeaderPlatform />
       <main className="main__global">
         <div className="container">
+          <br/>
           <h2>Funcionarios</h2>
           <Button
             color="primary
@@ -285,7 +286,6 @@ function Employeer() {
               </button>
             </ModalFooter>
           </Modal>
-          
           <Modal isOpen={modalEditar}>
             <ModalHeader>Editar Funcionario</ModalHeader>
             <ModalBody>
@@ -365,7 +365,6 @@ function Employeer() {
               </button>
             </ModalFooter>
           </Modal>
-
           <Modal isOpen={modalFiltro}>
             <ModalHeader>Buscar Funcionario</ModalHeader>
             <ModalBody>

@@ -71,6 +71,7 @@ function CellEmployeer() {
       <HeaderPlatform />
       <main className="main__global">
         <div className="container">
+          <br/>
           <h2>Operações</h2>
           <Table bordered hover responsive size="sm">
             <thead className="table__order">

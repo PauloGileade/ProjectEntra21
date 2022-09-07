@@ -149,6 +149,7 @@ function Product() {
       <HeaderPlatform />
       <main className="main__global">
         <div className="container">
+          <br />
           <h2>Produtos</h2>
           <Button
             color="primary

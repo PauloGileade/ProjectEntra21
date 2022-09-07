@@ -1,5 +1,5 @@
-.main__global {
-    background: #f3f4f6;
+main {
+    
     grid-area: main;
     overflow-y: auto;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -12,3 +12,4 @@
 .table__painel:hover {
    background-color: #FFC107;
 }
+
