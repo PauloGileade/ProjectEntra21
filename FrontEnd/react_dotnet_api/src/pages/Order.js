@@ -26,6 +26,7 @@ function Order() {
   const [orderselect, setOrderSelect] = useState({
     registerEmployeer: "",
     codeProduct: "",
+    phase: "",
     amountEnter: "",
   });
 
@@ -101,6 +102,7 @@ function Order() {
     orderselect.registerEmployeer = parseInt(orderselect.registerEmployeer);
     orderselect.codeProduct = parseInt(orderselect.codeProduct);
     orderselect.amountEnter = parseInt(orderselect.amountEnter);
+    orderselect.phase = parseInt(orderselect.phase);
     await axios
       .put(baseUrl, orderselect)
       .then((response) => {
@@ -123,15 +125,17 @@ function Order() {
 
   let sumEnter = 0;
   let sumFinished = 0;
-  let average = 0;
 
   data.forEach((order) => {
-    sumEnter += order.amountEnter;
-    sumFinished += order.amountFinished;
-    average = sumFinished / data.length;
+    if (order.phase === "Inicial") {
+      sumEnter += order.amountEnter;
+    }
+    if (order.phase === "Final") {
+      sumFinished += order.amountFinished;
+    }
   });
 
-  data.forEach((order) => {});
+  let average = sumEnter / sumFinished;
 
   return (
     <div>
@@ -141,12 +145,12 @@ function Order() {
           <br />
           <h2>Painel De Ordens</h2>
           <Table bordered hover responsive size="sm">
-            <thead className="table-warning">
+            <thead className="table__order">
               <tr align="center">
                 <th>Codigo celula</th>
                 <th>Codigo produto</th>
                 <th>Nome produto</th>
-                <th>Matricula funcionario</th>
+                <th>Matricula</th>
                 <th>Nome funcionario</th>
                 <th>Quantidade entrada</th>
                 <th>Quantidade saida</th>
@@ -155,9 +159,13 @@ function Order() {
                 <th>Adicionar entrada</th>
               </tr>
             </thead>
-            <tbody className="table-light">
+            <tbody>
               {data.map((order) => (
-                <tr align="center" key={order.codeCell}>
+                <tr
+                  className="table__painel"
+                  align="center"
+                  key={order.codeCell}
+                >
                   <td>{order.codeCell}</td>
                   <td>{order.codeProduct}</td>
                   <td>{order.nameProduct}</td>
@@ -184,7 +192,7 @@ function Order() {
               <div className="card">
                 <i className="fa fa-file-text fa-2x text-lightblue"></i>
                 <div className="card_inner">
-                  <h5 className="text-primary-p">Total De Orderns</h5>
+                  <h5 className="text-primary-p">Total De Ordens</h5>
                   <span className="font-bold text-title">{data.length}</span>
                 </div>
               </div>
@@ -228,7 +236,6 @@ function Order() {
                   disabled
                   value={orderselect && orderselect.registerEmployeer}
                 />
-                <br />
                 <label>Codigo Do Produto:</label>
                 <br />
                 <input
@@ -246,6 +253,21 @@ function Order() {
                   name="amountEnter"
                   onChange={handleChange}
                 ></input>
+                <label htmlFor="phase">Fase:</label>
+                <br />
+                <select
+                  type="text"
+                  className="form"
+                  name="phase"
+                  onChange={handleChange}
+                >
+                  <option value="">
+                    <em></em>
+                  </option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                </select>
               </div>
             </ModalBody>
             <ModalFooter>

@@ -30,6 +30,7 @@ function HeaderPlatform() {
   const [cellEmployeerselect, setCellEmployeerSelect] = useState({
     codeCell: "",
     registerEmployeer: "",
+    phase: ""
   });
 
   const [orderByCellselect, setOrderByCellSelect] = useState({
@@ -171,6 +172,7 @@ function HeaderPlatform() {
   };
 
   const pedidoPostOrder = () => {
+     orderselect.phase = parseInt(orderselect.phase);
     axios
       .post(baseUrl, orderselect)
       .then((response) => {
@@ -186,6 +188,7 @@ function HeaderPlatform() {
   };
 
   const pedidoPostCellEmployeer = () => {
+     cellEmployeerselect.phase = parseInt(cellEmployeerselect.phase);
     axios
       .post(baseUrlCellEmployeer, cellEmployeerselect)
       .then((response) => {
@@ -347,7 +350,7 @@ function HeaderPlatform() {
               name="amountEnter"
               onChange={handleChange}
             ></input>
-            <label htmlFor="levelEmployeer">Fase:</label>
+            <label htmlFor="phase">Fase:</label>
             <br />
             <select
               type="text"
@@ -399,6 +402,21 @@ function HeaderPlatform() {
               name="registerEmployeer"
               onChange={handleChangeCellEmployeer}
             ></input>
+            <label htmlFor="phase">Fase:</label>
+            <br />
+            <select
+              type="text"
+              className="form"
+              name="phase"
+              onChange={handleChangeCellEmployeer}
+            >
+              <option value="">
+                <em></em>
+              </option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+            </select>
           </div>
         </ModalBody>
 

@@ -4,3 +4,11 @@
     overflow-y: auto;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
+
+.table__order {
+    background-color: #d6d8d9;
+}
+
+.table__painel:hover {
+   background-color: #FFC107;
+}

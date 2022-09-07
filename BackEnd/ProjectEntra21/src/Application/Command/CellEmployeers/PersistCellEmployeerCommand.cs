@@ -43,7 +43,6 @@ namespace ProjectEntra21.src.Application.Request.CellEmployeers
                 return null;
 
 
-
             CellEmployeer cellEmployeer = await _cellEmployeerRepository.SelectOne(x => x.Employeer.Register == request.RegisterEmployeer
                  && x.CreateAt >= DateTime.Now.Date.Date
                     && x.CreateAt < DateTime.Now.Date.Date.AddDays(1)  && x.Phase == request.Phase); ;

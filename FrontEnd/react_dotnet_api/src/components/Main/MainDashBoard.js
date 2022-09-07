@@ -64,9 +64,23 @@ const MainDashBoard = () => {
 
   let sumEnter = 0;
   let sumFinished = 0;
-  let average = 0;
-  let maior = 0;
-  let employeer1;
+  let maiorProdução = 0;
+  let employeerNumberOne = "";
+  let meta = "";
+  let largerPhaseInitial = 0;
+  let largerPhaseIntermediary = 0;
+  let largerPhaseFinal = 0;
+  let NumberOneInitial = "";
+  let NumberOneIntermediary = "";
+  let NumberOneFinal = "";
+
+  data.forEach((order) => {
+    if (order.amountFinished >= 280) {
+      meta = "Alcançada";
+    } else {
+      meta = "Não alcançada";
+    }
+  });
 
   data.forEach((order) => {
     if (order.phase === "Inicial") {
@@ -75,20 +89,69 @@ const MainDashBoard = () => {
     if (order.phase === "Final") {
       sumFinished += order.amountFinished;
     }
-    average = order.amountEnter / sumFinished;
   });
 
+  let average = sumEnter / sumFinished;
+
   data.forEach((order) => {
-    if (order.amountFinished > maior) {
-      maior = order.amountFinished;
-      employeer1 =
+
+    if (order.amountFinished > maiorProdução) {
+      maiorProdução = order.amountFinished;
+      employeerNumberOne =
         order.nameEmployeer +
-        " / Celula " +
+        "/ Celula " +
         order.codeCell +
+        "/ fase " +
+        order.phase +
         "/ " +
-        maior +
+        maiorProdução +
         " Bag";
     }
+      if (
+        order.amountFinished > largerPhaseInitial &&
+        order.phase === "Inicial"
+      ) {
+        largerPhaseInitial = order.amountFinished;
+        NumberOneInitial =
+          order.nameEmployeer +
+          "/ Celula " +
+          order.codeCell +
+          "/ fase " +
+          order.phase +
+          "/ " +
+          largerPhaseInitial +
+          " Bag";
+      }
+       if (
+         order.amountFinished > largerPhaseIntermediary &&
+         order.phase === "Intermediaria"
+       ) {
+         largerPhaseIntermediary = order.amountFinished;
+         NumberOneIntermediary =
+           order.nameEmployeer +
+           "/ Celula " +
+           order.codeCell +
+           "/ fase " +
+           order.phase +
+           "/ " +
+           largerPhaseIntermediary +
+           " Bag";
+       }
+        if (
+          order.amountFinished > largerPhaseFinal &&
+          order.phase === "Final"
+        ) {
+          largerPhaseFinal = order.amountFinished;
+          NumberOneFinal =
+            order.nameEmployeer +
+            "/ Celula " +
+            order.codeCell +
+            "/ fase " +
+            order.phase +
+            "/ " +
+            largerPhaseFinal +
+            " Bag";
+        }
   });
 
   return (
@@ -151,13 +214,41 @@ const MainDashBoard = () => {
             <div className="charts__left">
               <div className="charts__left__title">
                 <div>
-                  <h2>1°</h2>
-                  <h5 className="text-primary-p">{employeer1}</h5>
+                  <h2>Maior Produção</h2>
+                  <h5 className="text-primary-p">{employeerNumberOne}</h5>
+                </div>
+                <i class="fa-solid fa-medal"></i>
+              </div>
+            </div>
+            <div className="charts__left">
+              <div className="charts__left__title">
+                <div>
+                  <h2>1° Fase Inicial</h2>
+                  <h5 className="text-primary-p">{NumberOneInitial}</h5>
+                </div>
+                <i class="fa-solid fa-medal"></i>
+              </div>
+            </div>
+            <div className="charts__left">
+              <div className="charts__left__title">
+                <div>
+                  <h2>1° Fase Intermediaria</h2>
+                  <h5 className="text-primary-p">{NumberOneIntermediary}</h5>
+                </div>
+                <i class="fa-solid fa-medal"></i>
+              </div>
+            </div>
+            <div className="charts__left">
+              <div className="charts__left__title">
+                <div>
+                  <h2>1° Fase Final</h2>
+                  <h5 className="text-primary-p">{NumberOneFinal}</h5>
                 </div>
                 <i class="fa-solid fa-medal"></i>
               </div>
             </div>
           </div>
+
           <br />
           <h2>Painel De Ordens</h2>
           <Table bordered responsive size="sm">
@@ -166,12 +257,13 @@ const MainDashBoard = () => {
                 <th>Codigo celula</th>
                 <th>Codigo produto</th>
                 <th>Nome produto</th>
-                <th>Matricula funcionario</th>
+                <th>Matricula</th>
                 <th>Nome funcionario</th>
                 <th>Quantidade entrada</th>
                 <th>Quantidade saida</th>
                 <th>Data criação</th>
                 <th>Fase</th>
+                <th>Meta</th>
               </tr>
             </thead>
             <tbody>
@@ -190,6 +282,7 @@ const MainDashBoard = () => {
                   <td>{order.amountFinished}</td>
                   <td>{order.creatAt}</td>
                   <td>{order.phase}</td>
+                  <td>{meta}</td>
                 </tr>
               ))}
             </tbody>
@@ -235,6 +328,7 @@ const MainDashBoard = () => {
 
           <div className="container">
             <div className="main__cards">
+              
               <div className="card">
                 <div className="card_inner">
                   <h5 className="text-primary-p">Total De Ordens</h5>
@@ -264,6 +358,7 @@ const MainDashBoard = () => {
                   </span>
                 </div>
               </div>
+
             </div>
           </div>
         </div>

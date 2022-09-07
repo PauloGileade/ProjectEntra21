@@ -40,7 +40,9 @@ namespace ProjectEntra21.src.Application.Query.CellEmployeers
             foreach (var mappedItem in mappedItems)
             {
                 list.Add(new CellEmployeerViewModel
-                {
+                {   
+                    Code = mappedItem.Code,
+                    Cell = mappedItem.Cell.CodeCell,
                     RegisterEmployeer = mappedItem.Employeer.Register,
                     NameEmployeer = mappedItem.Employeer.Name,
                     Office = mappedItem.Employeer.Office,

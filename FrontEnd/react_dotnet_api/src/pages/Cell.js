@@ -132,16 +132,20 @@ function Cell() {
           </div>
           <Row md="12" sm="2" xs="1">
             <Table bordered hover responsive size="sm">
-              <thead className="table-warning">
+              <thead className="table__order">
                 <tr align="center">
                   <th>Codigo</th>
                   <th>Status</th>
                   <th>Operação</th>
                 </tr>
               </thead>
-              <tbody className="table-light">
+              <tbody>
                 {data.map((cell) => (
-                  <tr align="center" key={cell.codeCell}>
+                  <tr
+                    className="table__painel"
+                    align="center"
+                    key={cell.codeCell}
+                  >
                     <td>{cell.codeCell}</td>
                     <td>{cell.statusCell}</td>
                     <td>

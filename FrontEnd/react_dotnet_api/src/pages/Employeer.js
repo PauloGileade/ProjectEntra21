@@ -175,7 +175,7 @@ function Employeer() {
             <br />
           </div>
           <Table bordered hover responsive size="sm">
-            <thead className="table-warning">
+            <thead className="table__order">
               <tr align="center">
                 <th>Matricula</th>
                 <th>Nome Completo</th>
@@ -186,10 +186,14 @@ function Employeer() {
                 <th>Operação</th>
               </tr>
             </thead>
-            <tbody className="table-light">
+            <tbody>
               {data &&
                 data.map((employeer) => (
-                  <tr align="center" key={employeer.register}>
+                  <tr
+                    className="table__painel"
+                    align="center"
+                    key={employeer.register}
+                  >
                     <td>{employeer.register}</td>
                     <td>{employeer.name}</td>
                     <td>{employeer.document}</td>
@@ -281,6 +285,7 @@ function Employeer() {
               </button>
             </ModalFooter>
           </Modal>
+          
           <Modal isOpen={modalEditar}>
             <ModalHeader>Editar Funcionario</ModalHeader>
             <ModalBody>
@@ -360,6 +365,7 @@ function Employeer() {
               </button>
             </ModalFooter>
           </Modal>
+
           <Modal isOpen={modalFiltro}>
             <ModalHeader>Buscar Funcionario</ModalHeader>
             <ModalBody>
