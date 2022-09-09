@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { Table, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import HeaderPlatform from "../components/HeaderPlatform/HeaderPlatform";
 import { useParams } from "react-router-dom";
-import "./global.css";
 
 function CellEmployeer() {
   const baseUrl = "https://localhost:5001/api/CellEmployeers";

@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import 'dart:async' ;
 
 void main() {
@@ -175,6 +175,7 @@ class _QRViewExampleState extends State<QRViewExample> {
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
+        request();
       });
     });
   }
@@ -192,5 +193,21 @@ class _QRViewExampleState extends State<QRViewExample> {
   void dispose() {
     controller?.dispose();
     super.dispose();
+  }
+
+  void request() async {
+
+    try{
+      final url =  Uri.https("localhost:5001","api/Orders/${result!.code}");
+
+      final response = await http.put(url);
+
+      print(response.toString());
+    }
+    catch(e){
+
+      print(e.toString());
+
+    }
   }
 }

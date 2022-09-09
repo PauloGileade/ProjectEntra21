@@ -5,7 +5,6 @@ import { Table } from "reactstrap";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { useParams } from "react-router-dom";
 import HeaderPlatform from "../components/HeaderPlatform/HeaderPlatform";
-import "./global.css";
 
 function Order() {
   const baseUrl = "https://localhost:5001/api/Orders";

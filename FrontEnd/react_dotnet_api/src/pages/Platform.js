@@ -1,5 +1,4 @@
 import HeaderPlatform from "../components/HeaderPlatform/HeaderPlatform";
-import "./global.css";
 
 function Platform() {
   return (

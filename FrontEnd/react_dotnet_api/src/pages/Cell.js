@@ -11,7 +11,7 @@ import {
   Row,
 } from "reactstrap";
 import HeaderPlatform from "../components/HeaderPlatform/HeaderPlatform";
-import "./global.css";
+import "./global.css"
 
 function Cell() {
   const baseUrl = "https://localhost:5001/api/Cells";
@@ -115,7 +115,7 @@ function Cell() {
   return (
     <div>
       <HeaderPlatform />
-      <main className="main__global">
+      <main>
         <div className="container">
           <br />
           <h2>Celulas</h2>
@@ -268,6 +268,7 @@ function Cell() {
           </Modal>
         </div>
       </main>
+    
     </div>
   );
 }

@@ -11,7 +11,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import HeaderPlatform from "../components/HeaderPlatform/HeaderPlatform";
 import * as React from "react";
-import "./global.css";
 
 function Employeer() {
   const baseUrl = "https://localhost:5001/api/Employeers";

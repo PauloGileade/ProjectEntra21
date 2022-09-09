@@ -1,9 +1,7 @@
-main {
-    
-    grid-area: main;
-    overflow-y: auto;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+body{
+    background-color: #f3f4f6;
 }
+
 
 .table__order {
     background-color: #d6d8d9;
@@ -12,4 +10,3 @@ main {
 .table__painel:hover {
    background-color: #FFC107;
 }
-

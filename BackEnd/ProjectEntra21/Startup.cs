@@ -62,7 +62,7 @@ namespace ProjectEntra21
 
             app.UseCors(options =>
             {
-                options.WithOrigins("http://localhost:3000");
+                options.AllowAnyOrigin();
                 options.AllowAnyMethod();
                 options.AllowAnyHeader();
             });

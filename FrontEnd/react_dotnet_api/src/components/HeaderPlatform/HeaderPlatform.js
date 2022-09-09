@@ -207,7 +207,7 @@ function HeaderPlatform() {
     <div>
       <nav className="navbar navbar-expand-lg navbar-warning bg-warning">
         <div className="container-fluid">
-          <a className="navbar-brand" href="/platform">
+          <a className="navbar-brand" href="/employeer">
             <strong>Plataforma CTA</strong>
           </a>
           <button

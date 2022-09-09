@@ -29,6 +29,7 @@ namespace ProjectEntra21.src.Presentation.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
         [HttpGet]
         [Route("{codeCell}/{date}")]
         public async Task<ActionResult<PaginationResponse<OrderViewModel>>> GetAllOrderByCodecellAsync([FromRoute] long codeCell, DateTime date,

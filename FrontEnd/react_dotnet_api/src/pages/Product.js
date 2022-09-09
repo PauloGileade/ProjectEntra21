@@ -11,7 +11,6 @@ import {
   Row,
 } from "reactstrap";
 import HeaderPlatform from "../components/HeaderPlatform/HeaderPlatform";
-import "./global.css";
 
 function Product() {
   const baseUrl = "https://localhost:5001/api/Products";
