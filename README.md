@@ -18,5 +18,11 @@ Falhas no armazenamento de dados, onde a supervisora da celulá é responsavel p
 
 Falta de acompanhamento da produção, os supervisores das celulás e os encarregados não tem um painel de vizualização da produção em tempo real.
 
-Diante deste cenario o SCP será responsavel por controlar todas as entradas e saidas de BigBags na linha de produção, armazenando todos dados com consistencia e sendo capaz de gerar relatorios dos operadores para analises da sua produção, e exibindo em tempo real a produção dos operadores no Painel de Ordens. 
-    
+Diante deste cenario o SCP será responsavel por controlar todas as entradas e saidas de BigBags na linha de produção, armazenando todos dados com consistencia e sendo capaz de gerar relatorios dos operadores para analises da sua produção, e exibindo em tempo real a produção dos operadores no Painel de Ordens.
+![Template daora](https://user-images.githubusercontent.com/88987341/191126990-195d95ba-2bb4-4a36-945b-4eae93fb3da0.png)
+O SCP utiliza-se das seguintes tecnologias, C# para BackEnd onde está registrada toda lógica, Banco de dados MySql para armazenamento dos dados da produção, ReactJS para FrontEnd responsável por exibir em tempo real o Painel de Ordens entre outras funcionalidades, Flutter para o controle e contagem da produção via leitura Qrcode.
+
+https://user-images.githubusercontent.com/88987341/191128148-ffc7e372-c0b7-4246-b1d4-caf43c7f42ab.MOV
+Desmonstração do abastecedor da celulá criando uma ordem para o operador da fase Inicial, inserindo 50 Bags de código 1 para costurar a alça 
+
+
