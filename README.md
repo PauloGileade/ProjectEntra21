@@ -26,7 +26,7 @@ O SCP utiliza-se das seguintes tecnologias, C# para BackEnd onde está registrad
 ![TecnologiasDoProjeto](https://user-images.githubusercontent.com/88987341/191152372-fcaf0ac9-de03-4198-80f2-5017d95c2423.gif)
 
 ![CriandoOrdem](https://user-images.githubusercontent.com/88987341/191139873-3c2d0498-7c1b-44b6-9f5b-7b379f4f2eeb.gif)
-Acima está uma demonstração do abastecedor da celulá criando uma ordem para o operador da fase Inicial, e inserindo 50 Bags de código 1 para costura dasa alças.
+Acima está uma demonstração do abastecedor da celulá criando uma ordem para o operador da fase Inicial, e inserindo 50 Bags de código 1 para costura das alças.
 
 https://user-images.githubusercontent.com/88987341/191142229-d28ac068-ade1-46c1-b1bd-12a43137be0c.mp4
 
