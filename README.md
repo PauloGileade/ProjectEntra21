@@ -27,7 +27,8 @@ Logo acima está uma desmonstração do abastecedor da celulá criando uma ordem
 
 https://user-images.githubusercontent.com/88987341/191142229-d28ac068-ade1-46c1-b1bd-12a43137be0c.mp4
 
-No video acima o abastecedor da fase intermediaría está bipando a etiqueta que contém as informações do operador, produto, celulá e a fase que operador está produzindo, está etiqueta é inserida no BigBag logo após o operador colocar a Alça, o Fundo ou tampa do BigBag, que é transferido da fase Inicial para a intermediaría ou da fase intermediaría para a fase Final de produção.
+No video acima o abastecedor da fase intermediaría está bipando a etiqueta que contém as informações do operador, produto, celulá e a fase que operador está produzindo, está etiqueta é inserida no BigBag logo após o operador colocar a Alça, o Fundo ou tampa do BigBag, que é transferido da fase Inicial para a intermediaría ou da fase intermediaría para a fase final de produção.
+    Desta forma o fluxo de transferência de BigBags entre as fases irá funcionar da seguinte maneira, se a fase inicial entregar 50 Bags prontos com alças, automaticamente o abastecedor da fase intermediaría irá ter somente 50 Bags disponiveis para abastecimento dos 3 operadores que está na fase intermediaría, sendo assim o mesmo fluxo de transferência serve para a fase final.
 
 
 
