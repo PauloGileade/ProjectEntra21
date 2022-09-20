@@ -4,7 +4,7 @@ SCP ou Sistema de controle da produção, é uma aplicação criada para gerenci
     Esse sistema foi desenvolvido para substituir o gerenciamento manual de contagem e armazenamneto de dados da produção, onde cada operador era responsável por contabilizar a sua produção através de separações das suas etiquetas que iria ser inseridas nos BigBags que estavam sendo produzidos.
     ![Template](https://user-images.githubusercontent.com/88987341/191122137-392e6069-a1d1-4ab8-a27e-e663d77cdb63.png)
     Nesta fábrica contém 6 celulás e todas seguem o mesmo padrão que está na Planta da linha de produção acima, cada celulá tem 12 colaboradores e são divididas em 3 fases, 6 operadores ficam responsáveis por costurar as alças dos BigBags na fase Inicial, 3 ficam responsáveis por costurar o fundo dos BigBags na fase Intermediária e 3 na fase Final costurando a tampa.
-    Exemplo de como funciona a contagem da produção dos produtos sem o SCP, (O abastecedor fornece a quantidade de entrada dos BigBags a cada operador da fase inicial juntamente com as etiquetas dos produtos que irão ser produzidos, e após abastecer o mesmo informa a quantidade total que foi inserida na celulá para a supervisora, sendo assim a contagem de cada operador funciona da seguinte forma, Operador recebeu 30 etiquetas, ao termino de uma hora o mesmo reconta suas etiquetas, e se sobrou apenas 5 etiquetas, então a produção do operador foi de 25 bags em uma hora, a supervisora recolhe essa informação e registra em sua planilha manualmente).
+    Exemplo de como funciona a contagem da produção dos produtos sem o SCP, (O abastecedor fornece a quantidade de entrada dos BigBags a cada operador da fase inicial juntamente com as etiquetas dos produtos que irão ser produzidos, e após abastecer o mesmo informa a quantidade total que foi inserida na celulá para a supervisora, sendo assim a contagem de cada operador funciona da seguinte forma, Operador recebeu 30 etiquetas, ao termino de uma hora o mesmo reconta suas etiquetas, e se sobrou apenas 5 etiquetas, então a produção do operador foi de 25 bags em uma hora, a supervisora recolhe essa informação e registra em sua planilha manualmente e ao final do turno é feito o cálculo da produção de cada operador).
     
     Impactos negativos do gerenciamento manual da produção;
 
@@ -12,7 +12,7 @@ Baixa produtividade na linha de produção, pois os operadores perdem tempo na c
 
 Conflitos internos, pois ao haver um erro na contagem do operador ou do abastecedor, irá ser dificil aplicar a rastreabilidade das entradas e saidas dos BigBags na linha de produção.
 
-Controle de contagem passivas a erros, o operador durante a produção pode se perde na sua contagem, calcular errado ou até mesmo omitir o valor exato.
+Controle de contagem passivas a erros, o operador durante a produção pode se perde na sua contagem, cálcular errado ou até mesmo omitir o valor exato.
 
 Falhas no armazenamento de dados, onde a supervisora da celulá é responsavel por anotar toda contagem em sua planilha, deste modo poderá armazenar uma contagem incorreta da produção caso o operador não informe o valor exato.
 
