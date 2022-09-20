@@ -18,7 +18,7 @@ Falhas no armazenamento de dados, onde a supervisora da celulá é responsavel p
 
 Falta de acompanhamento da produção, os supervisores das celulás e os encarregados não tem um painel de vizualização da produção em tempo real.
 
-Diante deste cenario o SCP será responsável por controlar todas as entradas e saidas de BigBags na linha de produção, armazenando todos dados com consistência e sendo capaz de gerar relatórios dos operadores para analises da sua produção, e exibindo em tempo real a produção dos operadores no Painel de Ordens que está logo abaixo.
+Diante deste cenário o SCP será responsável por controlar todas as entradas e saidas de BigBags na linha de produção, armazenando todos dados com consistência e sendo capaz de gerar relatórios dos operadores para analises da sua produção, e exibindo em tempo real a produção dos operadores no Painel de Ordens que está logo abaixo.
 
 https://user-images.githubusercontent.com/88987341/191147911-3ea6709e-1b83-4267-b4b7-2887e804bff7.mp4
 
