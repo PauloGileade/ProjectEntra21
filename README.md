@@ -22,8 +22,6 @@ Diante deste cenario o SCP será responsavel por controlar todas as entradas e s
 ![Template daora](https://user-images.githubusercontent.com/88987341/191126990-195d95ba-2bb4-4a36-945b-4eae93fb3da0.png)
 O SCP utiliza-se das seguintes tecnologias, C# para BackEnd onde está registrada toda lógica, Banco de dados MySql para armazenamento dos dados da produção, ReactJS para FrontEnd responsável por exibir em tempo real o Painel de Ordens entre outras funcionalidades, Flutter para o controle e contagem da produção via leitura Qrcode.
 
-https://user-images.githubusercontent.com/88987341/191138985-43997e99-6b97-4d0a-9025-dddb4e58bba5.mp4
-
+![CriandoOrdem](https://user-images.githubusercontent.com/88987341/191139873-3c2d0498-7c1b-44b6-9f5b-7b379f4f2eeb.gif)
 Desmonstração do abastecedor da celulá criando uma ordem para o operador da fase Inicial, inserindo 50 Bags de código 1 para costurar a alça.
-
 
