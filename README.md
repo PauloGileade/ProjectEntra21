@@ -23,5 +23,11 @@ Diante deste cenario o SCP será responsavel por controlar todas as entradas e s
 O SCP utiliza-se das seguintes tecnologias, C# para BackEnd onde está registrada toda lógica, Banco de dados MySql para armazenamento dos dados da produção, ReactJS para FrontEnd responsável por exibir em tempo real o Painel de Ordens entre outras funcionalidades, Flutter para o controle e contagem da produção via leitura Qrcode.
 
 ![CriandoOrdem](https://user-images.githubusercontent.com/88987341/191139873-3c2d0498-7c1b-44b6-9f5b-7b379f4f2eeb.gif)
-Desmonstração do abastecedor da celulá criando uma ordem para o operador da fase Inicial, inserindo 50 Bags de código 1 para costurar a alça.
+Logo acima está uma desmonstração do abastecedor da celulá criando uma ordem para o operador da fase Inicial, inserindo 50 Bags de código 1 para costurar a alça.
+
+https://user-images.githubusercontent.com/88987341/191142229-d28ac068-ade1-46c1-b1bd-12a43137be0c.mp4
+
+No video acima o abastecedor da fase intermediaría está bipando a etiqueta que contém as informações do operador, produto, celulá e a fase que operador está produzindo, está etiqueta é inserida no BigBag logo após o operador colocar a Alça, o Fundo ou tampa do BigBag, que é transferido da fase Inicial para a intermediaría ou da fase intermediaría para a fase Final de produção.
+
+
 
