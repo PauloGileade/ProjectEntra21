@@ -15,7 +15,7 @@ namespace ProjectEntra21.src.Presentation.Controllers
         public OrdersController(IMediator mediator) : base(mediator)
         {
         }
-
+        
         [HttpGet]
         public async Task<ActionResult<PaginationResponse<OrderViewModel>>> GetAllOrder([FromQuery] FilterBase filterBase)
         {

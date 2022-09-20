@@ -113,6 +113,9 @@ namespace ProjectEntra21.src.Application.Request.Orders
 
                     TotalPartial totalFinished = await _totalPartialRepository.SelectTotalPartial(phase - 1, request.CodeProduct);
 
+                    if (totalFinished == null)
+                        return null;
+
                     if (totalFinished.Total >= request.AmountEnter)
                     {
                         order.AmountEnter += request.AmountEnter;

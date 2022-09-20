@@ -42,7 +42,7 @@ namespace ProjectEntra21.src.Application.Command.Orders
             await _orderRepository.Update(order);
 
 
-            if (PhaseCell.Inicial == Enum.Parse<PhaseCell>(request.Phase) || PhaseCell.Intermediaria == Enum.Parse<PhaseCell>(request.Phase))
+            if (PhaseCell.Inicial == Enum.Parse<PhaseCell>(request.Phase) || PhaseCell.Intermediária == Enum.Parse<PhaseCell>(request.Phase))
             {
                 TotalPartial totalFinishedPartial = await _totalPartialRepository.SelectTotalPartial(int.Parse(request.Phase), request.CodeProduct);
 

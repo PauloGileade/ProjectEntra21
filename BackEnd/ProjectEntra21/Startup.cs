@@ -65,6 +65,7 @@ namespace ProjectEntra21
                 options.AllowAnyOrigin();
                 options.AllowAnyMethod();
                 options.AllowAnyHeader();
+                options.DisallowCredentials();
             });
 
             app.UseHttpsRedirection();

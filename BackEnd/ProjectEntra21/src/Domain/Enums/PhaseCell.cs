@@ -3,7 +3,7 @@
     public enum PhaseCell
     {
         Inicial = 1,
-        Intermediaria = 2,
+        Intermediária = 2,
         Final = 3
 
     }
