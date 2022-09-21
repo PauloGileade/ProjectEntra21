@@ -18,15 +18,20 @@ Falhas no armazenamento de dados, onde a supervisora da celulá é responsavel p
 
 Falta de acompanhamento da produção, os supervisores das celulás e os encarregados não tem um painel de vizualização da produção em tempo real.
 
-Diante deste cenário o SCP será responsável por controlar todas as entradas e saidas de BigBags na linha de produção, armazenando todos dados com consistência e sendo capaz de gerar relatórios dos operadores para analises da sua produção, e exibindo em tempo real a produção dos operadores no Painel de Ordens que está logo abaixo.
-
 https://user-images.githubusercontent.com/88987341/191147911-3ea6709e-1b83-4267-b4b7-2887e804bff7.mp4
 
-O SCP utiliza-se das seguintes tecnologias, C# para BackEnd onde está registrada toda lógica do sistema, Banco de dados MySql para armazenamento dos dados da produção, ReactJS para FrontEnd responsável por exibir em tempo real o Painel de Ordens entre outras funcionalidades, Flutter para o controle e contagem da produção via leitura Qrcode.
+Diante deste cenário o SCP será responsável por controlar todas as entradas e saidas de BigBags na linha de produção, armazenando todos dados com consistência e sendo capaz de gerar relatórios dos operadores para analises da sua produção, e exibindo em tempo real a produção dos operadores no Painel de Ordens que está logo acima.
+
 ![TecnologiasDoProjeto](https://user-images.githubusercontent.com/88987341/191152372-fcaf0ac9-de03-4198-80f2-5017d95c2423.gif)
 
+O SCP utiliza-se das seguintes tecnologias, C# para BackEnd onde está registrada toda lógica do sistema, Banco de dados MySql para armazenamento dos dados da produção, ReactJS para FrontEnd responsável por exibir em tempo real o Painel de Ordens entre outras funcionalidades, Flutter para o controle e contagem da produção via leitura Qrcode.
+
 ![CriandoOrdem](https://user-images.githubusercontent.com/88987341/191139873-3c2d0498-7c1b-44b6-9f5b-7b379f4f2eeb.gif)
+
+https://user-images.githubusercontent.com/88987341/191577885-46b57853-8655-4817-b74f-2c5f7a0e74ce.mp4
+
 Acima está uma demonstração do abastecedor da celulá criando uma ordem para o operador da fase Inicial, e inserindo 50 Bags de código 1 para costura das alças.
+
 
 https://user-images.githubusercontent.com/88987341/191142229-d28ac068-ade1-46c1-b1bd-12a43137be0c.mp4
 
