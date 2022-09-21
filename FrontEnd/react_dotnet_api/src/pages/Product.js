@@ -13,7 +13,7 @@ import {
 import HeaderPlatform from "../components/HeaderPlatform/HeaderPlatform";
 
 function Product() {
-  const baseUrl = "https://localhost:5001/api/Products";
+  const baseUrl = "https://192.168.1.7:5001/api/Products";
 
   const [data, setData] = useState([]);
   const [modalIncluir, setModalIncluir] = useState(false);

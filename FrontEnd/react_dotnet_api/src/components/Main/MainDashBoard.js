@@ -16,7 +16,7 @@ const MainDashBoard = () => {
   const [celula, setCelula] = useState("");
   const [dataDados, setDataDados] = useState("");
 
-  const baseUrl = "https://localhost:5001/api/Orders";
+  const baseUrl = "https://192.168.1.7:5001/api/Orders";
 
   let codecell = useParams().codeCell;
   let date = useParams().date;
@@ -283,6 +283,7 @@ const MainDashBoard = () => {
               ))}
             </tbody>
           </Table>
+          
           <Modal isOpen={modalFiltro}>
             <ModalHeader>Buscar Por Filtro</ModalHeader>
             <ModalBody>

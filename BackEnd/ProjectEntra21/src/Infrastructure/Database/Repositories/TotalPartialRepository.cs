@@ -24,5 +24,13 @@ namespace ProjectEntra21.src.Infrastructure.Database.Repositories
                 .Include(x => x.Product)
                 .FirstOrDefaultAsync();
         }
+
+        public async Task<TotalPartial> SelectTotalPartialByPhase(PhaseCell phase, long codeCell)
+        {
+            return await Dbset.Where(x => x.Phase == phase && x.Cell.CodeCell == codeCell)
+                .Include(x => x.Cell)
+                .Include(x => x.Product)
+                .FirstOrDefaultAsync();
+        }
     }
 }

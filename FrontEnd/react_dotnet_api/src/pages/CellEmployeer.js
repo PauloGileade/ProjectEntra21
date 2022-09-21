@@ -6,7 +6,7 @@ import HeaderPlatform from "../components/HeaderPlatform/HeaderPlatform";
 import { useParams } from "react-router-dom";
 
 function CellEmployeer() {
-  const baseUrl = "https://localhost:5001/api/CellEmployeers";
+  const baseUrl = "https://192.168.1.7:5001/api/CellEmployeers";
   const [data, setData] = useState([]);
   const [modalExcluir, setModalExcluir] = useState(false);
   const [modalEditar, setModalEditar] = useState(false);

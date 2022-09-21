@@ -14,7 +14,7 @@ import HeaderPlatform from "../components/HeaderPlatform/HeaderPlatform";
 import "./global.css"
 
 function Cell() {
-  const baseUrl = "https://localhost:5001/api/Cells";
+  const baseUrl = "https://192.168.1.7:5001/api/Cells";
 
   const [data, setData] = useState([]);
   const [modalIncluir, setModalIncluir] = useState(false);

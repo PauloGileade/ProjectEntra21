@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 import HeaderPlatform from "../components/HeaderPlatform/HeaderPlatform";
 
 function Order() {
-  const baseUrl = "https://localhost:5001/api/Orders";
+  const baseUrl = "https://192.168.1.7:5001/api/Orders";
 
   const [data, setData] = useState([]);
   const [modalEditar, setModalEditar] = useState(false);
