@@ -35,7 +35,6 @@ namespace ProjectEntra21.src.Infrastructure.Database.Repositories
             return newCode + 1;
         }
 
-
         public async Task<PaginationResponse<Order>> SelectAllOrder(FilterBase filters)
         {
             return await Dbset.Where(x => x.CreateAt >= DateTime.Now.Date && x.CreateAt < DateTime.Now.Date.AddDays(1))

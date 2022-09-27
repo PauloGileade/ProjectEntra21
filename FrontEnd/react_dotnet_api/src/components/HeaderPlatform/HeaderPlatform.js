@@ -1,11 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import {
-  Modal,
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-} from "reactstrap";
+import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { dropdown } from "bootstrap";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
@@ -25,10 +20,8 @@ function HeaderPlatform() {
     useState(false);
   const [modalFiltroCellEmployeer, setModalFiltroCellEmployeer] =
     useState(false);
-  const [modalFiltroTotalPartial, setModalFiltroTotalPartial] = useState(false);
   const [dataDadosStart, setDataDadosStart] = useState("");
   const [dataDadosEnd, setDataDadosEnd] = useState("");
-  const [codeCell, setCodeCellTotalPartial] = useState("");
 
   const [orderselect, setOrderSelect] = useState({
     registerEmployeer: "",
@@ -36,6 +29,14 @@ function HeaderPlatform() {
     phase: "",
     amountEnter: "",
   });
+
+  const [orderselectOrdemIntermediaria, setOrderSelectOrdemIntermediaria] =
+    useState({
+      codeCell: "",
+      phaseOrderTotalPartial: "",
+    });
+
+  let phaseSelect = orderselectOrdemIntermediaria.phaseOrderTotalPartial - 1;
 
   const [cellEmployeerselect, setCellEmployeerSelect] = useState({
     codeCell: "",
@@ -60,21 +61,12 @@ function HeaderPlatform() {
     codeCell: "",
   });
 
-  const [totalPartialselect, setTotalPartialSelect] = useState({
-    phaseCell: "",
-  });
-
   const abrirFecharModalIncluir = () => {
     setModalIncluir(!modalIncluir);
   };
 
   const abrirFecharModalIncluirCellEmployeer = () => {
     setModalIncluirCellEmployeer(!modalIncluirCellEmployeer);
-  };
-
-  const abrirFecharModalFiltroTotal = (value) => {
-    setCodeCellTotalPartial(value);
-    setModalFiltroTotalPartial(!modalFiltroTotalPartial);
   };
 
   const abrirFecharModalFiltro = () => {
@@ -106,11 +98,6 @@ function HeaderPlatform() {
       "/order/" + orderByCellselect.codeCell + "/" + dataDadosStart;
   }
 
-   function redirectTotalPartial() {
-     window.location.href =
-       "/totalPartial/" + totalPartialselect.phaseCell + "/" + codeCell;
-   }
-
   function redirectCellEmployeer() {
     window.location.href =
       "/cellemployeer/" +
@@ -141,15 +128,6 @@ function HeaderPlatform() {
       dataDadosEnd;
   }
 
-  const handleChangeTotalPartial = (e) => {
-    const { name, value } = e.target;
-    setTotalPartialSelect({
-      ...totalPartialselect,
-      [name]: value,
-    });
-    console.log(totalPartialselect);
-  };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setOrderSelect({
@@ -157,6 +135,15 @@ function HeaderPlatform() {
       [name]: value,
     });
     console.log(orderselect);
+  };
+
+  const handleChangeOrdemIntermediaria = (e) => {
+    const { name, value } = e.target;
+    setOrderSelectOrdemIntermediaria({
+      ...orderselectOrdemIntermediaria,
+      [name]: value,
+    });
+    console.log(orderselectOrdemIntermediaria);
   };
 
   const handleChangeCellEmployeer = (e) => {
@@ -236,6 +223,28 @@ function HeaderPlatform() {
       });
   };
 
+  const GetTotalPartialByCell = async () => {
+    await axios
+      .get(
+        baseUrlTotalPartial +
+          "/" +
+          phaseSelect +
+          "/" +
+          orderselectOrdemIntermediaria.codeCell
+      )
+      .then((response) => {
+        console.log(response);
+        setData([response.data]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    GetTotalPartialByCell();
+  }, []);
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-warning bg-warning">
@@ -288,51 +297,6 @@ function HeaderPlatform() {
                   <strong>Ordens</strong>
                 </a>
                 <div className="dropdown-menu">
-                  <a>
-                    <spam>Buscar Quantidade de saida</spam>
-                  </a>
-                  <Stack spacing={2} direction="row">
-                    <div className="button__main">
-                      <Button
-                        variant="contained"
-                        onClick={() => abrirFecharModalFiltroTotal(1)}
-                      >
-                        1
-                      </Button>
-                      <Button
-                        variant="contained"
-                        onClick={() => abrirFecharModalFiltroTotal(2)}
-                      >
-                        2
-                      </Button>
-                      <Button
-                        variant="contained"
-                        onClick={() => abrirFecharModalFiltroTotal(3)}
-                      >
-                        3
-                      </Button>
-                      <Button
-                        variant="contained"
-                        onClick={() => abrirFecharModalFiltroTotal(4)}
-                      >
-                        4
-                      </Button>
-                      <Button
-                        variant="contained"
-                        onClick={() => abrirFecharModalFiltroTotal(5)}
-                      >
-                        5
-                      </Button>
-                      <Button
-                        variant="contained"
-                        onClick={() => abrirFecharModalFiltroTotal(6)}
-                      >
-                        6
-                      </Button>
-                    </div>
-                  </Stack>
-
-                  <div className="dropdown-divider"></div>
                   <a
                     className="dropdown-item"
                     href="#"
@@ -362,7 +326,7 @@ function HeaderPlatform() {
                     href="#"
                     onClick={() => abrirFecharModalIncluir()}
                   >
-                    Cadastrar Nova
+                    Cadastrar Nova Ordem
                   </a>
                 </div>
               </li>
@@ -400,60 +364,50 @@ function HeaderPlatform() {
         </div>
       </nav>
 
-      <Modal isOpen={modalFiltroTotalPartial}>
-        <ModalHeader>Buscar Por Filtro</ModalHeader>
-        <ModalBody>
-          <div className="form-group">
-            <label>Celula:</label>
-            <br />
-            <input
-              type="number"
-              className="form-control"
-              name="codeCell"
-              value={codeCell}
-              readOnly
-            ></input>
-          </div>
-          <label htmlFor="phase">Fase:</label>
-          <br />
-          <select
-            type="text"
-            className="form"
-            name="phaseCell"
-            onChange={handleChangeTotalPartial}
-          >
-            <option value="">
-              <em></em>
-            </option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-          </select>
-          <br />
-        </ModalBody>
-
-        <ModalFooter>
-          <button
-            className="btn btn-primary"
-            href="/order"
-            onClick={() => redirectTotalPartial()}
-          >
-            Buscar
-          </button>
-          <button
-            className="btn btn-danger"
-            onClick={() => abrirFecharModalFiltroTotal()}
-          >
-            Cancelar
-          </button>
-          <br />
-        </ModalFooter>
-      </Modal>
-
       <Modal isOpen={modalIncluir}>
-        <ModalHeader>Incluir Ordem</ModalHeader>
+        <ModalHeader>Buscar Total De Saida</ModalHeader>
         <ModalBody>
           <div className="form-group">
+            <td>
+              <label>Celulá</label>
+              <select
+                type="text"
+                className="form"
+                name="codeCell"
+                onChange={handleChangeOrdemIntermediaria}
+              >
+                <option value="">
+                  <em></em>
+                </option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+              </select>
+              <label>Fase</label>
+              <select
+                type="text"
+                className="form"
+                name="phaseOrderTotalPartial"
+                onChange={handleChangeOrdemIntermediaria}
+              >
+                <option value="">
+                  <em></em>
+                </option>
+                <option>2</option>
+                <option>3</option>
+              </select>
+              <Button
+                variant="contained"
+                onClick={() => GetTotalPartialByCell()}
+              >
+                Buscar
+              </Button>
+            </td>
+            <br />
+            <h5>Cadastrar Nova Ordem</h5>
             <label>Matricula Do Funcionario:</label>
             <br />
             <input
@@ -493,6 +447,21 @@ function HeaderPlatform() {
               <option>2</option>
               <option>3</option>
             </select>
+            <div>
+              <br />
+            </div>
+            <p>
+              Total Disponivel:{" "}
+              {data.map((totalPartial) => (
+                <tr
+                  className="table__painel"
+                  align="center"
+                  key={totalPartial.codeCell}
+                >
+                  <td>{totalPartial.totalPhaseExit}</td>
+                </tr>
+              ))}
+            </p>
           </div>
         </ModalBody>
 
