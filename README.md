@@ -26,9 +26,7 @@ Diante deste cenário o SCP será responsável por controlar todas as entradas e
 
 O SCP utiliza-se das seguintes tecnologias, C# para BackEnd onde está registrada toda lógica do sistema, Banco de dados MySql para armazenamento dos dados da produção, ReactJS para FrontEnd responsável por exibir em tempo real o Painel de Ordens entre outras funcionalidades, Flutter para o controle e contagem da produção via leitura Qrcode.
 
-![CriandoOrdem](https://user-images.githubusercontent.com/88987341/191139873-3c2d0498-7c1b-44b6-9f5b-7b379f4f2eeb.gif)
-
-https://user-images.githubusercontent.com/88987341/191577885-46b57853-8655-4817-b74f-2c5f7a0e74ce.mp4
+![CriandoOrdemInicial](https://user-images.githubusercontent.com/88987341/192569301-114894b2-2e23-4a06-aaf4-eed749a81626.gif)
 
 Acima está uma demonstração do abastecedor da celulá criando uma ordem para o operador da fase Inicial, e inserindo 50 Bags de código 1 para costura das alças.
 
@@ -37,7 +35,12 @@ https://user-images.githubusercontent.com/88987341/191142229-d28ac068-ade1-46c1-
 
 No video acima o abastecedor da fase intermediária está bipando a etiqueta que contém as informações do operador, produto, celulá e a fase que operador está produzindo, e automaticamente a quantidade de saida da ordem é atualizada após a leitura da etiqueta que está inserida no BigBag logo após o operador colocar a Alça, o fundo ou tampa do Bag que é transferido da fase Inicial para a intermediária ou da fase intermediária para a fase final de produção.
     Desta forma o fluxo de transferência de BigBags entre as fases irá funcionar da seguinte maneira, se a fase inicial entregar 50 Bags prontos com alças, automaticamente o abastecedor da fase intermediária irá ter somente 50 Bags disponiveis para abastecimento dos 3 operadores que está produzindo na fase intermediária, sendo assim o mesmo fluxo de transferência serve da fase intermediária para a fase final.
-    
+     
+![CriandoOrdemIntermediaria](https://user-images.githubusercontent.com/88987341/192570592-014757fc-b258-47ba-adf6-d638273fae2f.gif)
+
+ Acima está uma demonstração do abastecedor da fase intermediária da celulá, buscando o total de saida da fase inicial e após isso criando uma ordem para o operador da fase Intermediária.
+
+
     Impactos positivos do gerenciamento automatizado da produção;
 
 Maior produtividade na linha de produção, pois os operadores não necessitaram contar suas entiquetas para separação antes de iniciar sua produção.
@@ -50,7 +53,7 @@ Gerenciamento completo dos Operadores e BigBags na linha de produção, SCP fica
 
 Relatorios com maior precisão para analise da produção de cada operador nas suas respectivas fases.
 
-![Template daora](https://user-images.githubusercontent.com/88987341/191149511-9cace5e2-8641-4b5a-9384-7c7772d30b5c.gif)
+![Views](https://user-images.githubusercontent.com/88987341/192574065-31957e3e-177a-47e7-be7e-e9b0c48e6b78.gif)
 O SCP também irá disponibilizar ao usuário, telas para gerenciamento dos colaboradores, produtos, celulás, ordens e operações, como está sendo exibido acima.
 
 ![TelaFinal](https://user-images.githubusercontent.com/88987341/191151106-f9127b27-743e-4a38-9c4e-11c1569c1030.gif)
