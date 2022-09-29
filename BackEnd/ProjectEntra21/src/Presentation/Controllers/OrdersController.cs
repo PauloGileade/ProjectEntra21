@@ -15,7 +15,7 @@ namespace ProjectEntra21.src.Presentation.Controllers
         public OrdersController(IMediator mediator) : base(mediator)
         {
         }
-        
+
         [HttpGet]
         public async Task<ActionResult<PaginationResponse<OrderViewModel>>> GetAllOrder([FromQuery] FilterBase filterBase)
         {
@@ -107,6 +107,11 @@ namespace ProjectEntra21.src.Presentation.Controllers
         [Route("{codeQrcode}")]
         public async Task<IActionResult> UpdateAmountFinishedAsync([FromRoute] string codeQrcode)
         {
+            if (codeQrcode == null)
+
+                return NotFound();
+
+
             string[] vect = codeQrcode.Split(';');
 
             return Ok(await _mediator.Send(new UpdateAmountFinishedCommand

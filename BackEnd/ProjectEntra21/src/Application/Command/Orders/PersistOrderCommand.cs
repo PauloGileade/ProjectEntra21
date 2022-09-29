@@ -93,10 +93,12 @@ namespace ProjectEntra21.src.Application.Request.Orders
 
             if (order == null)
             {
-                order = new Order();
+                order = new Order
+                {
+                    CellEmployeer = cellEmployeer,
+                    Product = product
+                };
 
-                order.CellEmployeer = cellEmployeer;
-                order.Product = product;
             }
 
             int phase = (int)request.Phase;

@@ -23,21 +23,21 @@ function HeaderPlatform() {
   const [dataDadosStart, setDataDadosStart] = useState("");
   const [dataDadosEnd, setDataDadosEnd] = useState("");
 
+  const [orderselectOrdemIntermediaria, setOrderSelectOrdemIntermediaria] =
+  useState({
+    codeCell: "",
+    phaseOrderTotalPartial: "",
+  });
+  
+  let phaseSelect = orderselectOrdemIntermediaria.phaseOrderTotalPartial;
+
   const [orderselect, setOrderSelect] = useState({
     registerEmployeer: "",
     codeProduct: "",
     phase: "",
     amountEnter: "",
   });
-
-  const [orderselectOrdemIntermediaria, setOrderSelectOrdemIntermediaria] =
-    useState({
-      codeCell: "",
-      phaseOrderTotalPartial: "",
-    });
-
-  let phaseSelect = orderselectOrdemIntermediaria.phaseOrderTotalPartial - 1;
-
+  
   const [cellEmployeerselect, setCellEmployeerSelect] = useState({
     codeCell: "",
     registerEmployeer: "",
@@ -369,7 +369,7 @@ function HeaderPlatform() {
         <ModalBody>
           <div className="form-group">
             <td>
-              <label>Celulá</label>
+              <label>Celulá </label>
               <select
                 type="text"
                 className="form"
@@ -396,8 +396,8 @@ function HeaderPlatform() {
                 <option value="">
                   <em></em>
                 </option>
+                <option>1</option>
                 <option>2</option>
-                <option>3</option>
               </select>
               <Button
                 variant="contained"

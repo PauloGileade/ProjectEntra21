@@ -51,9 +51,7 @@ namespace ProjectEntra21.src.Application.Query.Orders
                     Phase = mappedItem.CellEmployeer.Phase.ToString(),
                     CreatAt = mappedItem.CreateAt.Date.ToShortDateString(),
                     Goal = ""
-
                 });
-
             }
 
             return new PaginationResponse<OrderViewModel>(list, queryResult.TotalItems,
