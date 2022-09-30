@@ -30,10 +30,9 @@ O SCP utiliza-se das seguintes tecnologias, C# para BackEnd onde está registrad
 
 Acima está uma demonstração do abastecedor da celulá criando uma ordem para o operador da fase Inicial, e inserindo 50 Bags de código 1 para costura das alças.
 
+![LendoEtiquetaQrcode](https://user-images.githubusercontent.com/88987341/193367554-1ba021e0-0c1b-4052-8e79-155a27152105.gif)
 
-https://user-images.githubusercontent.com/88987341/191142229-d28ac068-ade1-46c1-b1bd-12a43137be0c.mp4
-
-No video acima o abastecedor da fase intermediária está bipando a etiqueta que contém as informações do operador, produto, celulá e a fase que operador está produzindo, e automaticamente a quantidade de saida da ordem é atualizada após a leitura da etiqueta que está inserida no BigBag logo após o operador colocar a Alça, o fundo ou tampa do Bag que é transferido da fase Inicial para a intermediária ou da fase intermediária para a fase final de produção.
+No video acima o abastecedor da fase intermediária está bipando as etiquetas inseridas nos BigBags que acaba de sair da fase inicial e que contém as informações do operador, produto, celulá e a fase que operador está produzindo, e automaticamente a quantidade de saida da ordem deste operador é atualizada no Painel, após a leitura da etiqueta o Bag estará pronto para ser transferido da fase Inicial para a intermediária ou da fase intermediária para a fase final de produção.
     Desta forma o fluxo de transferência de BigBags entre as fases irá funcionar da seguinte maneira, se a fase inicial entregar 50 Bags prontos com alças, automaticamente o abastecedor da fase intermediária irá ter somente 50 Bags disponiveis para abastecimento dos 3 operadores que está produzindo na fase intermediária, sendo assim o mesmo fluxo de transferência serve da fase intermediária para a fase final.
      
 ![CriandoOrdemIntermediaria](https://user-images.githubusercontent.com/88987341/192570592-014757fc-b258-47ba-adf6-d638273fae2f.gif)
