@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ProjectEntra21.src.Application.Command.Orders;
+using ProjectEntra21.src.Application.Exceptions;
 using ProjectEntra21.src.Application.Query.Orders;
 using ProjectEntra21.src.Application.Request.Orders;
 using ProjectEntra21.src.Application.ViewModels;
@@ -74,23 +75,28 @@ namespace ProjectEntra21.src.Presentation.Controllers
             }
         }
 
-
         [HttpPost]
         public async Task<IActionResult> PostOrdemAsync([FromBody] PersistOrderCommand persistOrderCommand)
         {
+
             if (persistOrderCommand == null)
-
                 return BadRequest();
 
+            try
+            {
+                var response = await _mediator.Send(persistOrderCommand);
 
-            var response = await _mediator.Send(persistOrderCommand);
-
-            if (response == null)
-                return BadRequest();
-
-
-            var absolutePath = string.Format("{0}://{1}{2}", Request.Scheme, Request.Host, Request.Path.Value);
-            return Created(new Uri(absolutePath + "/" + response.Code), response);
+                var absolutePath = string.Format("{0}://{1}{2}", Request.Scheme, Request.Host, Request.Path.Value);
+                return Created(new Uri(absolutePath + "/" + response.Code), response);
+            }
+            catch(NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+            catch (ValueNotAvailableException e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpPut]
@@ -108,7 +114,6 @@ namespace ProjectEntra21.src.Presentation.Controllers
         public async Task<IActionResult> UpdateAmountFinishedAsync([FromRoute] string codeQrcode)
         {
             if (codeQrcode == null)
-
                 return NotFound();
 
 

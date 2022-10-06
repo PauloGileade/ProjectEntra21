@@ -2,6 +2,7 @@
 using ProjectEntra21.src.Application.Database;
 using ProjectEntra21.src.Application.ViewModels;
 using ProjectEntra21.src.Domain.Entiteis;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -26,7 +27,8 @@ namespace ProjectEntra21.src.Application.Query.Employeers
             Employeer employeer = await _employeerRepository.SelectOne(x => x.Register == request.Register);
 
             if (employeer == null)
-                return null;
+
+                throw new Exception("Funcionario não está cadastrado !");
 
 
             return new EmployeerViewModel

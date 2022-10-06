@@ -1,9 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProjectEntra21.src.Domain.Common;
-using ProjectEntra21.src.Infrastructure;
 using ProjectEntra21.src.Infrastructure.Database.Common.Extension;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -54,7 +52,7 @@ namespace ProjectEntra21.src.Infrastructure.Database.Common
         }
 
         public virtual async Task<T> SelectOne(Expression<Func<T, bool>> filter = null)
-        {
+        {   
             return await Dbset.Where(filter).FirstOrDefaultAsync();
         }
 

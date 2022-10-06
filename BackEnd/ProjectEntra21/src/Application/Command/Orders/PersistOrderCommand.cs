@@ -44,7 +44,7 @@ namespace ProjectEntra21.src.Application.Request.Orders
             CellEmployeer cellEmployeer = await _cellEmployeerRepository.SelectOne(x => x.Employeer.Register == request.RegisterEmployeer && x.Phase == request.Phase);
 
             if (cellEmployeer == null)
-                return null;
+                throw new NotFoundException($"O operador não está na fase {request.Phase}, incluí-lo na fase correspondente !");
 
             cellEmployeer = await _cellEmployeerRepository.SelectOne(x => x.Employeer.Register == request.RegisterEmployeer
              && x.CreateAt >= DateTime.Now.Date
@@ -56,17 +56,18 @@ namespace ProjectEntra21.src.Application.Request.Orders
                 Employeer employeer = await _employeerRepository.SelectOne(x => x.Register == request.RegisterEmployeer);
 
                 if (employeer == null)
-                    return null;
+                    throw new NotFoundException("Funcionario não encontrado !");
 
                 cellEmployeer = await _cellEmployeerRepository.SelectOneEmployeer(request.RegisterEmployeer);
 
                 if (cellEmployeer == null)
-                    return null;
+                    throw new NotFoundException("Funcionario não está nacadastrado na operação !");
 
                 Cell cell = await _cellRepository.SelectOne(x => x.CodeCell == cellEmployeer.Cell.CodeCell);
 
                 if (cell == null)
-                    return null;
+                    throw new NotFoundException("Célula não encontrada !");
+
 
                 cellEmployeer = new CellEmployeer
                 {
@@ -80,7 +81,7 @@ namespace ProjectEntra21.src.Application.Request.Orders
             Product product = await _productRepository.SelectOne(x => x.Code == request.CodeProduct);
 
             if (product == null)
-                return null;
+                throw new NotFoundException("Produto não encontrado !");
 
 
             if (request.AmountEnter == 0)
@@ -98,7 +99,6 @@ namespace ProjectEntra21.src.Application.Request.Orders
                     CellEmployeer = cellEmployeer,
                     Product = product
                 };
-
             }
 
             int phase = (int)request.Phase;
@@ -116,7 +116,8 @@ namespace ProjectEntra21.src.Application.Request.Orders
                     TotalPartial totalFinished = await _totalPartialRepository.SelectTotalPartial(phase - 1, request.CodeProduct);
 
                     if (totalFinished == null)
-                        return null;
+                        throw new NotFoundException($"Não foi produzido nenhum produto na fase {request.Phase - 1} !");
+
 
                     if (totalFinished.Total >= request.AmountEnter)
                     {
@@ -126,8 +127,7 @@ namespace ProjectEntra21.src.Application.Request.Orders
                         await _totalPartialRepository.Update(totalFinished);
                     }
                     else
-
-                        throw new ValueNotAvailableException("Valor maior que o disponivel!");
+                        throw new ValueNotAvailableException($"A entrada de {request.AmountEnter} BigBag é maior que o disponivel da fase {request.Phase - 1} !");
 
                     break;
 

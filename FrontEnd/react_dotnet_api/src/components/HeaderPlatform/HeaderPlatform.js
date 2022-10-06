@@ -3,12 +3,11 @@ import { useState, useEffect } from "react";
 import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { dropdown } from "bootstrap";
 import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
 
 function HeaderPlatform() {
-  const baseUrl = "https://192.168.1.7:5001/api/Orders";
-  const baseUrlCellEmployeer = "https://192.168.1.7:5001/api/CellEmployeers";
-  const baseUrlTotalPartial = "https://192.168.1.7:5001/api/TotalPartials";
+  const baseUrl = "https://192.168.1.11:5001/api/Orders";
+  const baseUrlCellEmployeer = "https://192.168.1.11:5001/api/CellEmployeers";
+  const baseUrlTotalPartial = "https://192.168.1.11:5001/api/TotalPartials";
 
   const [data, setData] = useState([]);
   const [modalIncluir, setModalIncluir] = useState(false);
@@ -24,11 +23,11 @@ function HeaderPlatform() {
   const [dataDadosEnd, setDataDadosEnd] = useState("");
 
   const [orderselectOrdemIntermediaria, setOrderSelectOrdemIntermediaria] =
-  useState({
-    codeCell: "",
-    phaseOrderTotalPartial: "",
-  });
-  
+    useState({
+      codeCell: "",
+      phaseOrderTotalPartial: "",
+    });
+
   let phaseSelect = orderselectOrdemIntermediaria.phaseOrderTotalPartial;
 
   const [orderselect, setOrderSelect] = useState({
@@ -37,7 +36,7 @@ function HeaderPlatform() {
     phase: "",
     amountEnter: "",
   });
-  
+
   const [cellEmployeerselect, setCellEmployeerSelect] = useState({
     codeCell: "",
     registerEmployeer: "",
@@ -203,7 +202,8 @@ function HeaderPlatform() {
         abrirFecharModalIncluir();
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response.data);
+        alert(error.response.data);
       });
   };
 

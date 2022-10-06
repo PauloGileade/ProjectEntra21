@@ -2,6 +2,7 @@
 using ProjectEntra21.src.Application.Database;
 using ProjectEntra21.src.Application.ViewModels;
 using ProjectEntra21.src.Domain.Entiteis;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -25,8 +26,8 @@ namespace ProjectEntra21.src.Application.Query.Cells
         {
             Cell cell = await _cellRepository.SelectOne(x => x.CodeCell == request.CodeCell);
 
-            if (cell == null) 
-                return null;
+            if (cell == null)
+                throw new Exception("Célula não encontrado !");
 
             return new CellViewModel
             {

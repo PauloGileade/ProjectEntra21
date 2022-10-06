@@ -16,7 +16,7 @@ const MainDashBoard = () => {
   const [celula, setCelula] = useState("");
   const [dataDados, setDataDados] = useState("");
 
-  const baseUrl = "https://192.168.1.7:5001/api/Orders";
+  const baseUrl = "https://192.168.1.11:5001/api/Orders";
 
   let codecell = useParams().codeCell;
   let date = useParams().date;
