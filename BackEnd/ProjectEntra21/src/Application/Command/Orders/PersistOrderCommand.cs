@@ -44,7 +44,7 @@ namespace ProjectEntra21.src.Application.Request.Orders
             CellEmployeer cellEmployeer = await _cellEmployeerRepository.SelectOne(x => x.Employeer.Register == request.RegisterEmployeer && x.Phase == request.Phase);
 
             if (cellEmployeer == null)
-                throw new NotFoundException($"O operador não está na fase {request.Phase}, incluí-lo na fase correspondente !");
+                throw new NullReferenceException($"O operador não está na fase {request.Phase}, incluí-lo na fase correspondente !");
 
             cellEmployeer = await _cellEmployeerRepository.SelectOne(x => x.Employeer.Register == request.RegisterEmployeer
              && x.CreateAt >= DateTime.Now.Date
@@ -56,17 +56,17 @@ namespace ProjectEntra21.src.Application.Request.Orders
                 Employeer employeer = await _employeerRepository.SelectOne(x => x.Register == request.RegisterEmployeer);
 
                 if (employeer == null)
-                    throw new NotFoundException("Funcionario não encontrado !");
+                    throw new NullReferenceException("Funcionario não encontrado !");
 
                 cellEmployeer = await _cellEmployeerRepository.SelectOneEmployeer(request.RegisterEmployeer);
 
                 if (cellEmployeer == null)
-                    throw new NotFoundException("Funcionario não está nacadastrado na operação !");
+                    throw new NullReferenceException("Funcionario não está nacadastrado na operação !");
 
                 Cell cell = await _cellRepository.SelectOne(x => x.CodeCell == cellEmployeer.Cell.CodeCell);
 
                 if (cell == null)
-                    throw new NotFoundException("Célula não encontrada !");
+                    throw new NullReferenceException("Célula não encontrada !");
 
 
                 cellEmployeer = new CellEmployeer
@@ -78,10 +78,11 @@ namespace ProjectEntra21.src.Application.Request.Orders
 
                 await _cellEmployeerRepository.InsertOrUpdate(cellEmployeer);
             }
+
             Product product = await _productRepository.SelectOne(x => x.Code == request.CodeProduct);
 
             if (product == null)
-                throw new NotFoundException("Produto não encontrado !");
+                throw new NullReferenceException("Produto não encontrado !");
 
 
             if (request.AmountEnter == 0)
@@ -116,7 +117,7 @@ namespace ProjectEntra21.src.Application.Request.Orders
                     TotalPartial totalFinished = await _totalPartialRepository.SelectTotalPartial(phase - 1, request.CodeProduct);
 
                     if (totalFinished == null)
-                        throw new NotFoundException($"Não foi produzido nenhum produto na fase {request.Phase - 1} !");
+                        throw new NullReferenceException($"Não foi produzido nenhum produto na fase {request.Phase - 1} !");
 
 
                     if (totalFinished.Total >= request.AmountEnter)
@@ -127,7 +128,7 @@ namespace ProjectEntra21.src.Application.Request.Orders
                         await _totalPartialRepository.Update(totalFinished);
                     }
                     else
-                        throw new ValueNotAvailableException($"A entrada de {request.AmountEnter} BigBag é maior que o disponivel da fase {request.Phase - 1} !");
+                        throw new ValueNotAvailableException($"A entrada de {request.AmountEnter} BigBag na fase {request.Phase}, é maior que o disponivel da fase {request.Phase - 1} !");
 
                     break;
 

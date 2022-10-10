@@ -35,17 +35,17 @@ namespace ProjectEntra21.src.Application.Request.CellEmployeers
             Cell cell = await _cellRepository.SelectOne(x => x.CodeCell == request.CodeCell);
 
             if (cell == null)
-                return null;
+                throw new NullReferenceException("Célula não encontrada !");
 
             Employeer employeer = await _employeerRepository.SelectOne(x => x.Register == request.RegisterEmployeer);
 
             if (employeer == null)
-                return null;
+                throw new NullReferenceException("Funcionario não encontrado !");
 
 
             CellEmployeer cellEmployeer = await _cellEmployeerRepository.SelectOne(x => x.Employeer.Register == request.RegisterEmployeer
                  && x.CreateAt >= DateTime.Now.Date.Date
-                    && x.CreateAt < DateTime.Now.Date.Date.AddDays(1)  && x.Phase == request.Phase); ;
+                    && x.CreateAt < DateTime.Now.Date.Date.AddDays(1) && x.Phase == request.Phase); ;
 
 
             if (cellEmployeer == null)

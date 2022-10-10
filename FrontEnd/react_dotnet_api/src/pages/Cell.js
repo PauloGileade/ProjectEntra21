@@ -59,7 +59,8 @@ function Cell() {
         setData(response.data.data);
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response.data);
+        alert(error.response.data);
       });
   };
 
@@ -74,7 +75,8 @@ function Cell() {
         abrirFecharModalIncluir();
       })
       .catch((error) => {
-        console.log(error);
+         console.log(error.response.data);
+         alert(error.response.data);
       });
   };
 
@@ -90,7 +92,8 @@ function Cell() {
         abrirFecharModalEditar();
       })
       .catch((error) => {
-        console.log(error);
+         console.log(error.response.data);
+         alert(error.response.data);
       });
   };
 
@@ -104,7 +107,8 @@ function Cell() {
         abrirFecharModalExcluir();
       })
       .catch((error) => {
-        console.log(error);
+         console.log(error.response.data);
+         alert(error.response.data);
       });
   };
 
