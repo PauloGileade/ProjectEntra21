@@ -219,7 +219,8 @@ function HeaderPlatform() {
         abrirFecharModalIncluirCellEmployeer();
       })
       .catch((error) => {
-        console.log(error);
+          console.log(error.response.data);
+          alert(error.response.data);
       });
   };
 
@@ -237,7 +238,7 @@ function HeaderPlatform() {
         setData([response.data]);
       })
       .catch((error) => {
-        console.log(error);
+         console.log(error.response.data);
       });
   };
 

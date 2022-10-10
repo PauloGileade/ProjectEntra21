@@ -78,7 +78,6 @@ namespace ProjectEntra21.src.Presentation.Controllers
         [HttpPost]
         public async Task<IActionResult> PostOrdemAsync([FromBody] PersistOrderCommand persistOrderCommand)
         {
-
             if (persistOrderCommand == null)
                 return BadRequest();
 
@@ -89,7 +88,7 @@ namespace ProjectEntra21.src.Presentation.Controllers
                 var absolutePath = string.Format("{0}://{1}{2}", Request.Scheme, Request.Host, Request.Path.Value);
                 return Created(new Uri(absolutePath + "/" + response.Code), response);
             }
-            catch(NotFoundException e)
+            catch(NullReferenceException e)
             {
                 return NotFound(e.Message);
             }

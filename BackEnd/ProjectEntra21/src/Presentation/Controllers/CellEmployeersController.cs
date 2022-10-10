@@ -15,7 +15,7 @@ namespace ProjectEntra21.src.Presentation.Controllers
         public CellEmployeersController(IMediator mediator) : base(mediator)
         {
         }
-        
+
         [HttpGet]
         [Route("{codeCell}/{date}")]
         public async Task<ActionResult<PaginationResponse<CellEmployeerViewModel>>> GetSelectMoreAsync([FromRoute] long codeCell, DateTime date,
@@ -30,23 +30,24 @@ namespace ProjectEntra21.src.Presentation.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> PostCellEmployeerAsync([FromBody] PersistCellEmployeerCommand persistCellEmployeerCommand)
         {
             if (persistCellEmployeerCommand == null)
-
                 return BadRequest();
 
+            try
+            {
+                var response = await _mediator.Send(persistCellEmployeerCommand);
 
-            var response = await _mediator.Send(persistCellEmployeerCommand);
-
-            if (response == null)
-                return BadRequest();
-
-
-            var absolutePath = string.Format("{0}://{1}{2}", Request.Scheme, Request.Host, Request.Path.Value);
-            return Created(new Uri(absolutePath + "/" + response.Code), response);
+                var absolutePath = string.Format("{0}://{1}{2}", Request.Scheme, Request.Host, Request.Path.Value);
+                return Created(new Uri(absolutePath + "/" + response.Code), response);
+            }
+            catch (NullReferenceException e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpPut]

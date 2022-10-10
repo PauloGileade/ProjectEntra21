@@ -79,9 +79,8 @@ function Product() {
         abrirFecharModalFiltro();
       })
       .catch((error) => {
-        console.log(error);
-        alert("Produto não encontrado !");
-        abrirFecharModalFiltro();
+         console.log(error.response.data);
+         alert(error.response.data);
       });
   };
 
@@ -93,7 +92,8 @@ function Product() {
         setData(response.data.data);
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response.data);
+        alert(error.response.data);
       });
   };
 
@@ -108,7 +108,8 @@ function Product() {
         abrirFecharModalIncluir();
       })
       .catch((error) => {
-        console.log(error);
+         console.log(error.response.data);
+         alert(error.response.data);
       });
   };
 
@@ -123,7 +124,8 @@ function Product() {
         abrirFecharModalEditar();
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response.data);
+        alert(error.response.data);
       });
   };
 
@@ -137,7 +139,8 @@ function Product() {
         abrirFecharModalExcluir();
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response.data);
+        alert(error.response.data);
       });
   };
 

@@ -45,7 +45,8 @@ function CellEmployeer() {
         abrirFecharModalExcluir();
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response.data);
+        alert(error.response.data);
       });
   };
 
@@ -57,7 +58,8 @@ function CellEmployeer() {
         setData(response.data.data);
       })
       .catch((error) => {
-        console.log(error);
+         console.log(error.response.data);
+         alert(error.response.data);
       });
   };
 
