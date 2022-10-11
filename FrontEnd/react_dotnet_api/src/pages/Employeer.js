@@ -81,6 +81,7 @@ function Employeer() {
       })
       .catch((error) => {
         console.log(error.response.data);
+        alert(error.response.data);
       });
   };
 
@@ -92,7 +93,7 @@ function Employeer() {
         setData(response.data.data);
       })
       .catch((error) => {
-         console.log(error.response.data);
+        console.log(error.response.data);
       });
   };
 
@@ -111,8 +112,8 @@ function Employeer() {
         abrirFecharModalIncluir();
       })
       .catch((error) => {
-       console.log(error.response.data);
-       alert(error.response.data);
+        console.log(error.response.data);
+        alert(error.response.data);
       });
   };
 
@@ -127,8 +128,8 @@ function Employeer() {
         abrirFecharModalEditar();
       })
       .catch((error) => {
-         console.log(error.response.data);
-         alert(error.response.data);
+        console.log(error.response.data);
+        alert(error.response.data);
       });
   };
 
@@ -144,8 +145,8 @@ function Employeer() {
         abrirFecharModalExcluir();
       })
       .catch((error) => {
-         console.log(error.response.data);
-         alert(error.response.data);
+        console.log(error.response.data);
+        alert(error.response.data);
       });
   };
 
@@ -154,7 +155,7 @@ function Employeer() {
       <HeaderPlatform />
       <main className="main__global">
         <div className="container">
-          <br/>
+          <br />
           <h2>Funcionarios</h2>
           <Button
             color="primary

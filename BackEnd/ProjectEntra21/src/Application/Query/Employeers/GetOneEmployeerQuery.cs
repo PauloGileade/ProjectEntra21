@@ -28,7 +28,7 @@ namespace ProjectEntra21.src.Application.Query.Employeers
 
             if (employeer == null)
 
-                throw new Exception("Funcionario não está cadastrado !");
+                throw new NullReferenceException("Funcionario não está cadastrado !");
 
 
             return new EmployeerViewModel
