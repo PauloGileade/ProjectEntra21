@@ -28,14 +28,21 @@ namespace ProjectEntra21.src.Presentation.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
-            }   
+            }
         }
 
         [HttpGet]
         [Route("{register}")]
-        public async Task<EmployeerViewModel> GetSelectOneAsync([FromRoute] long register)
+        public async Task<ActionResult<EmployeerViewModel>> GetSelectOneAsync([FromRoute] long register)
         {
-            return await _mediator.Send(new GetOneEmployeerQuery { Register = register });
+            try
+            {
+                return await _mediator.Send(new GetOneEmployeerQuery { Register = register });
+            }
+            catch (NullReferenceException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost]

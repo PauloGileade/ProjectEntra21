@@ -30,7 +30,7 @@ namespace ProjectEntra21.src.Application.Query.Products
             Product product = await _productRepository.SelectOne(x => x.Code == request.Code);
 
             if (product == null)
-                throw new Exception("Produto não encontrado !");
+                throw new NullReferenceException("Produto não encontrado !");
 
 
             return new ProductViewModel

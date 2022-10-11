@@ -38,7 +38,7 @@ namespace ProjectEntra21.src.Presentation.Controllers
                 return await _mediator.Send(new GetOneProductQuery { Code = code });
 
             }
-            catch (Exception ex)
+            catch (NullReferenceException ex)
             {
                 return BadRequest(ex.Message);
             }
