@@ -3,11 +3,8 @@ using ProjectEntra21.src.Application.Database;
 using ProjectEntra21.src.Domain.Entiteis;
 using ProjectEntra21.src.Domain.Enums;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Linq;
 
 namespace ProjectEntra21.src.Application.Request.Employeers
 {

@@ -13,7 +13,7 @@ import HeaderPlatform from "../components/HeaderPlatform/HeaderPlatform";
 import * as React from "react";
 
 function Employeer() {
-  const baseUrl = "https://192.168.1.11:5001/api/Employeers";
+  const baseUrl = "https://192.168.1.7:5001/api/Employeers";
 
   const [data, setData] = useState([]);
   const [modalIncluir, setModalIncluir] = useState(false);
