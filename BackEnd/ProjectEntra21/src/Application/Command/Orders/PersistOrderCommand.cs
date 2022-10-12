@@ -15,7 +15,6 @@ namespace ProjectEntra21.src.Application.Request.Orders
         public long CodeProduct { get; set; }
         public int AmountEnter { get; set; }
         public PhaseCell Phase { get; set; }
-
     }
 
     public class PersistOrderCommandHandler : IRequestHandler<PersistOrderCommand, Order>
@@ -41,10 +40,11 @@ namespace ProjectEntra21.src.Application.Request.Orders
         public async Task<Order> Handle(PersistOrderCommand request, CancellationToken cancellationToken)
         {
 
-            CellEmployeer cellEmployeer = await _cellEmployeerRepository.SelectOne(x => x.Employeer.Register == request.RegisterEmployeer && x.Phase == request.Phase);
+            CellEmployeer cellEmployeer = await _cellEmployeerRepository.SelectOne(x => x.Employeer.Register == request.RegisterEmployeer && x.Phase == request.Phase && x.Cell.StatusCell == StatusCell.Ativa);
 
             if (cellEmployeer == null)
-                throw new NullReferenceException($"O operador não está na fase {request.Phase}, incluí-lo na fase correspondente !");
+                throw new NullReferenceException($"O operador não está na fase {request.Phase} ou a célula não está ativa, verifique as operações do dia {DateTime.Now.ToShortDateString()}!");
+
 
             cellEmployeer = await _cellEmployeerRepository.SelectOne(x => x.Employeer.Register == request.RegisterEmployeer
              && x.CreateAt >= DateTime.Now.Date

@@ -13,7 +13,7 @@ import {
 import HeaderPlatform from "../components/HeaderPlatform/HeaderPlatform";
 
 function Product() {
-  const baseUrl = "https://192.168.1.11:5001/api/Products";
+  const baseUrl = "https://192.168.1.7:5001/api/Products";
 
   const [data, setData] = useState([]);
   const [modalIncluir, setModalIncluir] = useState(false);
@@ -73,7 +73,6 @@ function Product() {
     await axios
       .get(baseUrl + "/" + productselectBycode.code)
       .then((response) => {
-        console.log(response);
         console.log(response.data);
         setData([response.data]);
         abrirFecharModalFiltro();

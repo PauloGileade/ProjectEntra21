@@ -5,9 +5,9 @@ import { dropdown } from "bootstrap";
 import Button from "@mui/material/Button";
 
 function HeaderPlatform() {
-  const baseUrl = "https://192.168.1.11:5001/api/Orders";
-  const baseUrlCellEmployeer = "https://192.168.1.11:5001/api/CellEmployeers";
-  const baseUrlTotalPartial = "https://192.168.1.11:5001/api/TotalPartials";
+  const baseUrl = "https://192.168.1.7:5001/api/Orders";
+  const baseUrlCellEmployeer = "https://192.168.1.7:5001/api/CellEmployeers";
+  const baseUrlTotalPartial = "https://192.168.1.7:5001/api/TotalPartials";
 
   const [data, setData] = useState([]);
   const [modalIncluir, setModalIncluir] = useState(false);
