@@ -71,7 +71,7 @@ function Order() {
         setData(response.data.data);
       })
       .catch((error) => {
-         console.log(error.response.data);
+        console.log(error.response.data);
       });
   };
 
@@ -93,7 +93,7 @@ function Order() {
         setData([response.data]);
       })
       .catch((error) => {
-         console.log(error.response.data);
+        console.log(error.response.data);
       });
   };
 
@@ -112,8 +112,8 @@ function Order() {
         abrirFecharModalEditar();
       })
       .catch((error) => {
-         console.log(error.response.data);
-         alert(error.response.data);
+        console.log(error.response.data);
+        alert(error.response.data);
       });
   };
 

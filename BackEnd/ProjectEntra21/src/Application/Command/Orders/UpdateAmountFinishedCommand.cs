@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using ProjectEntra21.src.Application.Database;
+using ProjectEntra21.src.Application.Exceptions;
 using ProjectEntra21.src.Domain.Entiteis;
 using ProjectEntra21.src.Domain.Enums;
 using System;
@@ -36,10 +37,18 @@ namespace ProjectEntra21.src.Application.Command.Orders
             if (order == null)
                 return null;
 
+            if (order.AmountFinished == null)
+                order.AmountFinished = 0;
 
-            order.AmountFinished = order.AmountFinished == null ? 1 : order.AmountFinished + 1;
 
-            await _orderRepository.Update(order);
+            if (order.AmountEnter > order.AmountFinished)
+            {
+                order.AmountFinished += 1;
+
+                await _orderRepository.Update(order);
+            }
+            else
+                throw new ValueNotAvailableException("Valor de saida é maior que da entrada de BigBag !");
 
 
             if (PhaseCell.Inicial == Enum.Parse<PhaseCell>(request.Phase) || PhaseCell.Intermediária == Enum.Parse<PhaseCell>(request.Phase))

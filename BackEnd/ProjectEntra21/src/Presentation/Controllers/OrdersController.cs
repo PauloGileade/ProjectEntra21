@@ -88,7 +88,7 @@ namespace ProjectEntra21.src.Presentation.Controllers
                 var absolutePath = string.Format("{0}://{1}{2}", Request.Scheme, Request.Host, Request.Path.Value);
                 return Created(new Uri(absolutePath + "/" + response.Code), response);
             }
-            catch(NullReferenceException e)
+            catch (NullReferenceException e)
             {
                 return NotFound(e.Message);
             }
@@ -115,16 +115,22 @@ namespace ProjectEntra21.src.Presentation.Controllers
             if (codeQrcode == null)
                 return NotFound();
 
-
-            string[] vect = codeQrcode.Split(';');
-
-            return Ok(await _mediator.Send(new UpdateAmountFinishedCommand
+            try
             {
-                RegisterEmployeer = long.Parse(vect[0]),
-                CodeProduct = long.Parse(vect[1]),
-                Phase = vect[2],
-                Cell = long.Parse(vect[3])
-            }));
+                string[] vect = codeQrcode.Split(';');
+
+                return Ok(await _mediator.Send(new UpdateAmountFinishedCommand
+                {
+                    RegisterEmployeer = long.Parse(vect[0]),
+                    CodeProduct = long.Parse(vect[1]),
+                    Phase = vect[2],
+                    Cell = long.Parse(vect[3])
+                }));
+            }
+            catch (ValueNotAvailableException e)
+            {
+                return BadRequest(e.Message);
+            }
         }
     }
 }
