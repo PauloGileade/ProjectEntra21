@@ -69,7 +69,7 @@ class _QRCodePageState extends State<QRCodePage> {
 
   void request() async {
     try {
-      final url = Uri.https("192.168.1.11:5001", "api/Orders/${code}");
+      final url = Uri.https("192.168.1.7:5001", "api/Orders/${code}");
 
       final response = await http.put(url);
 
@@ -79,3 +79,4 @@ class _QRCodePageState extends State<QRCodePage> {
     }
   }
 }
+
